@@ -83,6 +83,16 @@ export default class App extends Component {
     clearInterval(this.autoupdate);
   };
 
+  sendMessage = reqBody => {
+    const reqParams = {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      method: "POST",
+      body: JSON.stringify(reqBody)
+    };
+    fetch(`https://kadir-chat-server.glitch.me/messages`, reqParams);
+    this.handleLatest();
+  };
+
   render() {
     const { isLoading, noResults, error, messages, errorMsg } = this.state;
     return (
@@ -107,7 +117,7 @@ export default class App extends Component {
             "is Loading ...."
           )}
         </div>
-        <SendMessage />
+        <SendMessage sendMessage={this.sendMessage} />
       </div>
     );
   }

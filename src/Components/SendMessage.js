@@ -1,26 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 
-function SendMessage() {
-  return (
-    <div style={divStyle}>
-      <h2 style={{ margin: "0" }}>Send a message</h2>
-      <form
-        action="https://kadir-chat-server.glitch.me/messages"
-        method="post"
-        style={formStyle}
-      >
-        <p style={paraStyle}>
-          <div style={padding}>
-            <input type="text" name="from" placeholder="Your Name" />
-          </div>
-          <div style={padding}>
-            <input type="text" name="text" placeholder="The message..." />
-          </div>
-        </p>
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  );
+export default class SendMessage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      from: "",
+      text: ""
+    };
+  }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.sendMessage(this.state);
+  };
+
+  render() {
+    return (
+      <div style={divStyle}>
+        <h2 style={{ margin: "0" }}>Send a message</h2>
+        <form onSubmit={this.handleSubmit} style={formStyle}>
+          <p style={paraStyle}>
+            <div style={padding}>
+              <input
+                onChange={this.handleChange}
+                type="text"
+                name="from"
+                placeholder="Your Name"
+              />
+            </div>
+            <div style={padding}>
+              <input
+                onChange={this.handleChange}
+                type="text"
+                name="text"
+                placeholder="The message..."
+              />
+            </div>
+          </p>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    );
+  }
 }
 
 const divStyle = {
@@ -46,5 +70,3 @@ const paraStyle = {
 };
 
 const padding = { padding: "5px" };
-
-export default SendMessage;
