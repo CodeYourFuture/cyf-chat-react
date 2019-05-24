@@ -1,3 +1,16 @@
+button,
+input {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+@media (max-width: 600px) {
+  input {
+    width: 90%;
+  }
+}
 .App {
   text-align: center;
 }
@@ -30,4 +43,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
 }
