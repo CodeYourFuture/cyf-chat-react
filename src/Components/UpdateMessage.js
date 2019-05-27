@@ -49,7 +49,9 @@ export default class UpdateMessage extends Component {
               />
             </div>
           </p>
-          <button type="submit">Save Changes</button>
+          <button style={{ cursor: "pointer" }} type="submit">
+            Save Changes
+          </button>
         </form>
       </div>
     );

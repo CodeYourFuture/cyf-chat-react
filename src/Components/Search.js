@@ -23,17 +23,24 @@ export default class Search extends Component {
 
   render() {
     return (
-      <form
-        style={{ display: "flex", marginTop: "10px" }}
-        onSubmit={this.handleSubmit}
-      >
+      <form style={formStyle} onSubmit={this.handleSubmit}>
         <input
           placeholder="keyword "
           value={this.state.value}
           onChange={this.handleChange}
         />
-        <Button handleClick={this.handleSubmit} content="search" />
+        <Button
+          style={{ cursor: "pointer" }}
+          handleClick={this.handleSubmit}
+          content="search"
+        />
       </form>
     );
   }
 }
+
+const formStyle = {
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "10px"
+};

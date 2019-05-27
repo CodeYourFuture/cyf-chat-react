@@ -43,7 +43,9 @@ export default class SendMessage extends Component {
               />
             </div>
           </p>
-          <button type="submit">Send</button>
+          <button style={{ cursor: "pointer" }} type="submit">
+            Send
+          </button>
         </form>
       </div>
     );

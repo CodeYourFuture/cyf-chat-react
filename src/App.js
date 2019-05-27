@@ -46,8 +46,8 @@ export default class App extends Component {
       });
   };
 
-  displayMessageById = event => {
-    fetch(`https://kadir-chat-server.glitch.me/messages/${event.target.value}`)
+  displayMessageById = id => {
+    fetch(`https://kadir-chat-server.glitch.me/messages/${id}`)
       .then(res => res.json())
       .then(json => {
         clearInterval(this.autoupdate);
@@ -67,7 +67,7 @@ export default class App extends Component {
         this.setState({ infoMsg: "Selected message has been deleted!" });
       }
     });
-    this.handleLatest();
+    setInterval(this.handleLatest, 500);
   };
 
   search = keyWord => {
@@ -97,13 +97,14 @@ export default class App extends Component {
   };
 
   sendMessage = reqBody => {
+    this.handleLatest();
     const reqParams = {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
       body: JSON.stringify(reqBody)
     };
     fetch(`https://kadir-chat-server.glitch.me/messages`, reqParams);
-    this.handleLatest();
+    setInterval(this.handleLatest, 500);
   };
 
   editMessage = msg => {
@@ -141,9 +142,17 @@ export default class App extends Component {
       >
         <h1 style={h1style}>CYF Chat</h1>
         <div style={divStyle}>
-          <Button onClick={this.handleLatest} content="Latest messages" />
+          <Button
+            style={{ cursor: "pointer" }}
+            onClick={this.handleLatest}
+            content="Latest messages"
+          />
           <DisplayMessageById displayMessageById={this.displayMessageById} />
-          <Button onClick={this.displayMessages} content="All messages" />
+          <Button
+            style={{ cursor: "pointer" }}
+            onClick={this.displayMessages}
+            content="All messages"
+          />
         </div>
         <Search search={this.search} />
         <div>
