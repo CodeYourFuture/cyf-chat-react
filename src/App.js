@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Message from "./Components/Message.js";
+import DisplayMessageById from "./Components/DisplayMessageById.js";
 import SendMessage from "./Components/SendMessage.js";
 import UpdateMessage from "./Components/UpdateMessage.js";
 import Search from "./Components/Search.js";
@@ -37,6 +38,19 @@ export default class App extends Component {
     fetch("https://kadir-chat-server.glitch.me/messages/latest")
       .then(res => res.json())
       .then(json => {
+        this.setState({
+          isLoading: false,
+          infoMsg: null,
+          messages: json
+        });
+      });
+  };
+
+  displayMessageById = event => {
+    fetch(`https://kadir-chat-server.glitch.me/messages/${event.target.value}`)
+      .then(res => res.json())
+      .then(json => {
+        clearInterval(this.autoupdate);
         this.setState({
           isLoading: false,
           infoMsg: null,
@@ -128,6 +142,7 @@ export default class App extends Component {
         <h1 style={h1style}>CYF Chat</h1>
         <div style={divStyle}>
           <Button onClick={this.handleLatest} content="Latest messages" />
+          <DisplayMessageById displayMessageById={this.displayMessageById} />
           <Button onClick={this.displayMessages} content="All messages" />
         </div>
         <Search search={this.search} />
