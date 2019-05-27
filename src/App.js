@@ -100,7 +100,6 @@ export default class App extends Component {
   };
 
   updateMessage = updatedMsg => {
-    console.log(updatedMsg);
     const reqParams = {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "PUT",
@@ -109,9 +108,11 @@ export default class App extends Component {
     fetch(
       `https://kadir-chat-server.glitch.me/messages/${this.state.editMsg.id}`,
       reqParams
-    );
-    this.setState({ editMsg: false });
-    this.handleLatest();
+    )
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ messages: [json.message], editMsg: false });
+      });
   };
 
   render() {

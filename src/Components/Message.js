@@ -46,6 +46,7 @@ const btnStyle = {
   color: "white",
   border: "none",
   padding: "5px",
+  margin: "1px auto",
   borderRadius: "5px",
   cursor: "pointer"
 };
