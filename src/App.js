@@ -11,9 +11,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       messages: [],
-      error: false,
-      errorMsg: "",
-      noResults: false,
+      infoMsg: null,
       isLoading: true,
       editMsg: false
     };
@@ -29,8 +27,7 @@ export default class App extends Component {
         clearInterval(this.autoupdate);
         this.setState({
           isLoading: false,
-          noResults: false,
-          error: false,
+          infoMsg: null,
           messages: json
         });
       });
@@ -42,8 +39,7 @@ export default class App extends Component {
       .then(json => {
         this.setState({
           isLoading: false,
-          noResults: false,
-          error: false,
+          infoMsg: null,
           messages: json
         });
       });
@@ -52,6 +48,10 @@ export default class App extends Component {
   deleteMessage = id => {
     fetch(`https://kadir-chat-server.glitch.me/messages/${id}`, {
       method: "DELETE"
+    }).then(res => {
+      if (res.status !== 400) {
+        this.setState({ infoMsg: "Selected message has been deleted!" });
+      }
     });
     this.handleLatest();
   };
@@ -60,7 +60,7 @@ export default class App extends Component {
     fetch(`https://kadir-chat-server.glitch.me/messages/search?text=${keyWord}`)
       .then(res => {
         if (res.status === 400) {
-          this.setState({ error: true });
+          this.setState({ infoMsg: true });
         }
         return res;
       })
@@ -69,18 +69,15 @@ export default class App extends Component {
         json.msg
           ? this.setState({
               isLoading: false,
-              noResults: false,
-              error: true,
-              errorMsg: "Please type a keyword to search"
+              infoMsg: "Please type a keyword to search"
             })
           : json.length > 0
           ? this.setState({
               isLoading: false,
-              noResults: false,
-              error: false,
+              infoMsg: null,
               messages: json
             })
-          : this.setState({ isLoading: false, noResults: true });
+          : this.setState({ isLoading: false, infoMsg: "No results found" });
       });
     clearInterval(this.autoupdate);
   };
@@ -111,19 +108,16 @@ export default class App extends Component {
     )
       .then(res => res.json())
       .then(json => {
-        this.setState({ messages: [json.message], editMsg: false });
+        this.setState({
+          messages: [json.message],
+          infoMsg: json.msg,
+          editMsg: false
+        });
       });
   };
 
   render() {
-    const {
-      isLoading,
-      noResults,
-      error,
-      messages,
-      errorMsg,
-      editMsg
-    } = this.state;
+    const { isLoading, infoMsg, messages, editMsg } = this.state;
     return (
       <div
         style={{
@@ -138,8 +132,8 @@ export default class App extends Component {
         </div>
         <Search search={this.search} />
         <div>
-          {error && <p style={paraStyle}>{errorMsg}</p>}
-          {noResults && <p style={paraStyle}>No results found</p>}
+          {infoMsg && <p style={paraStyle}>{infoMsg}</p>}
+          {/* {noResults && <p style={paraStyle}>No results found</p>} */}
           {!isLoading ? (
             <Message
               messages={messages}
