@@ -14,11 +14,18 @@ export default class Message extends Component {
               <li style={{ listStyle: "none" }} key={msg.id}>
                 <span style={fromStyle}>{msg.from} :</span> {msg.text}
               </li>
-              <Button
-                onClick={this.props.delMessage.bind(this, msg.id)}
-                style={btnStyle}
-                content="X"
-              />
+              <div>
+                <Button
+                  onClick={this.props.editMessage.bind(this, msg)}
+                  style={btnStyle}
+                  content="Edit"
+                />{" "}
+                <Button
+                  onClick={this.props.delMessage.bind(this, msg.id)}
+                  style={btnStyle}
+                  content="X"
+                />
+              </div>
             </div>
           );
         })}

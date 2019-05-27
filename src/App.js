@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Message from "./Components/Message.js";
 import SendMessage from "./Components/SendMessage.js";
+import UpdateMessage from "./Components/UpdateMessage.js";
 import Search from "./Components/Search.js";
 import Button from "./Components/Button.js";
 
@@ -13,7 +14,8 @@ export default class App extends Component {
       error: false,
       errorMsg: "",
       noResults: false,
-      isLoading: true
+      isLoading: true,
+      editMsg: false
     };
   }
   componentDidMount() {
@@ -93,8 +95,34 @@ export default class App extends Component {
     this.handleLatest();
   };
 
+  editMessage = msg => {
+    this.setState({ editMsg: msg });
+  };
+
+  updateMessage = updatedMsg => {
+    console.log(updatedMsg);
+    const reqParams = {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      method: "PUT",
+      body: JSON.stringify(updatedMsg)
+    };
+    fetch(
+      `https://kadir-chat-server.glitch.me/messages/${this.state.editMsg.id}`,
+      reqParams
+    );
+    this.setState({ editMsg: false });
+    this.handleLatest();
+  };
+
   render() {
-    const { isLoading, noResults, error, messages, errorMsg } = this.state;
+    const {
+      isLoading,
+      noResults,
+      error,
+      messages,
+      errorMsg,
+      editMsg
+    } = this.state;
     return (
       <div
         style={{
@@ -112,12 +140,24 @@ export default class App extends Component {
           {error && <p style={paraStyle}>{errorMsg}</p>}
           {noResults && <p style={paraStyle}>No results found</p>}
           {!isLoading ? (
-            <Message messages={messages} delMessage={this.deleteMessage} />
+            <Message
+              messages={messages}
+              editMessage={this.editMessage}
+              delMessage={this.deleteMessage}
+            />
           ) : (
             "is Loading ...."
           )}
         </div>
-        <SendMessage sendMessage={this.sendMessage} />
+
+        {editMsg ? (
+          <UpdateMessage
+            msgToUpdate={editMsg}
+            updateMessage={this.updateMessage}
+          />
+        ) : (
+          <SendMessage sendMessage={this.sendMessage} />
+        )}
       </div>
     );
   }
