@@ -18,20 +18,20 @@ export default class App extends Component {
     };
   }
   componentDidMount() {
-    this.autoupdate = setInterval(this.handleLatest, 500);
+    this.autoUpdate = setInterval(this.handleLatest, 500);
   }
 
   displayMessages = () => {
     fetch("https://kadir-chat-server.glitch.me/messages")
       .then(res => res.json())
       .then(json => {
-        clearInterval(this.autoupdate);
         this.setState({
           isLoading: false,
           infoMsg: null,
           messages: json
         });
       });
+    clearInterval(this.autoUpdate);
   };
 
   handleLatest = () => {
@@ -50,13 +50,13 @@ export default class App extends Component {
     fetch(`https://kadir-chat-server.glitch.me/messages/${id}`)
       .then(res => res.json())
       .then(json => {
-        clearInterval(this.autoupdate);
         this.setState({
           isLoading: false,
           infoMsg: null,
           messages: json
         });
       });
+    clearInterval(this.autoUpdate);
   };
 
   deleteMessage = id => {
@@ -64,10 +64,12 @@ export default class App extends Component {
       method: "DELETE"
     }).then(res => {
       if (res.status !== 400) {
-        this.setState({ infoMsg: "Selected message has been deleted!" });
+        this.setState({
+          infoMsg: "Selected message has been deleted!",
+          messages: this.state.messages.filter(msg => msg.id != id)
+        });
       }
     });
-    setInterval(this.handleLatest, 500);
   };
 
   search = keyWord => {
@@ -93,18 +95,17 @@ export default class App extends Component {
             })
           : this.setState({ isLoading: false, infoMsg: "No results found" });
       });
-    clearInterval(this.autoupdate);
+    clearInterval(this.autoUpdate);
   };
 
   sendMessage = reqBody => {
-    this.handleLatest();
     const reqParams = {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
       body: JSON.stringify(reqBody)
     };
     fetch(`https://kadir-chat-server.glitch.me/messages`, reqParams);
-    setInterval(this.handleLatest, 500);
+    this.autoUpdate = setInterval(this.handleLatest, 500);
   };
 
   editMessage = msg => {
@@ -129,6 +130,7 @@ export default class App extends Component {
           editMsg: false
         });
       });
+    clearInterval(this.autoUpdate);
   };
 
   render() {
