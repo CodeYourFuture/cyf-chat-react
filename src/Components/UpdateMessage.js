@@ -28,8 +28,8 @@ export default class UpdateMessage extends Component {
   render() {
     // console.log(this.props.msgToUpdate);
     return (
-      <div style={divStyle}>
-        <h2 style={{ margin: "0" }}>Edit a message</h2>
+      <div id="update-form" style={divStyle}>
+        <h2 style={{ margin: "0", color: "white" }}>Edit a message</h2>
         <form onSubmit={this.handleSubmit} style={formStyle}>
           <p style={paraStyle}>
             <div style={padding}>
@@ -49,7 +49,10 @@ export default class UpdateMessage extends Component {
               />
             </div>
           </p>
-          <button style={{ cursor: "pointer" }} type="submit">
+          <button
+            style={{ cursor: "pointer", background: "#fab95b" }}
+            type="submit"
+          >
             Save Changes
           </button>
         </form>
@@ -61,6 +64,7 @@ export default class UpdateMessage extends Component {
 const divStyle = {
   display: `flex`,
   flexDirection: "column",
+  background: "#38598b",
   alignItems: "center",
   margin: "10px 0",
   border: "1px solid black",

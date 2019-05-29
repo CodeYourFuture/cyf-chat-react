@@ -5,21 +5,23 @@ export default class Message extends Component {
   render() {
     return (
       <ul style={{ padding: "0" }}>
-        {this.props.messages.map(msg => {
+        {this.props.messages.map((msg, i) => {
           return (
             <div
               className="message"
-              style={{ background: msg.id % 2 === 0 ? "lightblue" : "white" }}
+              style={{ background: i % 2 === 0 ? "#dedede" : "#ffeafe" }}
             >
               <li style={{ listStyle: "none" }} key={msg.id}>
                 <span style={fromStyle}>{msg.from} :</span> {msg.text}
               </li>
-              <div>
-                <Button
-                  onClick={this.props.editMessage.bind(this, msg)}
-                  style={btnStyle}
-                  content="Edit"
-                />{" "}
+              <div style={{ width: "40px" }}>
+                <a href="#update-form">
+                  <Button
+                    onClick={this.props.editMessage.bind(this, msg)}
+                    style={btnStyle}
+                    content="Edit"
+                  />
+                </a>{" "}
                 <Button
                   onClick={this.props.delMessage.bind(this, msg.id)}
                   style={btnStyle}

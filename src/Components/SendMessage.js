@@ -21,9 +21,9 @@ export default class SendMessage extends Component {
   render() {
     return (
       <div style={divStyle}>
-        <h2 style={{ margin: "0" }}>Send a message</h2>
+        <h2 style={{ margin: "0", color: "white" }}>Send a message</h2>
         <form onSubmit={this.handleSubmit} style={formStyle}>
-          <p style={paraStyle}>
+          <div style={paraStyle}>
             <div style={padding}>
               <input
                 onChange={this.handleChange}
@@ -42,8 +42,15 @@ export default class SendMessage extends Component {
                 placeholder="The message..."
               />
             </div>
-          </p>
-          <button style={{ cursor: "pointer" }} type="submit">
+          </div>
+          <button
+            style={{
+              cursor: "pointer",
+              background: "#fab95b",
+              padding: "5px"
+            }}
+            type="submit"
+          >
             Send
           </button>
         </form>
@@ -56,6 +63,7 @@ const divStyle = {
   display: `flex`,
   flexDirection: "column",
   alignItems: "center",
+  background: "#38598b",
   margin: "10px 0",
   border: "1px solid black",
   borderRadius: "5px",

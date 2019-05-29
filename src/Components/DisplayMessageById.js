@@ -20,16 +20,16 @@ export default class DisplayMessageById extends Component {
   render() {
     return (
       <div className="App">
-        <Button
-          onClick={this.handleSubmit}
-          style={{ cursor: "pointer" }}
-          content="Display by Id"
-        />
         <input
-          style={{ width: "30px" }}
+          style={{ width: "90px", textAlign: "center" }}
           onChange={this.handleChange}
           placeholder="Id"
           value={this.state.id}
+        />
+        <Button
+          onClick={this.handleSubmit}
+          style={{ cursor: "pointer", background: "#fab95b" }}
+          content="Display by Id"
         />
       </div>
     );

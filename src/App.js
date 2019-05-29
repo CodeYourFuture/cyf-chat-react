@@ -20,7 +20,9 @@ export default class App extends Component {
   componentDidMount() {
     this.autoUpdate = setInterval(this.handleLatest, 500);
   }
-
+  componentWillUnmount() {
+    console.log("byeee");
+  }
   displayMessages = () => {
     fetch("https://kadir-chat-server.glitch.me/messages")
       .then(res => res.json())
@@ -118,10 +120,8 @@ export default class App extends Component {
       method: "PUT",
       body: JSON.stringify(updatedMsg)
     };
-    fetch(
-      `https://kadir-chat-server.glitch.me/messages/${this.state.editMsg.id}`,
-      reqParams
-    )
+    const id = this.state.editMsg.id;
+    fetch(`https://kadir-chat-server.glitch.me/messages/${id}`, reqParams)
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -138,47 +138,56 @@ export default class App extends Component {
     return (
       <div
         style={{
-          width: "90%",
-          margin: "0 auto"
+          maxWidth: "768px",
+          border: "1px solid black",
+          borderRadius: "5px",
+          margin: "10px auto",
+          padding: "3px"
         }}
       >
-        <h1 style={h1style}>CYF Chat</h1>
-        <div style={divStyle}>
-          <Button
-            style={{ cursor: "pointer" }}
-            onClick={this.handleLatest}
-            content="Latest messages"
-          />
-          <DisplayMessageById displayMessageById={this.displayMessageById} />
-          <Button
-            style={{ cursor: "pointer" }}
-            onClick={this.displayMessages}
-            content="All messages"
-          />
-        </div>
-        <Search search={this.search} />
-        <div>
-          {infoMsg && <p style={paraStyle}>{infoMsg}</p>}
-          {/* {noResults && <p style={paraStyle}>No results found</p>} */}
-          {!isLoading ? (
-            <Message
-              messages={messages}
-              editMessage={this.editMessage}
-              delMessage={this.deleteMessage}
+        <div
+          style={{
+            width: "95%",
+            margin: "0 auto"
+          }}
+        >
+          <h1 style={h1style}>CYF Chat</h1>
+          <div style={divStyle}>
+            <Button
+              style={{ cursor: "pointer", background: "#fab95b" }}
+              onClick={this.handleLatest}
+              content="Latest messages"
+            />
+            <DisplayMessageById displayMessageById={this.displayMessageById} />
+            <Button
+              style={{ cursor: "pointer", background: "#fab95b" }}
+              onClick={this.displayMessages}
+              content="All messages"
+            />
+          </div>
+          <Search search={this.search} />
+          <div>
+            {infoMsg && <p style={paraStyle}>{infoMsg}</p>}
+            {!isLoading ? (
+              <Message
+                messages={messages}
+                editMessage={this.editMessage}
+                delMessage={this.deleteMessage}
+              />
+            ) : (
+              "is Loading ...."
+            )}
+          </div>
+
+          {editMsg ? (
+            <UpdateMessage
+              msgToUpdate={editMsg}
+              updateMessage={this.updateMessage}
             />
           ) : (
-            "is Loading ...."
+            <SendMessage sendMessage={this.sendMessage} />
           )}
         </div>
-
-        {editMsg ? (
-          <UpdateMessage
-            msgToUpdate={editMsg}
-            updateMessage={this.updateMessage}
-          />
-        ) : (
-          <SendMessage sendMessage={this.sendMessage} />
-        )}
       </div>
     );
   }
@@ -186,13 +195,18 @@ export default class App extends Component {
 
 const h1style = {
   textAlign: "center",
-  borderBottom: "1px solid black"
+  color: "white",
+  padding: "5px 0",
+  margin: "10px auto",
+  backgroundColor: "#38598b",
+  border: "1px solid black",
+  borderRadius: "5px"
 };
 
 const divStyle = { display: "flex", justifyContent: "space-between" };
 
 const paraStyle = {
-  border: "2px solid red",
+  border: "2px solid #553c8b",
   borderRadius: "5px",
   padding: "10px",
   marginBottom: "10px",

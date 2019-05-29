@@ -25,12 +25,13 @@ export default class Search extends Component {
     return (
       <form style={formStyle} onSubmit={this.handleSubmit}>
         <input
+          style={{ textAlign: "center" }}
           placeholder="keyword "
           value={this.state.value}
           onChange={this.handleChange}
         />
         <Button
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", background: "#fab95b" }}
           handleClick={this.handleSubmit}
           content="search"
         />

@@ -1,3 +1,8 @@
+body {
+  background: #e7eaf6;
+  font-family: "Raleway", sans-serif;
+}
+
 button,
 input {
   font-size: 16px;
