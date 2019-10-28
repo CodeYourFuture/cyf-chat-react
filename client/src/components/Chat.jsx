@@ -79,7 +79,7 @@ const Chat = ({ location }) => {
   }, [messages]);
 
   useEffect(() => {
-    console.log("inside third effect");
+    console.log("inside room effect");
 
     if (room === "main") {
       console.log(room, prevRoom);
@@ -123,10 +123,10 @@ const Chat = ({ location }) => {
 
   const changeRoom = Room => {
     console.log(room, Room);
+    fetchMessages(room);
     if (room === Room) {
       return;
     }
-    fetchMessages(Room);
     setRoom(Room);
   };
 
@@ -136,6 +136,22 @@ const Chat = ({ location }) => {
     );
 
     setMessages(response.data);
+  };
+
+  const deleteMessage = async id => {
+    const response = await axios.delete(
+      `http://localhost:3005/messages/messages/${id}`
+    );
+    console.log("This is response of delete ", response);
+  };
+
+  const editMessage = async (id, message) => {
+    /*     const response = await axios.put(
+      `http://localhost:3005/messages/messages/${id}`
+    );
+    console.log("This is response of delete ", response); */
+    setMessages([...messages]);
+    console.log("edit:", id, message);
   };
 
   return (
@@ -149,7 +165,12 @@ const Chat = ({ location }) => {
             <div className="container">
               <div className="row">
                 <div className="col-md-12 " style={{ height: "80vh" }}>
-                  <Messages messages={messages} name={name} />
+                  <Messages
+                    messages={messages}
+                    name={name}
+                    onDelete={deleteMessage}
+                    onEdit={editMessage}
+                  />
                 </div>
               </div>
               <div className="row">

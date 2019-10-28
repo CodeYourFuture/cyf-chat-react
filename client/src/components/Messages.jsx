@@ -5,7 +5,7 @@ import Message from "./Message";
 import List from "@material-ui/core/List";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-const Messages = ({ messages, name }) => {
+const Messages = ({ messages, name, onDelete, onEdit, isEditing }) => {
   const useStyles = makeStyles({
     root: {
       backgroundColor: "#404346",
@@ -22,12 +22,19 @@ const Messages = ({ messages, name }) => {
       <List>
         {messages.map((message, i) => {
           return (
-            <Box key={i} className={classes.messageBox}>
+            <Box
+              key={message._id ? message._id : i}
+              className={classes.messageBox}
+            >
               <Message
                 message={message.message}
                 avatar={message.avatar}
                 name={message.name}
                 date={message.date}
+                id={message._id}
+                thereIsId={message._id ? true : false}
+                onDelete={onDelete}
+                onEdit={onEdit}
               />
             </Box>
           );

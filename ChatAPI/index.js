@@ -90,7 +90,7 @@ io.on("connection", socket => {
 
     socket.leave(user.prevRoom);
     socket.join(user.room);
-
+    console.log("about to emit");
     //For everyone
     socket.emit("message", {
       name: "Admin",

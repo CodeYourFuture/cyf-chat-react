@@ -10,9 +10,10 @@ import {
   Typography,
   Collapse
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { mdiMenu } from "@mdi/js";
 import Icon from "@mdi/react";
+import EditIcon from "@material-ui/icons/Edit";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const EditMessage = () => {
+const EditMessage = ({ onDelete, onEdit, id, thereIsId }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 
@@ -50,8 +51,24 @@ const EditMessage = () => {
       </IconButton>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <List>
-          <ListItem button>Edit message2</ListItem>
-          <ListItem button>Delete message</ListItem>
+          <ListItem
+            button
+            onClick={e => {
+              e.preventDefault();
+              onDelete(id);
+            }}
+          >
+            <DeleteIcon color="secondary" />
+            <Typography component="span" className="pl-3" variant="body2">
+              Delete
+            </Typography>
+          </ListItem>
+          <ListItem button onClick={onEdit}>
+            <EditIcon color="primary" />
+            <Typography component="span" className="pl-3" variant="body2">
+              Edit
+            </Typography>
+          </ListItem>
         </List>
       </Collapse>
     </Box>
