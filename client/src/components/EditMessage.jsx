@@ -50,7 +50,7 @@ const EditMessage = () => {
       </IconButton>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <List>
-          <ListItem button>Edit message</ListItem>
+          <ListItem button>Edit message2</ListItem>
           <ListItem button>Delete message</ListItem>
         </List>
       </Collapse>
