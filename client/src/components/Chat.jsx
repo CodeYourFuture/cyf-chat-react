@@ -150,7 +150,7 @@ const Chat = ({ location }) => {
       `http://localhost:3005/messages/messages/${id}`
     );
     console.log("This is response of delete ", response); */
-    setMessages([...messages]);
+    /*    setMessages([...messages]); */
     console.log("edit:", id, message);
   };
 
