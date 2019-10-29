@@ -20,8 +20,10 @@ const {
   getUsersInRoom
 } = require("./users.js");
 
+const uri =
+  "mongodb+srv://AliShadman95:<password>@chat-hbleq.mongodb.net/Chat?retryWrites=true&w=majority";
 // mongoose instance connection url connection
-mongoose.connect("mongodb://localhost/Chat", {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
