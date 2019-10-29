@@ -16,6 +16,41 @@ import Icon from "@mdi/react";
 import EditIcon from "@material-ui/icons/Edit";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+
+const StyledMenu = withStyles({
+  paper: {
+    border: "1px solid #d3d4d5"
+  }
+})(props => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "left"
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "left"
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles(theme => ({
+  root: {
+    "&:hover": {
+      backgroundColor: theme.palette.grey,
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+        color: theme.palette.common.white
+      }
+    }
+  }
+}))(MenuItem);
 
 const useStyles = makeStyles(theme => ({
   expand: {
@@ -33,44 +68,62 @@ const useStyles = makeStyles(theme => ({
 const EditMessage = ({ onDelete, onEdit, id, thereIsId }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
   return (
     <Box>
-      <IconButton
-        className={clsx(classes.expand, {
-          [classes.expandOpen]: expanded
-        })}
-        onClick={handleExpandClick}
-        aria-expanded={expanded}
-        aria-label="show more"
-      >
+      <IconButton onClick={handleClick}>
         <Icon path={mdiMenu} title="Menu" size={1} color="white" />
       </IconButton>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <List>
-          <ListItem
-            button
-            onClick={e => {
-              e.preventDefault();
-              onDelete(id);
-            }}
-          >
+      <StyledMenu
+        id="customized-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <StyledMenuItem
+          onClick={e => {
+            e.preventDefault();
+            onDelete(id);
+          }}
+        >
+          <ListItemIcon>
             <DeleteIcon color="secondary" />
-            <Typography component="span" className="pl-3" variant="body2">
-              Delete
-            </Typography>
-          </ListItem>
-          <ListItem button onClick={onEdit}>
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography component="span" className="pl-3" variant="body2">
+                Delete
+              </Typography>
+            }
+          />
+        </StyledMenuItem>
+        <StyledMenuItem
+          onClick={e => {
+            e.preventDefault();
+            onEdit(id);
+          }}
+        >
+          <ListItemIcon>
             <EditIcon color="primary" />
-            <Typography component="span" className="pl-3" variant="body2">
-              Edit
-            </Typography>
-          </ListItem>
-        </List>
-      </Collapse>
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography component="span" className="pl-3" variant="body2">
+                Edit
+              </Typography>
+            }
+          />
+        </StyledMenuItem>
+      </StyledMenu>
     </Box>
   );
 };
