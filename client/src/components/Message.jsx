@@ -37,16 +37,7 @@ const calendarStrings = {
   sameElse: "L"
 };
 
-const Message = ({
-  message,
-  name,
-  date,
-  avatar,
-  onDelete,
-  onEdit,
-  id,
-  thereIsId
-}) => {
+const Message = ({ message, name, date, avatar, onDelete, onEdit, id }) => {
   const classes = useStyles();
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
@@ -63,7 +54,8 @@ const Message = ({
 
   const sendEditMessage = e => {
     e.preventDefault();
-    onEdit(editedMessage);
+    onEdit(id, editedMessage);
+    setIsEditing(false);
   };
 
   return (
@@ -72,26 +64,29 @@ const Message = ({
         <ListItemAvatar>
           <Avatar src={images[avatar]} />
         </ListItemAvatar>
-        {isEditing ? (
-          <TextField
-            id="standard-name"
-            value={editedMessage}
-            onChange={e => handleChange(e)}
-            margin="normal"
-            onKeyPress={ev => (ev.key === "Enter" ? sendEditMessage(ev) : null)}
-          />
-        ) : (
-          <ListItemText
-            primary={
-              <React.Fragment>
-                {name + " "}
-                <Moment calendar={calendarStrings} className={classes.date}>
-                  {date}
-                </Moment>
-              </React.Fragment>
-            }
-            secondary={
-              <React.Fragment>
+
+        <ListItemText
+          primary={
+            <React.Fragment>
+              {name + " "}
+              <Moment calendar={calendarStrings} className={classes.date}>
+                {date}
+              </Moment>
+            </React.Fragment>
+          }
+          secondary={
+            <React.Fragment>
+              {isEditing ? (
+                <TextField
+                  id="standard-name"
+                  value={editedMessage}
+                  onChange={e => handleChange(e)}
+                  margin="normal"
+                  onKeyPress={ev =>
+                    ev.key === "Enter" ? sendEditMessage(ev) : null
+                  }
+                />
+              ) : (
                 <Typography
                   component="span"
                   variant="body2"
@@ -99,18 +94,14 @@ const Message = ({
                 >
                   {message}
                 </Typography>
-              </React.Fragment>
-            }
-          />
-        )}
-        {thereIsId && (
+              )}
+            </React.Fragment>
+          }
+        />
+
+        {name !== "Admin" && (
           <Box className={classes.menuRight}>
-            <EditMessage
-              onDelete={onDelete}
-              onEdit={editMessage}
-              id={id}
-              thereIsId={thereIsId}
-            />
+            <EditMessage onDelete={onDelete} onEdit={editMessage} id={id} />
           </Box>
         )}
       </ListItem>

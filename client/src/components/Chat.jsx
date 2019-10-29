@@ -26,6 +26,7 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [fetchCounter, setFetchCounter] = useState(1);
 
   const prevRoom = usePrevious(room);
 
@@ -119,14 +120,16 @@ const Chat = ({ location }) => {
       const response = await axios.post(`http://localhost:3005/messages`, mess);
       console.log("Added: this is response", response);
     }
+    fetchMessages(room);
   };
 
   const changeRoom = Room => {
     console.log(room, Room);
-    fetchMessages(room);
     if (room === Room) {
+      console.log("Same room , reutrinig");
       return;
     }
+    fetchMessages(Room);
     setRoom(Room);
   };
 
@@ -134,24 +137,31 @@ const Chat = ({ location }) => {
     const response = await axios.get(
       `http://localhost:3005/messages/rooms/${room}`
     );
-
     setMessages(response.data);
   };
 
   const deleteMessage = async id => {
-    const response = await axios.delete(
-      `http://localhost:3005/messages/messages/${id}`
-    );
+    const response = await axios.delete(`http://localhost:3005/messages/${id}`);
     console.log("This is response of delete ", response);
+
+    //Create copy of messages and filter out the deleted message
+    let copyMess = [...messages];
+    setMessages(copyMess.filter(e => e._id !== id));
   };
 
   const editMessage = async (id, message) => {
-    /*     const response = await axios.put(
-      `http://localhost:3005/messages/messages/${id}`
-    );
-    console.log("This is response of delete ", response); */
-    /*    setMessages([...messages]); */
-    console.log("edit:", id, message);
+    const response = await axios.put(`http://localhost:3005/messages/${id}`, {
+      message
+    });
+
+    console.log("Response from editmessage", response);
+
+    //Create copy of messages and edit the state
+    let copyMess = [...messages];
+    let editedMess = copyMess.find(e => e._id === id);
+    editedMess.message = message;
+    let editedMessIndex = copyMess.findIndex(e => e._id === id);
+    setMessages(copyMess.splice(editedMessIndex, 1, editMessage));
   };
 
   return (

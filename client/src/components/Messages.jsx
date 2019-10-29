@@ -32,7 +32,6 @@ const Messages = ({ messages, name, onDelete, onEdit, isEditing }) => {
                 name={message.name}
                 date={message.date}
                 id={message._id}
-                thereIsId={message._id ? true : false}
                 onDelete={onDelete}
                 onEdit={onEdit}
               />

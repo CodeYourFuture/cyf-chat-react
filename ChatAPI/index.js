@@ -56,12 +56,16 @@ io.on("connection", socket => {
     //For everyone
     socket.emit("message", {
       name: "Admin",
-      message: `${user.name}, Welcome to room ${user.room}`
+      message: `${user.name}, Welcome to room ${user.room}`,
+      room: user.room
     });
     //For all beside the sender client
-    socket.broadcast
-      .to(user.room)
-      .emit("message", { name: "Admin", message: `${user.name} has joined!` });
+    socket.broadcast.to(user.room).emit("message", {
+      name: "Admin",
+
+      message: `${user.name} has joined!`,
+      room: user.room
+    });
 
     io.to(user.room).emit("roomData", {
       room: user.room,
@@ -94,17 +98,20 @@ io.on("connection", socket => {
     //For everyone
     socket.emit("message", {
       name: "Admin",
-      message: `${user.name}, Welcome to room ${user.room}`
+      message: `${user.name}, Welcome to room ${user.room}`,
+      room: user.room
     });
     //For all beside the sender client
     socket.broadcast.to(user.room).emit("message", {
       name: "Admin",
-      message: `${user.name} has joined!`
+      message: `${user.name} has joined!`,
+      room: user.room
     });
 
     socket.broadcast.to(user.prevRoom).emit("message", {
       name: "Admin",
-      message: `${user.name} has left.`
+      message: `${user.name} has left.`,
+      room: user.room
     });
 
     io.to(user.room).emit("roomData", {
@@ -121,7 +128,8 @@ io.on("connection", socket => {
     if (user) {
       io.to(user.room).emit("message", {
         name: "Admin",
-        message: `${user.name} has left.`
+        message: `${user.name} has left.`,
+        room: user.room
       });
       io.to(user.room).emit("roomData", {
         room: user.room,
