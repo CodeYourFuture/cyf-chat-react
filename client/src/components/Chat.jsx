@@ -161,7 +161,7 @@ const Chat = ({ location }) => {
         setMessage("");
       });
 
-      let mess = { name, avatar, message, room, date: Date.now };
+      let mess = { name, avatar, message, room };
       const response = await axios.post(`http://localhost:3005/messages`, mess);
       console.log("Added: this is response", response);
     }
