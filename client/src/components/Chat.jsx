@@ -7,6 +7,7 @@ import Form from "../components/Form";
 import Rooms from "./Rooms";
 import Messages from "./Messages";
 import axios from "axios";
+import Header from "../components/Header";
 
 let socket;
 
@@ -27,6 +28,7 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [fetchCounter, setFetchCounter] = useState(1);
+  const [searchMessagesResult, setSearchMessagesResult] = useState([]);
 
   const prevRoom = usePrevious(room);
 
@@ -133,6 +135,15 @@ const Chat = ({ location }) => {
     setRoom(Room);
   };
 
+  const searchMessages = async value => {
+    const response = await axios.get(
+      `http://localhost:3005/messages/search/${value}`
+    );
+
+    console.log(response);
+    setSearchMessagesResult(response.data);
+  };
+
   const fetchMessages = async room => {
     const response = await axios.get(
       `http://localhost:3005/messages/rooms/${room}`
@@ -141,7 +152,9 @@ const Chat = ({ location }) => {
   };
 
   const deleteMessage = async id => {
-    const response = await axios.delete(`http://localhost:3005/messages/${id}`);
+    const response = await axios.delete(
+      `http://localhost:3005/messages/id/${id}`
+    );
     console.log("This is response of delete ", response);
 
     //Create copy of messages and filter out the deleted message
@@ -150,9 +163,12 @@ const Chat = ({ location }) => {
   };
 
   const editMessage = async (id, message) => {
-    const response = await axios.put(`http://localhost:3005/messages/${id}`, {
-      message
-    });
+    const response = await axios.put(
+      `http://localhost:3005/messages/id/${id}`,
+      {
+        message
+      }
+    );
 
     console.log("Response from editmessage", response);
 
@@ -168,13 +184,25 @@ const Chat = ({ location }) => {
     <div className="App">
       <Container>
         <Grid container>
-          <Grid item md={2}>
+          <Grid item md={12}>
+            <Header
+              searchMessages={e => {
+                e.preventDefault();
+                searchMessages(e.target.value);
+              }}
+              searchMessagesResult={searchMessagesResult}
+            />
+          </Grid>
+          <Grid item md={2} className="mt-2">
             <Rooms rooms={rooms} changeRoom={changeRoom} />
           </Grid>
           <Grid item md={10}>
-            <div className="container">
+            <div className="container-fluid">
               <div className="row">
-                <div className="col-md-12 " style={{ height: "80vh" }}>
+                <div
+                  className="col-md-12 mt-3 "
+                  style={{ height: "73vh", paddingRight: "0px" }}
+                >
                   <Messages
                     messages={messages}
                     name={name}
