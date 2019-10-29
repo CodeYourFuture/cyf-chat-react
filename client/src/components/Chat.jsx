@@ -14,6 +14,7 @@ import { mdiReload } from "@mdi/js";
 import Icon from "@mdi/react";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
 let socket;
 
@@ -25,7 +26,43 @@ const usePrevious = value => {
   return ref.current;
 };
 
+const useStyles = makeStyles(theme => ({
+  chipsXS: {
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      justifyContent: "space-evenly"
+    }
+  },
+  roomHeightBreak: {
+    [theme.breakpoints.between("xs", "sm")]: {
+      paddingRight: "0px",
+      paddingLeft: "0px"
+    },
+    [theme.breakpoints.between("lg", "xl")]: {
+      height: "80vh",
+      paddingRight: "0px"
+    }
+  },
+  messageHeightBreak: {
+    [theme.breakpoints.between("xs", "sm")]: {
+      height: "33vh",
+      paddingRight: "0px",
+      paddingLeft: "0px"
+    },
+    [theme.breakpoints.between("lg", "xl")]: {
+      height: "80vh",
+      paddingRight: "0px"
+    },
+    [theme.breakpoints.only("sm")]: {
+      height: "50vh",
+      paddingRight: "0px"
+    }
+  }
+}));
+
 const Chat = ({ location }) => {
+  const classes = useStyles();
+
   const [name, setName] = useState("");
   const [room, setRoom] = useState("main");
   const [avatar, setAvatar] = useState(0);
@@ -196,9 +233,9 @@ const Chat = ({ location }) => {
 
   return (
     <div className="App">
-      <Container>
+      <Container maxWidth="xl">
         <Grid container>
-          <Grid item md={12}>
+          <Grid item md={12} xl={12} xs={12}>
             <Header
               searchMessages={e => {
                 e.preventDefault();
@@ -207,11 +244,11 @@ const Chat = ({ location }) => {
               searchMessagesResult={searchMessagesResult}
             />
           </Grid>
-          <Grid item md={2} className="mt-2">
-            <Box style={{ height: "73vh" }}>
+          <Grid item md={2} xl={2} sm={12} xs={12} className="mt-2">
+            <Box className={classes.roomHeightBreak}>
               <Rooms rooms={rooms} changeRoom={changeRoom} />
             </Box>
-            <Box>
+            <Box className={classes.chipsXS}>
               <Chip
                 avatar={
                   <Icon
@@ -263,13 +300,10 @@ const Chat = ({ location }) => {
               />
             </Box>
           </Grid>
-          <Grid item md={10}>
+          <Grid item md={10} xl={10} xs={12}>
             <div className="container-fluid">
               <div className="row">
-                <div
-                  className="col-md-12 mt-3 "
-                  style={{ height: "73vh", paddingRight: "0px" }}
-                >
+                <div className={classes.messageHeightBreak + " col-md-12 mt-3"}>
                   <Messages
                     messages={messages}
                     name={name}
@@ -279,7 +313,7 @@ const Chat = ({ location }) => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-10">
+                <div className="col-md-12 col-xs-12">
                   <Form
                     onInputChange={e => {
                       setMessage(e.target.value);

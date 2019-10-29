@@ -10,6 +10,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper
+  },
+  roomsXS: {
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "center"
+    }
   }
 }));
 
@@ -19,6 +24,7 @@ const Room = ({ roomName, index, selectedIndex, handleListItemClick }) => {
   return (
     <ListItem
       button
+      className={classes.roomsXS}
       selected={selectedIndex === index}
       onClick={event => handleListItemClick(event, index)}
     >
