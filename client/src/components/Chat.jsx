@@ -8,6 +8,12 @@ import Rooms from "./Rooms";
 import Messages from "./Messages";
 import axios from "axios";
 import Header from "../components/Header";
+import Box from "@material-ui/core/Box";
+import IconButton from "@material-ui/core/IconButton";
+import { mdiReload } from "@mdi/js";
+import Icon from "@mdi/react";
+import Chip from "@material-ui/core/Chip";
+import Typography from "@material-ui/core/Typography";
 
 let socket;
 
@@ -180,6 +186,14 @@ const Chat = ({ location }) => {
     setMessages(copyMess.splice(editedMessIndex, 1, editMessage));
   };
 
+  const getLatestMessages = async () => {
+    const response = await axios.get(
+      `http://localhost:3005/messages/latest/${room}`
+    );
+
+    setMessages(response.data.reverse());
+  };
+
   return (
     <div className="App">
       <Container>
@@ -194,7 +208,60 @@ const Chat = ({ location }) => {
             />
           </Grid>
           <Grid item md={2} className="mt-2">
-            <Rooms rooms={rooms} changeRoom={changeRoom} />
+            <Box style={{ height: "73vh" }}>
+              <Rooms rooms={rooms} changeRoom={changeRoom} />
+            </Box>
+            <Box>
+              <Chip
+                avatar={
+                  <Icon
+                    path={mdiReload}
+                    title="reload"
+                    size={1}
+                    color="white"
+                  />
+                }
+                label={
+                  <Typography
+                    component="span"
+                    variant="caption"
+                    style={{ color: "white" }}
+                  >
+                    Fetch all
+                  </Typography>
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  fetchMessages(room);
+                }}
+                variant="outlined"
+              />
+              <Chip
+                avatar={
+                  <Icon
+                    path={mdiReload}
+                    title="reload"
+                    size={1}
+                    color="white"
+                  />
+                }
+                label={
+                  <Typography
+                    component="span"
+                    variant="caption"
+                    style={{ color: "white" }}
+                  >
+                    Last 10
+                  </Typography>
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  getLatestMessages();
+                }}
+                variant="outlined"
+                className="ml-2"
+              />
+            </Box>
           </Grid>
           <Grid item md={10}>
             <div className="container-fluid">
@@ -212,7 +279,7 @@ const Chat = ({ location }) => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-10">
                   <Form
                     onInputChange={e => {
                       setMessage(e.target.value);

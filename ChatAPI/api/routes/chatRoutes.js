@@ -12,6 +12,7 @@ module.exports = app => {
     .put(chat.edit_a_message)
     .delete(chat.delete_a_message);
 
+  app.route("/messages/latest/:roomName").get(chat.get_latest_by_room);
   app.route("/messages/search/:searchValue").get(chat.get_messages_by_text);
 
   app.route("/messages/rooms/:roomName").get(chat.get_messages_by_room);

@@ -79,3 +79,14 @@ exports.delete_a_message = (req, res) => {
     }
   );
 };
+
+exports.get_latest_by_room = (req, res) => {
+  Message.find({ room: req.params.roomName }, function(err, message) {
+    if (err) {
+      return res.send(err);
+    }
+    res.json(message);
+  })
+    .sort({ _id: -1 })
+    .limit(10);
+};
