@@ -108,9 +108,9 @@ const Chat = ({ location }) => {
 
   useEffect(() => {
     console.log("inside message Effect");
-
     socket.on("message", message => {
       setMessages([...messages, message]);
+      console.log("inside message Effect", message);
     });
 
     socket.on("roomData", ({ users }) => {
@@ -126,25 +126,14 @@ const Chat = ({ location }) => {
 
   useEffect(() => {
     console.log("inside room effect");
-
-    if (room === "main") {
-      console.log(room, prevRoom);
-      if (
-        ROOMS.map(e => {
-          return e.toLowerCase();
-        }).includes(prevRoom)
-      ) {
-        socket.emit("CHANGE_ROOM", { room }, error => {
-          console.log(error);
-        });
-      } else {
-        return;
-      }
-    } else {
-      socket.emit("CHANGE_ROOM", { room }, error => {
-        console.log(error);
-      });
+    if (room === prevRoom) {
+      console.log("same rooms returning");
+      return;
     }
+
+    socket.emit("CHANGE_ROOM", { room }, error => {
+      console.log(error);
+    });
 
     return () => {
       socket.emit("disconnect");
@@ -168,12 +157,13 @@ const Chat = ({ location }) => {
     fetchMessages(room);
   };
 
-  const changeRoom = Room => {
+  const changeRoom = async Room => {
     console.log(room, Room);
     if (room === Room) {
       console.log("Same room , reutrinig");
       return;
     }
+
     fetchMessages(Room);
     setRoom(Room);
   };
@@ -191,7 +181,8 @@ const Chat = ({ location }) => {
     const response = await axios.get(
       `http://localhost:3005/messages/rooms/${room}`
     );
-    setMessages(response.data);
+    console.log(response.data);
+    setMessages(response.data.length >= 1 ? response.data : []);
   };
 
   const deleteMessage = async id => {

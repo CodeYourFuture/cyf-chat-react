@@ -60,7 +60,7 @@ io.on("connection", socket => {
     //For everyone
     socket.emit("message", {
       name: "Admin",
-      message: `${user.name}, Welcome to room ${user.room}`,
+      message: `${user.name}, Welcome!`,
       room: user.room
     });
     //For all beside the sender client
@@ -96,15 +96,9 @@ io.on("connection", socket => {
     const user = updateUserRoom(socket.id, room);
     console.log("user", user);
 
-    socket.leave(user.prevRoom);
     socket.join(user.room);
-    console.log("about to emit");
-    //For everyone
-    socket.emit("message", {
-      name: "Admin",
-      message: `${user.name}, Welcome to room ${user.room}`,
-      room: user.room
-    });
+    socket.leave(user.prevRoom);
+
     //For all beside the sender client
     socket.broadcast.to(user.room).emit("message", {
       name: "Admin",
