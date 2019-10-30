@@ -126,8 +126,8 @@ const Chat = ({ location }) => {
 
   useEffect(() => {
     console.log("inside room effect");
-    if (room === prevRoom) {
-      console.log("same rooms returning");
+    if (room === prevRoom || !prevRoom) {
+      console.log("same rooms or no prevRoom RETURNING");
       return;
     }
 
