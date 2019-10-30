@@ -120,6 +120,15 @@ io.on("connection", socket => {
     callback();
   });
 
+  socket.on("SEND_IS_TYPING", ({ room, name }, callback) => {
+    socket.broadcast.to(room).emit("IS_TYPING", {
+      name: name,
+      message: "is typing.."
+    });
+
+    callback();
+  });
+
   socket.on("disconnect", function() {
     const user = removeUser(socket.id);
 

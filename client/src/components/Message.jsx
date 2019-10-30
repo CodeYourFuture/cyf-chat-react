@@ -83,7 +83,7 @@ const Message = ({ message, name, date, avatar, onDelete, onEdit, id }) => {
           primary={
             <React.Fragment>
               <Typography>
-                {name + " "}
+                {name + "  "}
                 <Moment calendar={calendarStrings} className={classes.date}>
                   {date}
                 </Moment>

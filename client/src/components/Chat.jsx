@@ -80,6 +80,7 @@ const Chat = ({ location }) => {
   const [messages, setMessages] = useState([]);
   const [fetchCounter, setFetchCounter] = useState(1);
   const [searchMessagesResult, setSearchMessagesResult] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
 
   const prevRoom = usePrevious(room);
 
@@ -149,6 +150,14 @@ const Chat = ({ location }) => {
       socket.off();
     };
   }, [room]);
+
+  useEffect(() => {
+    console.log("inside typing useffect");
+
+    socket.on("IS_TYPING", message => {
+      console.log("inside istyping Effect", message);
+    });
+  }, [isTyping]);
 
   //function for sending message
   const sendMessage = async ev => {
@@ -231,6 +240,29 @@ const Chat = ({ location }) => {
     );
 
     setMessages(response.data.reverse());
+  };
+
+  const typingstopped = () => {
+    console.log("typing stopped");
+    setIsTyping(false);
+    // socket.emit(notTyping);
+  };
+
+  const handleInputChange = e => {
+    setMessage(e.target.value);
+    let time;
+    if (isTyping === false) {
+      setIsTyping(true);
+      console.log("about to emit the typing to evertone");
+      socket.emit("SEND_IS_TYPING", { room, name }, error => {
+        console.log(error);
+      });
+      time = setTimeout(typingstopped, 4000);
+    } else {
+      clearTimeout(time);
+      time = setTimeout(typingstopped, 4000);
+      clearTimeout(time);
+    }
   };
 
   return (
@@ -317,9 +349,7 @@ const Chat = ({ location }) => {
               <div className="row">
                 <div className="col-md-12 col-xs-12">
                   <Form
-                    onInputChange={e => {
-                      setMessage(e.target.value);
-                    }}
+                    onInputChange={handleInputChange}
                     message={message}
                     sendMessage={ev => {
                       sendMessage(ev);
