@@ -12,8 +12,15 @@ import {
 import EditMessage from "../components/EditMessage";
 import images from "../helpers/Images";
 import Moment from "react-moment";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { typography } from "@material-ui/system";
 
 const useStyles = makeStyles(theme => ({
   whiteText: {
@@ -42,13 +49,20 @@ const Message = ({ message, name, date, avatar, onDelete, onEdit, id }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
 
+  const handleDialogClose = () => {
+    setIsEditing(!isEditing);
+  };
+  const handleDialogConfirm = e => {
+    setIsEditing(!isEditing);
+    sendEditMessage(e);
+  };
+
   const handleChange = e => {
     e.preventDefault();
     setEditedMessage(e.target.value);
   };
 
   const editMessage = e => {
-    e.preventDefault();
     setIsEditing(true);
   };
 
@@ -68,25 +82,17 @@ const Message = ({ message, name, date, avatar, onDelete, onEdit, id }) => {
         <ListItemText
           primary={
             <React.Fragment>
-              {name + " "}
-              <Moment calendar={calendarStrings} className={classes.date}>
-                {date}
-              </Moment>
+              <Typography>
+                {name + " "}
+                <Moment calendar={calendarStrings} className={classes.date}>
+                  {date}
+                </Moment>
+              </Typography>
             </React.Fragment>
           }
           secondary={
             <React.Fragment>
-              {isEditing ? (
-                <TextField
-                  id="standard-name"
-                  value={editedMessage}
-                  onChange={e => handleChange(e)}
-                  margin="normal"
-                  onKeyPress={ev =>
-                    ev.key === "Enter" ? sendEditMessage(ev) : null
-                  }
-                />
-              ) : (
+              {!isEditing && (
                 <Typography
                   component="span"
                   variant="body2"
@@ -98,6 +104,43 @@ const Message = ({ message, name, date, avatar, onDelete, onEdit, id }) => {
             </React.Fragment>
           }
         />
+        {isEditing && (
+          <Dialog
+            open
+            onClose={handleDialogClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Edit</DialogTitle>
+            <DialogContent>
+              <DialogContentText>Edit the message..</DialogContentText>
+
+              <TextField
+                id="standard-name"
+                autoFocus
+                value={editedMessage}
+                onChange={e => handleChange(e)}
+                margin="normal"
+                fullWidth
+                onKeyPress={ev =>
+                  ev.key === "Enter" ? sendEditMessage(ev) : null
+                }
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDialogClose} color="secondary">
+                Cancel
+              </Button>
+              <Button
+                onClick={e => {
+                  handleDialogConfirm(e);
+                }}
+                color="primary"
+              >
+                Edit
+              </Button>
+            </DialogActions>
+          </Dialog>
+        )}
 
         {name !== "Admin" && (
           <Box className={classes.menuRight}>

@@ -41,6 +41,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.between("lg", "xl")]: {
       height: "80vh",
       paddingRight: "0px"
+    },
+    [theme.breakpoints.only("lg")]: {
+      height: "75vh",
+      paddingRight: "0px"
     }
   },
   messageHeightBreak: {
@@ -55,6 +59,10 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.only("sm")]: {
       height: "50vh",
+      paddingRight: "0px"
+    },
+    [theme.breakpoints.only("lg")]: {
+      height: "75vh",
       paddingRight: "0px"
     }
   }
@@ -211,7 +219,10 @@ const Chat = ({ location }) => {
     let editedMess = copyMess.find(e => e._id === id);
     editedMess.message = message;
     let editedMessIndex = copyMess.findIndex(e => e._id === id);
-    setMessages(copyMess.splice(editedMessIndex, 1, editMessage));
+    console.log(editedMessIndex);
+    copyMess.splice(editedMessIndex, 1, editedMess);
+    console.log(copyMess);
+    setMessages(copyMess);
   };
 
   const getLatestMessages = async () => {
