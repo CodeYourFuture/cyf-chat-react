@@ -27,7 +27,7 @@ exports.get_a_message_by_id = (req, res) => {
   });
 };
 
-exports.get_messages_by_text = (req, res) => {
+exports.search_messages_by_text = (req, res) => {
   Message.find(
     { message: { $regex: req.params.searchValue, $options: "i" } },
     function(err, message) {
@@ -89,4 +89,20 @@ exports.get_latest_by_room = (req, res) => {
   })
     .sort({ _id: -1 })
     .limit(10);
+};
+
+exports.search_messages_by_room = (req, res) => {
+  Message.find(
+    {
+      message: { $regex: req.params.searchValue, $options: "i" },
+      room: req.params.roomName
+    },
+    function(err, message) {
+      if (err) {
+        return res.send(err);
+      }
+
+      res.json(message);
+    }
+  );
 };

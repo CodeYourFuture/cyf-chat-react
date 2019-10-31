@@ -5,17 +5,17 @@ import Message from "./Message";
 import List from "@material-ui/core/List";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-const Messages = ({ messages, name, onDelete, onEdit, isEditing }) => {
-  const useStyles = makeStyles({
-    root: {
-      backgroundColor: "#404346",
-      color: "white",
-      overflow: "auto",
-      height: "100%"
-    },
-    messageBox: { alignItems: "flex-end" }
-  });
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "#404346",
+    color: "white",
+    overflow: "auto",
+    height: "100%"
+  },
+  messageBox: { alignItems: "flex-end" }
+});
 
+const Messages = ({ messages, name, onDelete, onEdit, isEditing }) => {
   const classes = useStyles();
   return (
     <ScrollToBottom className={classes.root}>

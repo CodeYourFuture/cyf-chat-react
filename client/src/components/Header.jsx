@@ -2,6 +2,9 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import InputBase from "@material-ui/core/InputBase";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 import {
   Avatar,
   Box,
@@ -11,7 +14,8 @@ import {
   IconButton,
   Typography,
   TextField,
-  Collapse
+  Collapse,
+  Radio
 } from "@material-ui/core";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
@@ -20,6 +24,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import images from "../helpers/Images";
 import Moment from "react-moment";
 import clsx from "clsx";
+import { green } from "@material-ui/core/colors";
+import { cpus } from "os";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -111,6 +117,16 @@ const StyledMenuItem = withStyles(theme => ({
   }
 }))(MenuItem);
 
+const GreenRadio = withStyles({
+  root: {
+    color: green[400],
+    "&$checked": {
+      color: green[600]
+    }
+  },
+  checked: {}
+})(props => <Radio color="default" {...props} />);
+
 const calendarStrings = {
   lastDay: "[Yesterday at] LT",
   sameDay: "[Today at] LT",
@@ -124,11 +140,24 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedCollapse, setSelectedCollapse] = React.useState(-1);
+  const [selectedRadio, setSelectedRadio] = React.useState("a");
+  const [searchValue, setSearchValue] = React.useState("");
+
+  const handleRadioChange = event => {
+    setSelectedRadio(event.target.value);
+    console.log(event.target.value, searchValue);
+    searchMessages(searchValue, event.target.value === "c" ? 0 : 1);
+  };
 
   const handleClick = event => {
     event.preventDefault();
+
     setAnchorEl(event.currentTarget);
-    searchMessages(event);
+    searchMessages(event, 1);
+  };
+
+  const onInputChange = ev => {
+    setSearchValue(ev);
   };
 
   const handleClose = () => {
@@ -147,12 +176,17 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
             Let's Chat!
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-
+            <IconButton onClick={ev => handleClick(ev)}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+            </IconButton>
             <InputBase
               placeholder="Search…"
+              onChange={ev => {
+                ev.preventDefault();
+                onInputChange(ev.target.value);
+              }}
               onKeyPress={ev => (ev.key === "Enter" ? handleClick(ev) : null)}
               classes={{
                 root: classes.inputRoot,
@@ -167,6 +201,44 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              <Box className="pl-3">
+                <FormControl component="fieldset">
+                  <RadioGroup
+                    aria-label="position"
+                    name="position"
+                    value={selectedRadio}
+                    onChange={handleRadioChange}
+                    row
+                  >
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <Radio
+                          checked={selectedRadio === "a"}
+                          value="a"
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "A" }}
+                        />
+                      }
+                      label="This room"
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      value="end"
+                      control={
+                        <GreenRadio
+                          checked={selectedRadio === "c"}
+                          value="c"
+                          name="radio-button-demo"
+                          inputProps={{ "aria-label": "C" }}
+                        />
+                      }
+                      label="All rooms"
+                      labelPlacement="end"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Box>
               {searchMessagesResult.map((message, i) => {
                 return (
                   <div key={i}>

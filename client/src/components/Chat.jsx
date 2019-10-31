@@ -201,9 +201,10 @@ const Chat = ({ location }) => {
     setRoom(Room);
   };
 
-  const searchMessages = async value => {
+  const searchMessages = async (value, type) => {
+    const str = type === 0 ? `${value}` : `room/${room}/${value}`;
     const response = await axios.get(
-      `http://localhost:3005/messages/search/${value}`
+      `http://localhost:3005/messages/search/${str}`
     );
 
     console.log(response);
@@ -289,14 +290,13 @@ const Chat = ({ location }) => {
         <Grid container>
           <Grid item md={12} xl={12} xs={12}>
             <Header
-              searchMessages={e => {
-                e.preventDefault();
-                searchMessages(e.target.value);
+              searchMessages={(e, type) => {
+                searchMessages(e, type);
               }}
               searchMessagesResult={searchMessagesResult}
             />
           </Grid>
-          <Grid item md={2} xl={2} sm={12} xs={12} className="mt-2">
+          <Grid item md={2} xl={2} sm={12} xs={12} className="mt-3">
             <Box className={classes.roomHeightBreak}>
               <Rooms
                 rooms={rooms}
@@ -305,56 +305,58 @@ const Chat = ({ location }) => {
                 changeRoom={changeRoom}
               />
             </Box>
-            <Box className={classes.chipsXS}>
-              <Chip
-                avatar={
-                  <Icon
-                    path={mdiReload}
-                    title="reload"
-                    size={1}
-                    color="white"
-                  />
-                }
-                label={
-                  <Typography
-                    component="span"
-                    variant="caption"
-                    style={{ color: "white" }}
-                  >
-                    Fetch all
-                  </Typography>
-                }
-                onClick={e => {
-                  e.preventDefault();
-                  fetchMessages(room);
-                }}
-                variant="outlined"
-              />
-              <Chip
-                avatar={
-                  <Icon
-                    path={mdiReload}
-                    title="reload"
-                    size={1}
-                    color="white"
-                  />
-                }
-                label={
-                  <Typography
-                    component="span"
-                    variant="caption"
-                    style={{ color: "white" }}
-                  >
-                    Last 10
-                  </Typography>
-                }
-                onClick={e => {
-                  e.preventDefault();
-                  getLatestMessages();
-                }}
-                variant="outlined"
-                className="ml-2"
-              />
+            <Box className="mt-4">
+              <Box className={classes.chipsXS}>
+                <Chip
+                  avatar={
+                    <Icon
+                      path={mdiReload}
+                      title="reload"
+                      size={1}
+                      color="white"
+                    />
+                  }
+                  label={
+                    <Typography
+                      component="span"
+                      variant="caption"
+                      style={{ color: "white" }}
+                    >
+                      Fetch all
+                    </Typography>
+                  }
+                  onClick={e => {
+                    e.preventDefault();
+                    fetchMessages(room);
+                  }}
+                  variant="outlined"
+                />
+                <Chip
+                  avatar={
+                    <Icon
+                      path={mdiReload}
+                      title="reload"
+                      size={1}
+                      color="white"
+                    />
+                  }
+                  label={
+                    <Typography
+                      component="span"
+                      variant="caption"
+                      style={{ color: "white" }}
+                    >
+                      Last 10
+                    </Typography>
+                  }
+                  onClick={e => {
+                    e.preventDefault();
+                    getLatestMessages();
+                  }}
+                  variant="outlined"
+                  className="ml-2"
+                />
+              </Box>
             </Box>
           </Grid>
           <Grid item md={10} xl={10} xs={12}>
