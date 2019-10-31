@@ -42,9 +42,9 @@ const useStyles = makeStyles(theme => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: fade(theme.palette.common.white, 0.9),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+      backgroundColor: fade(theme.palette.common.white, 0.9)
     },
     marginLeft: 0,
     width: "100%",
@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   inputRoot: {
-    color: "inherit"
+    color: "black"
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
@@ -170,7 +170,7 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
   };
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="inherit">
+      <AppBar position="static" style={{ backgroundColor: "#404346" }}>
         <Toolbar variant="dense">
           <Typography className={classes.title} variant="h6" noWrap>
             Let's Chat!
@@ -201,7 +201,7 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <Box className="pl-3">
+              <Box className="pl-3 d-flex ">
                 <FormControl component="fieldset">
                   <RadioGroup
                     aria-label="position"
@@ -209,6 +209,7 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
                     value={selectedRadio}
                     onChange={handleRadioChange}
                     row
+                    className="d-flex flex-nowrap"
                   >
                     <FormControlLabel
                       value="end"
