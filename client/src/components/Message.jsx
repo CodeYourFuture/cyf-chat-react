@@ -18,6 +18,7 @@ import EditMessage from "../components/EditMessage";
 import images from "../helpers/Images";
 import Moment from "react-moment";
 import { makeStyles } from "@material-ui/core/styles";
+import { Twemoji } from "react-emoji-render";
 
 const useStyles = makeStyles(theme => ({
   whiteText: {
@@ -95,7 +96,7 @@ const Message = ({ message, name, date, avatar, onDelete, onEdit, id }) => {
                   variant="body2"
                   className={classes.whiteText}
                 >
-                  {message}
+                  <Twemoji svg text={message} />
                 </Typography>
               )}
             </React.Fragment>

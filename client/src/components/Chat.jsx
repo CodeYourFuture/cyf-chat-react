@@ -187,6 +187,7 @@ const Chat = ({ location }) => {
 
   const searchMessages = async (value, type) => {
     const str = type === 0 ? `${value}` : `room/${room}/${value}`;
+
     const response = await axios.get(
       `http://localhost:3005/messages/search/${str}`
     );

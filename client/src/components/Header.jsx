@@ -143,15 +143,14 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
 
   const handleRadioChange = event => {
     setSelectedRadio(event.target.value);
-    console.log(event.target.value, searchValue);
+
     searchMessages(searchValue, event.target.value === "c" ? 0 : 1);
   };
 
   const handleClick = event => {
     event.preventDefault();
-
     setAnchorEl(event.currentTarget);
-    searchMessages(event, 1);
+    searchMessages(searchValue, 1);
   };
 
   const onInputChange = ev => {
@@ -163,7 +162,6 @@ const Header = ({ searchMessages, searchMessagesResult }) => {
   };
 
   const handleExpandClick = id => {
-    console.log(id);
     setSelectedCollapse(selectedCollapse === id ? -1 : id);
   };
   return (

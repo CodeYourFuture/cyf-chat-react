@@ -73,7 +73,6 @@ const Room = ({
         </Box>
         {roomName.toLowerCase() === currentRoom.toLowerCase() &&
           users.map(({ avatar, room }, i) => {
-            console.log(room, currentRoom, "this is room and curr");
             if (i > 4) {
               return (
                 room.toLowerCase() === currentRoom.toLowerCase() && (
