@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Grid, Box } from "@material-ui/core";
+import React from "react";
+import { Box, List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Message from "./Message";
-import List from "@material-ui/core/List";
+
 import ScrollToBottom from "react-scroll-to-bottom";
 
 const useStyles = makeStyles({

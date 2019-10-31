@@ -1,9 +1,15 @@
 import React from "react";
-import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Box, Avatar, List, Typography, Collapse } from "@material-ui/core";
+import {
+  Box,
+  Avatar,
+  List,
+  Typography,
+  Collapse,
+  ListItem,
+  ListItemAvatar,
+  ListItemText
+} from "@material-ui/core";
 import images from "../helpers/Images";
 
 const useStyles = makeStyles(theme => ({

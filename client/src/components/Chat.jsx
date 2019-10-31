@@ -10,7 +10,6 @@ import axios from "axios";
 import Header from "../components/Header";
 import IsTyping from "../components/IsTyping";
 import Box from "@material-ui/core/Box";
-import IconButton from "@material-ui/core/IconButton";
 import { mdiReload } from "@mdi/js";
 import Icon from "@mdi/react";
 import Chip from "@material-ui/core/Chip";
@@ -79,7 +78,6 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [fetchCounter, setFetchCounter] = useState(1);
   const [searchMessagesResult, setSearchMessagesResult] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const [userTyping, setUserTyping] = useState(" is typing..");
@@ -87,14 +85,7 @@ const Chat = ({ location }) => {
   const prevRoom = usePrevious(room);
 
   const ENDPOINT = "localhost:3005";
-  const ROOMS = [
-    "Main",
-    "Chill",
-    "Evening",
-    "placeholder",
-    "placeholder1",
-    "placeholder2"
-  ];
+  const ROOMS = ["Main", "Chill", "Evening", "Room1", "Room2", "Room3"];
 
   useEffect(() => {
     const { name, avatar } = queryString.parse(location.search);
@@ -103,8 +94,8 @@ const Chat = ({ location }) => {
     setRooms(ROOMS);
     setAvatar(avatar);
 
+    //Emmiting Join
     socket.emit("join", { name, avatar, room }, error => {
-      console.log("emmited", name, avatar, room);
       console.log(error);
     });
 
@@ -118,12 +109,11 @@ const Chat = ({ location }) => {
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-    console.log("inside message Effect");
+    //When we get messages from server
     socket.on("message", message => {
       setMessages([...messages, message]);
-      console.log("inside message Effect", message);
     });
-
+    //We get the room data with users logged in
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
@@ -136,16 +126,16 @@ const Chat = ({ location }) => {
   }, [messages]);
 
   useEffect(() => {
-    console.log("inside room effect");
+    //We will not run this Effect on mount
     if (room === prevRoom || !prevRoom) {
-      console.log("same rooms or no prevRoom RETURNING");
       return;
     }
 
+    // Emmiting change room to server
     socket.emit("CHANGE_ROOM", { room }, error => {
       console.log(error);
     });
-
+    // Getting room data from server
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
@@ -158,19 +148,14 @@ const Chat = ({ location }) => {
   }, [room]);
 
   useEffect(() => {
-    console.log("inside typing useffect");
-
     socket.on("IS_TYPING", ({ name }) => {
       //Concat the name of the user that is typing to " is typing..."
       const userTyp = userTyping;
       const string = name.concat(userTyp);
-
       setUserTyping(string);
     });
 
     socket.on("IS_NOT_TYPING", ({ message }) => {
-      //Concat the name of the user that is typing to " is typing..."
-
       setUserTyping(message);
     });
   }, [isTyping]);
@@ -178,6 +163,7 @@ const Chat = ({ location }) => {
   //function for sending message
   const sendMessage = async ev => {
     ev.preventDefault();
+    //We send the message and then we set the Input State to empty string
     if (message) {
       socket.emit("SEND_MESSAGE", message, () => {
         setMessage("");
@@ -185,15 +171,13 @@ const Chat = ({ location }) => {
 
       let mess = { name, avatar, message, room };
       const response = await axios.post(`http://localhost:3005/messages`, mess);
-      console.log("Added: this is response", response);
     }
     fetchMessages(room);
   };
 
   const changeRoom = async Room => {
-    console.log(room, Room);
+    // Return if click on the same room
     if (room === Room) {
-      console.log("Same room , reutrinig");
       return;
     }
 
@@ -207,7 +191,6 @@ const Chat = ({ location }) => {
       `http://localhost:3005/messages/search/${str}`
     );
 
-    console.log(response);
     setSearchMessagesResult(response.data);
   };
 
@@ -215,7 +198,6 @@ const Chat = ({ location }) => {
     const response = await axios.get(
       `http://localhost:3005/messages/rooms/${room}`
     );
-    console.log(response.data);
     setMessages(response.data.length >= 1 ? response.data : []);
   };
 
@@ -223,7 +205,6 @@ const Chat = ({ location }) => {
     const response = await axios.delete(
       `http://localhost:3005/messages/id/${id}`
     );
-    console.log("This is response of delete ", response);
 
     //Create copy of messages and filter out the deleted message
     let copyMess = [...messages];
@@ -238,16 +219,12 @@ const Chat = ({ location }) => {
       }
     );
 
-    console.log("Response from editmessage", response);
-
     //Create copy of messages and edit the state
     let copyMess = [...messages];
     let editedMess = copyMess.find(e => e._id === id);
     editedMess.message = message;
     let editedMessIndex = copyMess.findIndex(e => e._id === id);
-    console.log(editedMessIndex);
     copyMess.splice(editedMessIndex, 1, editedMess);
-    console.log(copyMess);
     setMessages(copyMess);
   };
 
@@ -260,7 +237,6 @@ const Chat = ({ location }) => {
   };
 
   const typingstopped = () => {
-    console.log("typing stopped");
     setIsTyping(false);
     socket.emit("SEND_IS_NOT_TYPING", { room, name }, error => {
       console.log(error);
@@ -272,7 +248,6 @@ const Chat = ({ location }) => {
     let time;
     if (isTyping === false) {
       setIsTyping(true);
-      console.log("about to emit the typing to evertone");
       socket.emit("SEND_IS_TYPING", { room, name }, error => {
         console.log(error);
       });

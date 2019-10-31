@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   messageBox: { alignItems: "flex-end" }
 });
 
-const Rooms = ({ rooms, currentRoom, changeRoom, users, history }) => {
+const Rooms = ({ rooms, currentRoom, changeRoom, users }) => {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 

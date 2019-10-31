@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import {
-  Avatar,
   Box,
-  ListItem,
-  List,
-  ListItemAvatar,
   ListItemText,
   IconButton,
   Typography,
-  Collapse
+  Menu,
+  MenuItem,
+  ListItemIcon
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { mdiMenu } from "@mdi/js";
@@ -17,9 +15,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 
 const StyledMenu = withStyles({
   paper: {
@@ -52,21 +47,7 @@ const StyledMenuItem = withStyles(theme => ({
   }
 }))(MenuItem);
 
-const useStyles = makeStyles(theme => ({
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(180deg)"
-  }
-}));
-
 const EditMessage = ({ onDelete, onEdit, id, thereIsId }) => {
-  const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 

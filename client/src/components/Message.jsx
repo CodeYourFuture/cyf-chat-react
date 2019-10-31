@@ -5,22 +5,19 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  IconButton,
   Typography,
-  TextField
+  TextField,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
 } from "@material-ui/core";
 import EditMessage from "../components/EditMessage";
 import images from "../helpers/Images";
 import Moment from "react-moment";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
 import { makeStyles } from "@material-ui/core/styles";
-import { typography } from "@material-ui/system";
 
 const useStyles = makeStyles(theme => ({
   whiteText: {
