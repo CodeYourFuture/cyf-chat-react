@@ -8,6 +8,7 @@ import Rooms from "./Rooms";
 import Messages from "./Messages";
 import axios from "axios";
 import Header from "../components/Header";
+import IsTyping from "../components/IsTyping";
 import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import { mdiReload } from "@mdi/js";
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
       paddingRight: "0px"
     },
     [theme.breakpoints.only("lg")]: {
-      height: "75vh",
+      height: "73vh",
       paddingRight: "0px"
     }
   },
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
       paddingRight: "0px"
     },
     [theme.breakpoints.only("lg")]: {
-      height: "75vh",
+      height: "73vh",
       paddingRight: "0px"
     }
   }
@@ -75,12 +76,13 @@ const Chat = ({ location }) => {
   const [room, setRoom] = useState("main");
   const [avatar, setAvatar] = useState(0);
   const [rooms, setRooms] = useState([]);
-  const [users, setUsers] = useState("");
+  const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [fetchCounter, setFetchCounter] = useState(1);
   const [searchMessagesResult, setSearchMessagesResult] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [userTyping, setUserTyping] = useState(" is typing..");
 
   const prevRoom = usePrevious(room);
 
@@ -144,6 +146,10 @@ const Chat = ({ location }) => {
       console.log(error);
     });
 
+    socket.on("roomData", ({ users }) => {
+      setUsers(users);
+    });
+
     return () => {
       socket.emit("disconnect");
 
@@ -154,8 +160,18 @@ const Chat = ({ location }) => {
   useEffect(() => {
     console.log("inside typing useffect");
 
-    socket.on("IS_TYPING", message => {
-      console.log("inside istyping Effect", message);
+    socket.on("IS_TYPING", ({ name }) => {
+      //Concat the name of the user that is typing to " is typing..."
+      const userTyp = userTyping;
+      const string = name.concat(userTyp);
+
+      setUserTyping(string);
+    });
+
+    socket.on("IS_NOT_TYPING", ({ message }) => {
+      //Concat the name of the user that is typing to " is typing..."
+
+      setUserTyping(message);
     });
   }, [isTyping]);
 
@@ -245,7 +261,9 @@ const Chat = ({ location }) => {
   const typingstopped = () => {
     console.log("typing stopped");
     setIsTyping(false);
-    // socket.emit(notTyping);
+    socket.emit("SEND_IS_NOT_TYPING", { room, name }, error => {
+      console.log(error);
+    });
   };
 
   const handleInputChange = e => {
@@ -280,7 +298,12 @@ const Chat = ({ location }) => {
           </Grid>
           <Grid item md={2} xl={2} sm={12} xs={12} className="mt-2">
             <Box className={classes.roomHeightBreak}>
-              <Rooms rooms={rooms} changeRoom={changeRoom} />
+              <Rooms
+                rooms={rooms}
+                currentRoom={room}
+                users={users}
+                changeRoom={changeRoom}
+              />
             </Box>
             <Box className={classes.chipsXS}>
               <Chip
@@ -355,6 +378,11 @@ const Chat = ({ location }) => {
                       sendMessage(ev);
                     }}
                   />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12 col-xs-12 text-left">
+                  <IsTyping userTyping={userTyping} />
                 </div>
               </div>
             </div>

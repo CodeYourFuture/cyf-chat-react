@@ -3,7 +3,7 @@ import { List, Box } from "@material-ui/core";
 import Room from "./Room";
 import { withRouter } from "react-router";
 
-const Rooms = ({ rooms, changeRoom, history }) => {
+const Rooms = ({ rooms, currentRoom, changeRoom, users, history }) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleListItemClick = (event, index) => {
@@ -22,7 +22,9 @@ const Rooms = ({ rooms, changeRoom, history }) => {
           <Box key={i}>
             <Room
               roomName={room}
+              currentRoom={currentRoom}
               index={i}
+              users={users}
               selectedIndex={selectedIndex}
               handleListItemClick={handleListItemClick}
             />

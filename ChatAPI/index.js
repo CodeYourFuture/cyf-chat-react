@@ -117,6 +117,11 @@ io.on("connection", socket => {
       users: getUsersInRoom(user.room)
     });
 
+    socket.to(user.prevRoom).emit("roomData", {
+      room: user.room,
+      users: getUsersInRoom(user.prevRoom)
+    });
+
     callback();
   });
 
@@ -124,6 +129,15 @@ io.on("connection", socket => {
     socket.broadcast.to(room).emit("IS_TYPING", {
       name: name,
       message: "is typing.."
+    });
+
+    callback();
+  });
+
+  socket.on("SEND_IS_NOT_TYPING", ({ room, name }, callback) => {
+    socket.broadcast.to(room).emit("IS_NOT_TYPING", {
+      name: name,
+      message: " is typing.."
     });
 
     callback();
