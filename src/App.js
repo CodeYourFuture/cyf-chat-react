@@ -21,8 +21,6 @@ function App() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(newMessage);
     postMessage(
       "https://cyf-chat-server-express.herokuapp.com/messages",
       newMessage
