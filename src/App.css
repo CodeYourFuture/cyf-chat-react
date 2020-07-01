@@ -1,5 +1,10 @@
-.App-header {
+.App {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
+.App-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,11 +13,57 @@
   color: white;
 }
 
+.container {
+  height: 450px;
+}
+
+.container h5 {
+  margin-bottom: 2px;
+}
+
 .message {
-  text-align: center;
-  width: 400px;
-  height: 200px;
+  width: 500px;
+  height: 100px;
   background-color: palegreen;
   border-radius: 40px;
   color: #282c34;
+}
+
+.message p {
+  padding: 5px;
+  margin-left: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.container span {
+  padding: 5px;
+  margin-left: 30px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form input {
+  width: 400px;
+  padding: 10px;
+}
+
+textarea {
+  width: 400px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+form button {
+  width: 80px;
+  padding: 10px;
+  background-color: palegreen;
+  border: none;
+  margin-top: 10px;
 }
