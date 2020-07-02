@@ -28,8 +28,11 @@ function App() {
     );
   };
   const handleOnChange = (e) => {
-    const some = { ...newMessage, [e.target.name]: e.target.value };
-    setNewMessages(some);
+    const newMessageFromReact = {
+      ...newMessage,
+      [e.target.name]: e.target.value,
+    };
+    setNewMessages(newMessageFromReact);
   };
   useEffect(() => {
     fetch("https://cyf-chat-server-express.herokuapp.com/messages")
