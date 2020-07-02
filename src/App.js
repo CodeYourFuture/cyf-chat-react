@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import "./App.css";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => setMessages(data));
   }, [messages]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -46,6 +48,7 @@ function App() {
                 <p>{mess.text}</p>
               </div>
               <span>{mess.timeSent}</span>
+              <span>{moment(mess.timeSent).fromNow()}</span>
             </div>
           ))}
         </div>
