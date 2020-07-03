@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
+import Messages from "./components/Messages";
+import FormMessages from "./components/FormMessages";
+import { postMessage } from "./utils/function";
 import "./App.css";
 
 function App() {
@@ -9,17 +11,6 @@ function App() {
     text: "",
   });
 
-  function postMessage(url, data) {
-    const response = fetch(url, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then(() => console.log("Message Send!"));
-    return response;
-  }
   const handleSubmit = (e) => {
     e.preventDefault();
     postMessage(
@@ -44,38 +35,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="container">
-          {messages.map((mess) => (
-            <div key={mess.id}>
-              <h5>{mess.from}</h5>
-              <div className="message">
-                <p>{mess.text}</p>
-              </div>
-              <div className="tooltip">
-                {moment(mess.timeSent).fromNow()}
-                <span className="tooltipText">{mess.timeSent}</span>
-              </div>
-              <span></span>
-            </div>
-          ))}
+          <Messages messages={messages} />
         </div>
       </header>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Your Name"
-          onChange={handleOnChange}
-          name="from"
-        ></input>
-        <textarea
-          type="text"
-          placeholder="Enter message here..."
-          rows="6"
-          cols="50"
-          onChange={handleOnChange}
-          name="text"
-        ></textarea>
-        <button>Send</button>
-      </form>
+      <FormMessages
+        handleSubmit={handleSubmit}
+        handleOnChange={handleOnChange}
+      />
     </div>
   );
 }
