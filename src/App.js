@@ -50,8 +50,11 @@ function App() {
               <div className="message">
                 <p>{mess.text}</p>
               </div>
-              <span>{mess.timeSent}</span>
-              <span>{moment(mess.timeSent).fromNow()}</span>
+              <div className="tooltip">
+                {moment(mess.timeSent).fromNow()}
+                <span className="tooltipText">{mess.timeSent}</span>
+              </div>
+              <span></span>
             </div>
           ))}
         </div>
