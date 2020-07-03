@@ -95,6 +95,7 @@ form button {
   margin-left: -60px;
   opacity: 0;
   transition: opacity 1s;
+  font-size: 13px;
 }
 
 .tooltip:hover .tooltipText {
