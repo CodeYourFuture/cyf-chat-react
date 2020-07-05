@@ -18,7 +18,7 @@ const FormMessages = ({ handleOnChange, handleSubmit }) => {
         name="text"
         wrap="hard"
       ></textarea>
-      <button>Send</button>
+      <button className="sendBtn">Send</button>
     </form>
   );
 };

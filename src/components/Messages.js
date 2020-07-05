@@ -1,7 +1,12 @@
 import React from "react";
 import moment from "moment";
 
-const Messages = ({ messages }) => {
+const Messages = ({
+  messages,
+  handleSubmitEdit,
+  editButton,
+  handleEditText,
+}) => {
   return (
     <div>
       {messages.map((mess) => (
@@ -14,7 +19,22 @@ const Messages = ({ messages }) => {
             {moment(mess.timeSent).fromNow()}
             <span className="tooltipText">{mess.timeSent}</span>
           </div>
-          <span></span>
+          <form onSubmit={handleSubmitEdit}>
+            <textarea
+              className="edit-text"
+              name="text"
+              onChange={handleEditText}
+            ></textarea>
+            <div>
+              <button className="sendEditBtn" value={mess.id}>
+                Send
+              </button>
+            </div>
+          </form>
+          <button className="editBtn" value={mess.id} onClick={editButton}>
+            Edit
+          </button>
+          <button className="deleteBtn">Delete</button>
         </div>
       ))}
     </div>

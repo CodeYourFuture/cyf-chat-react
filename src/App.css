@@ -37,8 +37,6 @@
 
 }
 
-
-
 .container span {
   padding: 5px;
   margin-left: 30px;
@@ -65,7 +63,7 @@ textarea {
   white-space: pre-wrap;
 }
 
-form button {
+form button .sendBtn {
   width: 80px;
   padding: 10px;
   background-color: palegreen;
@@ -101,6 +99,30 @@ form button {
 .tooltip:hover .tooltipText {
   visibility: visible;
   opacity: 1;
+}
+
+
+
+.deleteBtn {
+  width: 50px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: none
+}
+
+.editBtn {
+  width: 50px;
+  margin-left: 250px;
+  border-radius: 20px;
+  border: none
+}
+
+
+.sendEditBtn {
+  width: 50px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: none
 }
 
 @media (max-width: 375px) {
