@@ -22,23 +22,21 @@ function App() {
   const seeLatest = () => {
     setRoute("latest");
     setRequestOption({
-      method: "GET",
+      method: "GET"
     });
   };
 
   const searchById = (event) => {
     setRoute(event.target.value);
     setRequestOption({
-      method: "GET",
+      method: "GET"
     });
   };
 
   const deleteMessage = (id) => {
     setRoute(id);
     setRequestOption({
-      method: "DELETE",
-      mode: "cors",
-      cache: "no-cache",
+      method: "DELETE"
     });
   };
 

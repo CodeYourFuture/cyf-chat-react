@@ -6,16 +6,9 @@ const Messages = (props) => {
         ? props.messageData.map((message) => {
             return (
               <div key={message.id} className="message">
-                <h2>Id: {message.id}</h2>
-                <h4>Name: {message.from}</h4>
-                <p>
-                  <b>message: </b>
-                  {message.text}
-                </p>
-                <h5>
-                  <b>timeSent: </b>
-                  {message.timesent}
-                </h5>
+                <h4>{message.from}</h4>
+                <p>'{message.text}'</p>
+                <h6>{message.timesent}</h6>
                 <button
                   className="delet-button"
                   onClick={() => props.deleteMessage(message.id)}
