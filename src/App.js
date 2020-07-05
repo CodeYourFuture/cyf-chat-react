@@ -42,7 +42,8 @@ function App() {
     });
   };
 
-  const newMessage = () => {
+  const newMessage = (e) => {
+    e.preventDefauld();
     setRoute("add");
     setRequestOption({
       method: "POST",
