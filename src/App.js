@@ -5,14 +5,16 @@ import "./App.css";
 
 function App() {
   const [messageData, setMessageData] = useState([]);
+  console.log(messageData)
   const [route, setRoute] = useState("");
+  // console.log(route);
   const [requestOption, setRequestOption] = useState({ method: "GET" });
   const [from, setFrom] = useState("");
   const [text, setText] = useState("");
 
   useEffect(() => {
     fetch(
-      `https://cyf-nader-chat-server.herokuapp.com/messages/${route}`,
+      `https://cyf-nader-chat-react-app.herokuapp.com/messages/${route}`,
       requestOption
     )
       .then((res) => res.json())
@@ -28,6 +30,7 @@ function App() {
 
   const searchById = (event) => {
     setRoute(event.target.value);
+    // console.log(event.target.value)
     setRequestOption({
       method: "GET"
     });
