@@ -52,6 +52,14 @@ function App() {
     );
     setShowEditDiv(!showEditDiv);
   };
+  const handleDelete = e => {
+    const deleteId = e.target.value;
+    fetchFromServer(
+      `https://cyf-chat-server-express.herokuapp.com/messages/${deleteId}`,
+      {},
+      "DELETE"
+    );
+  };
 
   useEffect(() => {
     fetch("https://cyf-chat-server-express.herokuapp.com/messages")
@@ -70,6 +78,7 @@ function App() {
             handleEditText={handleEditText}
             showEditDiv={showEditDiv}
             messageEditId={messageEditId}
+            handleDelete={handleDelete}
           />
         </div>
       </header>

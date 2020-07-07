@@ -7,7 +7,8 @@ const Messages = ({
   editButton,
   handleEditText,
   showEditDiv,
-  messageEditId
+  messageEditId,
+  handleDelete
 }) => {
   return (
     <div>
@@ -40,7 +41,9 @@ const Messages = ({
           <button className="editBtn" value={mess.id} onClick={editButton}>
             {showEditDiv ? "Back" : "Edit"}
           </button>
-          <button className="deleteBtn">Delete</button>
+          <button className="deleteBtn" onClick={handleDelete} value={mess.id}>
+            Delete
+          </button>
         </div>
       ))}
     </div>
