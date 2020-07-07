@@ -22,7 +22,7 @@ const Messages = ({
             <span className="tooltipText">{mess.timeSent}</span>
           </div>
           {mess.id === messageEditId && showEditDiv ? (
-            <form onSubmit={handleSubmitEdit}>
+            <form onSubmit={handleSubmitEdit} className="form-edit">
               <textarea
                 className="edit-text"
                 name="text"

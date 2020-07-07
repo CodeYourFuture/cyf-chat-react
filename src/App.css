@@ -14,7 +14,7 @@
 }
 
 .container h5 {
-  margin-bottom: 2px;
+  margin-bottom: -15px;
 }
 .form-post {
   margin-top: 100px;
@@ -47,6 +47,7 @@
 form {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 10px;
 }
@@ -116,7 +117,7 @@ textarea {
 
 .editBtn {
   width: 50px;
-  margin-left: 250px;
+  margin-left: 180px;
   border-radius: 20px;
   border: none;
   outline: none;
@@ -128,6 +129,10 @@ textarea {
   border-radius: 20px;
   border: none;
 }
+.form-edit {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 @media (max-width: 375px) {
   .message {
@@ -135,10 +140,14 @@ textarea {
   }
 
   form input {
-    width: 300px;
+    width: 250px;
   }
 
   textarea {
-    width: 300px;
+    width: 250px;
   }
+  
+.editBtn {
+  margin-left: 70px;
+}
 }
