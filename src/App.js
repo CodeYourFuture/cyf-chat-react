@@ -1,54 +1,62 @@
 import React, { useState, useEffect } from "react";
 import Messages from "./components/Messages";
 import FormMessages from "./components/FormMessages";
-import { postMessage } from "./utils/function";
+import { postMessage, updateMessage } from "./utils/function";
 import "./App.css";
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessages] = useState({
     from: "",
-    text: "",
+    text: ""
   });
   const [messageEditId, setMessageEditId] = useState("");
   const [newEditText, setNewEditText] = useState("");
+  const [showEditDiv, setShowEditDiv] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
+    if (e.target.value === "") {
+      alert("Please complete all the fields");
+    }
     postMessage(
       "https://cyf-chat-server-express.herokuapp.com/messages",
       newMessage
     );
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = e => {
     const newMessageFromReact = {
       ...newMessage,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     };
     setNewMessages(newMessageFromReact);
   };
-  const editButton = (e) => {
+  const editButton = e => {
     const messId = e.target.value;
     setMessageEditId(Number(messId));
-    console.log(messId);
+    setShowEditDiv(!showEditDiv);
+    console.log(Number(messId));
   };
-  const handleEditText = (e) => {
-    const updMessage = messages.find((mess) => mess.id === messageEditId);
+  const handleEditText = e => {
+    const updMessage = messages.find(mess => mess.id === messageEditId);
     const newMessageEdit = { ...updMessage, [e.target.name]: e.target.value };
     setNewEditText(newMessageEdit);
   };
-  const handleSubmitEdit = (e) => {
+  const handleSubmitEdit = e => {
     e.preventDefault();
 
-    const index = messages.indexOf(newEditText);
-    messages.splice(index, 1, newEditText);
-    console.log(newEditText);
+    updateMessage(
+      `https://cyf-chat-server-express.herokuapp.com/update/${messageEditId}`,
+      newEditText
+    );
+    setShowEditDiv(!showEditDiv);
   };
+
   useEffect(() => {
     fetch("https://cyf-chat-server-express.herokuapp.com/messages")
-      .then((res) => res.json())
-      .then((data) => setMessages(data));
+      .then(res => res.json())
+      .then(data => setMessages(data));
   }, [messages]);
 
   return (
@@ -60,6 +68,7 @@ function App() {
             handleSubmitEdit={handleSubmitEdit}
             editButton={editButton}
             handleEditText={handleEditText}
+            showEditDiv={showEditDiv}
           />
         </div>
       </header>

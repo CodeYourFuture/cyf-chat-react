@@ -17,7 +17,6 @@
   margin-bottom: 2px;
 }
 
-
 .message {
   width: 450px;
   height: 100px;
@@ -34,7 +33,6 @@
   margin-left: 30px;
   font-size: 16px;
   font-weight: 600;
-
 }
 
 .container span {
@@ -63,12 +61,17 @@ textarea {
   white-space: pre-wrap;
 }
 
-form button .sendBtn {
+.sendBtn {
   width: 80px;
   padding: 10px;
   background-color: palegreen;
   border: none;
   margin-top: 10px;
+}
+
+.sendBtn:hover {
+  color: black;
+  background-color: white;
 }
 
 .tooltip {
@@ -101,28 +104,25 @@ form button .sendBtn {
   opacity: 1;
 }
 
-
-
 .deleteBtn {
   width: 50px;
   margin-left: 10px;
   border-radius: 20px;
-  border: none
+  border: none;
 }
 
 .editBtn {
   width: 50px;
   margin-left: 250px;
   border-radius: 20px;
-  border: none
+  border: none;
 }
-
 
 .sendEditBtn {
   width: 50px;
   margin-left: 10px;
   border-radius: 20px;
-  border: none
+  border: none;
 }
 
 @media (max-width: 375px) {
