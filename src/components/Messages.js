@@ -28,9 +28,8 @@ const Messages = ({
                 className="edit-text"
                 name="text"
                 onChange={handleEditText}
-                value={mess.text}
+                defaultValue={mess.text}
               />
-
               <div>
                 <button className="sendEditBtn" value={mess.id}>
                   Send
@@ -39,7 +38,7 @@ const Messages = ({
             </form>
           ) : null}
           <button className="editBtn" value={mess.id} onClick={editButton}>
-            {showEditDiv ? "Back" : "Edit"}
+            {mess.id === messageEditId && showEditDiv ? "Back" : "Edit"}
           </button>
           <button className="deleteBtn" onClick={handleDelete} value={mess.id}>
             Delete
