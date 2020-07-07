@@ -1,18 +1,6 @@
-export function postMessage(url, data) {
+export function fetchFromServer(url, data, method) {
   const response = fetch(url, {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  }).then(() => console.log("Message Send!"));
-  return response;
-}
-
-export function updateMessage(url, data) {
-  const response = fetch(url, {
-    method: "PUT",
+    method: method,
     mode: "cors",
     headers: {
       "Content-Type": "application/json"

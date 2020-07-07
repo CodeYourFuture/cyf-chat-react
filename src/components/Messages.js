@@ -27,9 +27,9 @@ const Messages = ({
                 className="edit-text"
                 name="text"
                 onChange={handleEditText}
-              >
-                {mess.text}
-              </textarea>
+                value={mess.text}
+              />
+
               <div>
                 <button className="sendEditBtn" value={mess.id}>
                   Send

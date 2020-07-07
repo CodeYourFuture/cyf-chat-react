@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Messages from "./components/Messages";
 import FormMessages from "./components/FormMessages";
-import { postMessage, updateMessage } from "./utils/function";
+import { fetchFromServer } from "./utils/function";
 import "./App.css";
 
 function App() {
@@ -19,9 +19,10 @@ function App() {
     if (e.target.value === "") {
       alert("Please complete all the fields");
     }
-    postMessage(
+    fetchFromServer(
       "https://cyf-chat-server-express.herokuapp.com/messages",
-      newMessage
+      newMessage,
+      "POST"
     );
   };
 
@@ -36,7 +37,6 @@ function App() {
     const messId = e.target.value;
     setMessageEditId(Number(messId));
     setShowEditDiv(!showEditDiv);
-    console.log(Number(messId));
   };
   const handleEditText = e => {
     const updMessage = messages.find(mess => mess.id === messageEditId);
@@ -45,10 +45,10 @@ function App() {
   };
   const handleSubmitEdit = e => {
     e.preventDefault();
-
-    updateMessage(
+    fetchFromServer(
       `https://cyf-chat-server-express.herokuapp.com/update/${messageEditId}`,
-      newEditText
+      newEditText,
+      "PUT"
     );
     setShowEditDiv(!showEditDiv);
   };
