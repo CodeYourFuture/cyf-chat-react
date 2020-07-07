@@ -6,7 +6,8 @@ const Messages = ({
   handleSubmitEdit,
   editButton,
   handleEditText,
-  showEditDiv
+  showEditDiv,
+  messageEditId
 }) => {
   return (
     <div>
@@ -20,7 +21,7 @@ const Messages = ({
             {moment(mess.timeSent).fromNow()}
             <span className="tooltipText">{mess.timeSent}</span>
           </div>
-          {showEditDiv && (
+          {mess.id === messageEditId && showEditDiv ? (
             <form onSubmit={handleSubmitEdit}>
               <textarea
                 className="edit-text"
@@ -35,7 +36,7 @@ const Messages = ({
                 </button>
               </div>
             </form>
-          )}
+          ) : null}
           <button className="editBtn" value={mess.id} onClick={editButton}>
             {showEditDiv ? "Back" : "Edit"}
           </button>

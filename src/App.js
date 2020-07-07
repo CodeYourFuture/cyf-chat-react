@@ -69,6 +69,7 @@ function App() {
             editButton={editButton}
             handleEditText={handleEditText}
             showEditDiv={showEditDiv}
+            messageEditId={messageEditId}
           />
         </div>
       </header>

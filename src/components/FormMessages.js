@@ -2,13 +2,13 @@ import React from "react";
 
 const FormMessages = ({ handleOnChange, handleSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-post">
       <input
         type="text"
         placeholder="Your Name"
         onChange={handleOnChange}
         name="from"
-      ></input>
+      />
       <textarea
         type="text"
         placeholder="Enter message here..."
@@ -17,7 +17,7 @@ const FormMessages = ({ handleOnChange, handleSubmit }) => {
         onChange={handleOnChange}
         name="text"
         wrap="hard"
-      ></textarea>
+      />
       <button className="sendBtn">Send</button>
     </form>
   );
