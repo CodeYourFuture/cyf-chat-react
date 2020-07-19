@@ -5,12 +5,15 @@ import "./App.css";
 
 function App() {
   const [messageData, setMessageData] = useState([]);
-  console.log(messageData)
+  const [routeName, setRouteName]=useState("");
   const [route, setRoute] = useState("");
-  // console.log(route);
-  const [requestOption, setRequestOption] = useState({ method: "GET" });
-  const [from, setFrom] = useState("");
-  const [text, setText] = useState("");
+  const [methodName, setMethodName]=useState("GET")
+  const [requestOption, setRequestOption] = useState({ method: methodName });
+  const [formData, setFormData]=useState({
+    from:'',
+    text:''
+  })
+  const [displayForm, setDisplayForm]=useState("hide")
 
   useEffect(() => {
     fetch(
@@ -24,38 +27,47 @@ function App() {
   const seeLatest = () => {
     setRoute("latest");
     setRequestOption({
-      method: "GET"
+      method: "GET",
     });
   };
 
   const searchById = (event) => {
     setRoute(event.target.value);
-    // console.log(event.target.value)
     setRequestOption({
-      method: "GET"
+      method: "GET",
     });
   };
 
   const deleteMessage = (id) => {
     setRoute(id);
     setRequestOption({
-      method: "DELETE"
+      method: "DELETE",
     });
   };
 
   const newMessage = (e) => {
-    e.preventDefauld();
-    setRoute("add");
+    e.preventDefault();
+    setDisplayForm("hide")
     setRequestOption({
-      method: "POST",
+      method: methodName,
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        from,
-        text,
-      }),
+      body: JSON.stringify(formData),
     });
+    setRoute(routeName)
+    
   };
 
+  const editMessage = (id)=>{
+    setDisplayForm("show")
+    setRouteName(id)
+    setMethodName("PUT")
+  }
+
+  const showMessageForm = ()=>{
+    setDisplayForm("show")
+    setRouteName("add")
+    setMethodName("POST")
+  }
   return (
     <div>
       <div className="heading">
@@ -65,17 +77,23 @@ function App() {
         <div className="search">
           <div>
             <button onClick={seeLatest}>see latest</button>
+            <button onClick={showMessageForm}>New Message</button>
             <input placeholder="search by id" onChange={searchById}></input>
           </div>
-          <SendMessage
-            newMessage={newMessage}
-            setFrom={setFrom}
-            setText={setText}
-          />
+          
         </div>
+        
+      
       </div>
-      <div >
-        <Messages messageData={messageData} deleteMessage={deleteMessage} />
+      <div>
+      <SendMessage
+            newMessage={newMessage}
+            setFormData={setFormData}
+            formData={formData}
+            displayForm={displayForm}
+            setDisplayForm={setDisplayForm}
+          />
+        <Messages messageData={messageData} deleteMessage={deleteMessage} editMessage={editMessage}/>
       </div>
     </div>
   );

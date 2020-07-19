@@ -58,3 +58,26 @@ button {
 button {
   cursor: pointer;
 }
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+  height: 37%;
+  width: 50%;
+  background-color: lightblue;
+  position: fixed;
+  margin:  10% 10% 0 25%;
+  border: 1px solid rgb(83, 83, 218);
+
+}
+.form-style{
+  width: 80%;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+}
+.formGroup{
+  display: flex;
+  justify-content: space-around;
+}
