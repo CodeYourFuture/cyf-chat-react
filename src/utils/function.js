@@ -3,9 +3,9 @@ export function fetchFromServer(url, data, method) {
     method: method,
     mode: "cors",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
-  }).then(() => console.log("Message Send!"));
+    body: JSON.stringify(data),
+  });
   return response;
 }

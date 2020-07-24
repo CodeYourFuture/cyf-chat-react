@@ -16,9 +16,11 @@
 .container h5 {
   margin-bottom: -15px;
 }
+
 .form-post {
   margin-top: 100px;
 }
+
 .message {
   width: 450px;
   height: 100px;
@@ -113,6 +115,11 @@ textarea {
   border-radius: 20px;
   border: none;
   outline: none;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background-color: palegreen;
 }
 
 .editBtn {
@@ -129,6 +136,7 @@ textarea {
   border-radius: 20px;
   border: none;
 }
+
 .form-edit {
   display: flex;
   flex-wrap: wrap;
@@ -146,8 +154,8 @@ textarea {
   textarea {
     width: 250px;
   }
-  
-.editBtn {
-  margin-left: 70px;
-}
+
+  .editBtn {
+    margin-left: 70px;
+  }
 }

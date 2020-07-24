@@ -8,12 +8,12 @@ const Messages = ({
   handleEditText,
   showEditDiv,
   messageEditId,
-  handleDelete
+  handleDelete,
 }) => {
   return (
     <div>
-      {messages.map(mess => (
-        <div key={mess.id}>
+      {messages.map((mess) => (
+        <div key={mess._id}>
           <h5>{mess.from}</h5>
           <div className="message">
             <p className="p-message">{mess.text}</p>
@@ -22,7 +22,7 @@ const Messages = ({
             {moment(mess.timeSent).fromNow()}
             <span className="tooltipText">{mess.timeSent}</span>
           </div>
-          {mess.id === messageEditId && showEditDiv ? (
+          {mess._id === messageEditId && showEditDiv ? (
             <form onSubmit={handleSubmitEdit} className="form-edit">
               <textarea
                 className="edit-text"
@@ -31,16 +31,16 @@ const Messages = ({
                 defaultValue={mess.text}
               />
               <div>
-                <button className="sendEditBtn" value={mess.id}>
+                <button className="sendEditBtn" value={mess._id}>
                   Send
                 </button>
               </div>
             </form>
           ) : null}
-          <button className="editBtn" value={mess.id} onClick={editButton}>
-            {mess.id === messageEditId && showEditDiv ? "Back" : "Edit"}
+          <button className="editBtn" value={mess._id} onClick={editButton}>
+            {mess._id === messageEditId && showEditDiv ? "Back" : "Edit"}
           </button>
-          <button className="deleteBtn" onClick={handleDelete} value={mess.id}>
+          <button className="deleteBtn" onClick={handleDelete} value={mess._id}>
             Delete
           </button>
         </div>

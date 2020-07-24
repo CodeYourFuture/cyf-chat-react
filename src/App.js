@@ -8,15 +8,15 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessages] = useState({
     from: "",
-    text: ""
+    text: "",
   });
   const [messageEditId, setMessageEditId] = useState("");
   const [newEditText, setNewEditText] = useState("");
   const [showEditDiv, setShowEditDiv] = useState(false);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target.value === "") {
+    if (newMessage.from === "" || newMessage.text === "") {
       alert("Please complete all the fields");
     }
     fetchFromServer(
@@ -26,33 +26,34 @@ function App() {
     );
   };
 
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     const newMessageFromReact = {
       ...newMessage,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     };
     setNewMessages(newMessageFromReact);
   };
-  const editButton = e => {
+
+  const editButton = (e) => {
     const messId = e.target.value;
-    setMessageEditId(Number(messId));
+    setMessageEditId(messId);
     setShowEditDiv(!showEditDiv);
   };
-  const handleEditText = e => {
-    const updMessage = messages.find(mess => mess.id === messageEditId);
+  const handleEditText = (e) => {
+    const updMessage = messages.find((mess) => mess._id === messageEditId);
     const newMessageEdit = { ...updMessage, [e.target.name]: e.target.value };
     setNewEditText(newMessageEdit);
   };
-  const handleSubmitEdit = e => {
+  const handleSubmitEdit = (e) => {
     e.preventDefault();
     fetchFromServer(
-      `https://cyf-chat-server-express.herokuapp.com/update/${messageEditId}`,
+      `https://cyf-chat-server-express.herokuapp.com/message/update/${messageEditId}`,
       newEditText,
       "PUT"
     );
     setShowEditDiv(!showEditDiv);
   };
-  const handleDelete = e => {
+  const handleDelete = (e) => {
     const deleteId = e.target.value;
     fetchFromServer(
       `https://cyf-chat-server-express.herokuapp.com/messages/${deleteId}`,
@@ -62,9 +63,9 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://cyf-chat-server-express.herokuapp.com/messages")
-      .then(res => res.json())
-      .then(data => setMessages(data));
+    fetch("https://cyf-chat-server-express.herokuapp.com/")
+      .then((res) => res.json())
+      .then((messages) => setMessages(messages));
   }, [messages]);
 
   return (
