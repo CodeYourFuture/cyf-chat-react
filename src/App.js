@@ -63,9 +63,24 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://cyf-chat-server-express.herokuapp.com/")
-      .then((res) => res.json())
-      .then((messages) => setMessages(messages));
+    async function fetchData() {
+      try {
+        const res = await fetch(
+          "https://cyf-chat-server-express.herokuapp.com/"
+        );
+        const messages = await res.json();
+        setMessages(messages);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    fetchData();
+    let repeat = setTimeout(() => {
+      fetchData();
+    }, 10000);
+    return () => {
+      clearTimeout(repeat);
+    };
   }, [messages]);
 
   return (
