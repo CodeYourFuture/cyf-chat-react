@@ -7,7 +7,7 @@ const Messages = (props) => {
             return (
               <div key={message.id} className="message">
                 <h2>{message.id}</h2>
-                <h4>{message.from}</h4>
+                <h1>{message.from}</h1>
                 <p>'{message.text}'</p>
                 <h6>{message.timesent}</h6>
                 <button
