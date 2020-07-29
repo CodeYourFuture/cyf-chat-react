@@ -12,14 +12,14 @@ const Messages = (props) => {
                 <h6>{message.timesent}</h6>
                 <button
                   className="delet-button"
-                  onClick={() => props.deleteMessage(message.id)}
+                  onClick={() => props.deleteMessage(message._id)}
                   method="delete"
                 >
                   Delete
                 </button>
                 <button
                   className="delet-button"
-                  onClick={() => props.editMessage(message.id)}
+                  onClick={() => props.editMessage(message._id)}
                 >
                   Edit
                 </button>
