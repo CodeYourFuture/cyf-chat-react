@@ -6,8 +6,8 @@ const Messages = (props) => {
         ? props.messageData.map((message) => {
             return (
               <div key={message.id} className="message">
-                <h2>{message.id}</h2>
-                <h1>{message.from}</h1>
+                <h5>{message._id}</h5>
+                <h3>{message.from}</h3>
                 <p>'{message.text}'</p>
                 <h6>{message.timesent}</h6>
                 <button
