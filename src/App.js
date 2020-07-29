@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     fetch(
-      `https://cyf-nader-chat-react-app.herokuapp.com/messages/${route}`,
+      `https://cyf-nader-chat-server.herokuapp.com/messages/${route}`,
       requestOption
     )
       .then((res) => res.json())
