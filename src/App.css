@@ -1,16 +1,10 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,15 +13,149 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.container h5 {
+  margin-bottom: -15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.form-post {
+  margin-top: 100px;
+}
+
+.message {
+  width: 450px;
+  height: 100px;
+  background-color: palegreen;
+  border-radius: 40px;
+  color: #282c34;
+  line-height: 1.3;
+}
+
+.message p {
+  max-width: 80%;
+  word-wrap: break-word;
+  padding: 5px;
+  margin-left: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.container span {
+  padding: 5px;
+  margin-left: 30px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 10px;
+}
+
+form input {
+  width: 400px;
+  padding: 10px;
+}
+
+textarea {
+  width: 400px;
+  padding: 10px;
+  margin-top: 20px;
+  white-space: pre-wrap;
+}
+
+.sendBtn {
+  width: 80px;
+  padding: 10px;
+  background-color: palegreen;
+  border: none;
+  margin-top: 10px;
+}
+
+.sendBtn:hover {
+  color: black;
+  background-color: white;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  font-size: 13px;
+  cursor: alias;
+}
+
+.tooltip .tooltipText {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 1s;
+  font-size: 13px;
+}
+
+.tooltip:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+
+.deleteBtn {
+  width: 50px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background-color: palegreen;
+}
+
+.editBtn {
+  width: 50px;
+  margin-left: 180px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+.sendEditBtn {
+  width: 50px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: none;
+}
+
+.form-edit {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 375px) {
+  .message {
+    width: 300px;
   }
-  to {
-    transform: rotate(360deg);
+
+  form input {
+    width: 250px;
+  }
+
+  textarea {
+    width: 250px;
+  }
+
+  .editBtn {
+    margin-left: 70px;
   }
 }
