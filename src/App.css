@@ -1,33 +1,129 @@
 .App {
-  text-align: center;
+    text-align: left;
+    margin: 10px;
+    padding: 10px;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #222;
+    height: 50px;
+    padding: 20px;
+    color: white;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.App-title {
+    font-size: 1.5em;
+}
+
+.App-content {
+    padding-top: 20px;
+    font-size: large;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.search {
+    padding: 5px 0 20px 0;
+}
+
+tr {
+    color: #5b5757;
+}
+
+.results {
+    padding-top: 15px;
+}
+
+.footer {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.card {
+    width: 18rem;
+}
+
+.card img {
+    height: 200px;
+}
+
+.heading {
+    max-width: 50px;
+    margin: 5px;
+}
+
+.header {
+    display: flex;
+    justify-content: start;
+    margin: 5px;
+    background-color: rgb(188, 188, 240);
+}
+
+.headerTitle {
+    align-self: center;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.fontColor {
+    color: white;
+}
+
+.footerlist {
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.card {
+    width: 18rem;
+    margin: 50px 25px;
+}
+
+.card-text {
+    margin-top: 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background-color: #21618c;
+    border: 1px solid #21618c;
+}
+
+.btn:hover {
+    color: #21618c;
+    border: 1px solid #21618c;
+    background-color: white;
 }
