@@ -7,8 +7,7 @@ const SetApi = () => {
     const newendpoint = (e) => {
         setValue(e.target.value)
     }
-
-    console.log(url)
+    
     return (
         <div>
             <section className="client">
