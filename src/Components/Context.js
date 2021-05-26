@@ -1,37 +1,38 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
     const [clicked, setClicked] = useState(false);
-    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com", "https://enchanted-principal.glitch.me","https://yunus-chat-server.herokuapp.com"]);
+    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com", "https://enchanted-principal.glitch.me","https://clem-chat-server-vol2.glitch.me "]);
     const [value, setValue] = useState("");
+    const [selectValue, setSelectValue] = useState([])
     const [messages, setMessages] = useState([]);
-console.log(messages);
-console.log(value);
-    const fetchMessages = useCallback(async () => {
-        const urljoin = value + "/messages"
-        console.log(urljoin)
-           try {
-               const response = await fetch(urljoin);
-               const data = await response.json();
-               if (data) {
-                   setMessages(data)
-                   setValue("")
-               } else {
-                   return data;
-               }
-           } catch (error) {
-               console.log(error);
-           }
-    }, [value])
-    const submit = () => {
-        fetchMessages();
-        setUrl(url.concat(value).reverse())
-        setValue("");
-    }
+
+    
+    useEffect(() => {
+        const second = `${selectValue[0]}/messages`
+        console.log(second)
+        fetch(second)
+        .then(response => response.json())
+        .then(data => console.log(data));
+    },[selectValue])
+
+    useEffect(() => {
+        const first = "https://yunus-chat-server.herokuapp.com/messages"
+        fetch(first)
+        .then(response => response.json())
+        .then(data => console.log(data))
+    },[])
+
     const fetchurl = (e) => {
-        setValue(e.target.value)
+        setSelectValue(selectValue.concat(e.target.value).reverse())
+    }
+
+    const submit = () => {
+        setUrl(url.concat(value).reverse())
+        setSelectValue(selectValue.concat(value).reverse())
+        setValue("")
     }
 
     const popup = () => {
