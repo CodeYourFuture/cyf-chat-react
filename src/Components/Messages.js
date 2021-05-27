@@ -11,7 +11,7 @@ const Messages = () => {
                parseInt(element.id) ===  parseInt(e.target.value) ? 
                setpostName(element.from) ||
                setPostMessage(element.text) || 
-               setId(element.id) : null
+               setId(parseInt(element.id)) : null
            )
        })
     }

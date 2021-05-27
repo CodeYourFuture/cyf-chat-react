@@ -4,9 +4,8 @@ import faker from  "faker";
 
 
 const ChatFormContainer = () => {
-    const { yourname, yourmessage, postName, postMessage,id, setId, setPostMessage, setpostName, setData, selectValue } =useGlobalContext()
-    
-    console.log(faker.datatype.number());
+    const { yourname, yourmessage, postName, postMessage,id, setId, setPostMessage, setpostName, setData, selectValue, url} =useGlobalContext();
+    console.log(selectValue);
     const post = () => {
 
         if(id){
@@ -27,7 +26,7 @@ const ChatFormContainer = () => {
                      }
                  )
             };
-            fetch(`${selectValue[0]}/messages/${id}`, update)
+            fetch(`${selectValue.length > 0 ? selectValue[0] : url[0]}/messages/${id}`, update)
             .then(response => response.json())
             .then(data =>   console.warn(data))
         }else {

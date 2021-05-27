@@ -14,11 +14,10 @@ const AppProvider = ({ children }) => {
     const [id, setId ] = useState("") 
     useEffect(() => {
         const second = `${selectValue[0]}/messages`
-        console.log(second)
         fetch(second)
         .then(response => response.json())
         .then(data => setData(data));
-    },[selectValue,url,data])
+    },[selectValue,url])
 
     useEffect(() => {
         const first = "https://yunus-chat-server.herokuapp.com/messages"
@@ -59,7 +58,8 @@ const AppProvider = ({ children }) => {
          setUrl, url, fetchurl,
         submit, value,
         setValue, messages,
-        setMessages, data, selectValue,
+        setMessages, data,
+        selectValue,
         yourmessage, yourname,
         postMessage,
         postName,
