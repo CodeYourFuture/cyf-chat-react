@@ -8,6 +8,7 @@ body {
 
 .App {
   text-align: center;
+  margin-top:20px
 }
 
 .positioner{
@@ -127,9 +128,45 @@ select {
   margin-top: 4px;
 }
 .refresh{
-  margin-left: 41rem;
+  margin-left: 43rem;
+  margin-top:6px;
 }
 
 ul{
   list-style-type: none;
+  align-items: center;
+  flex-direction: column;
+  padding:0;
+  margin:0;
+}
+
+
+/* /chat-form-container */
+
+.chat-form {
+  padding: 20px 0;
+  background: #4ecdc4;
+  border-radius: 5px;
+  border-top: 10px solid #556270;
+}
+
+.message-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+
+.form-buttons {
+  align-self: flex-end;
+  margin-left: 31rem;
+  margin-top:7px
+}
+
+input {
+  width: 80%;
+  padding: 10px 22px;
+  box-shadow: 2px 2px rgb(0 0 0 / 50%);
+  box-sizing: border-box;
+  margin: auto;
 }
