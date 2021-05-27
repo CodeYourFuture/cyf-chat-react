@@ -4,7 +4,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
     const [clicked, setClicked] = useState(false);
-    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com", "https://enchanted-principal.glitch.me","https://clem-chat-server-vol2.glitch.me "]);
+    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com", "https://enchanted-principal.glitch.me","https://ahmed-chat-server.glitch.me"]);
     const [value, setValue] = useState("");
     const [selectValue, setSelectValue] = useState([])
     const [messages, setMessages] = useState([]);
@@ -17,7 +17,7 @@ const AppProvider = ({ children }) => {
         fetch(second)
         .then(response => response.json())
         .then(data => setData(data));
-    },[selectValue])
+    },[selectValue,url])
 
     useEffect(() => {
         const first = "https://yunus-chat-server.herokuapp.com/messages"
@@ -25,7 +25,6 @@ const AppProvider = ({ children }) => {
         .then(response => response.json())
         .then(data => setData(data))
     },[])
-
     const fetchurl = (e) => {
         setSelectValue(selectValue.concat(e.target.value).reverse())
     }
@@ -45,7 +44,7 @@ const AppProvider = ({ children }) => {
     }
    
     return (
-        <AppContext.Provider value={{ popup, clicked, setUrl, url, fetchurl, submit, value, setValue, messages, setMessages, data }}>
+        <AppContext.Provider value={{ popup, clicked, setUrl, url, fetchurl, submit, value, setValue, messages, setMessages, data, selectValue }}>
             {children}
         </AppContext.Provider>
     );
