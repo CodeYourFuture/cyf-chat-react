@@ -3,7 +3,7 @@ import { useGlobalContext } from "./Context";
 
 
 const Messages = () => {
-    const { data, url ,setPostMessage, setpostName, setId } = useGlobalContext();
+    const { data, selectValue ,setPostMessage, setpostName, setId } = useGlobalContext();
 
     const edit = (e) => {
        data.map((element) => {
@@ -17,7 +17,7 @@ const Messages = () => {
     }
 
     const remove = (e) => {
-        fetch(`${url[0]}/messages/${e.target.value}`, {
+        fetch(`${selectValue[0]}/messages/${e.target.value}`, {
         method: 'DELETE',
         })
         .then(res => res.json()) // or res.json()
