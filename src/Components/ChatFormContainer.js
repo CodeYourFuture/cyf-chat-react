@@ -41,6 +41,7 @@ const ChatFormContainer = () => {
                     <input type="text" value={postMessage} onChange={yourmessage} placeholder="your message..."></input>
                 </div>
                 <div className="form-buttons">
+                    <span></span>
                     <button className="btn btn-primary" style={{ marginRight:"5px" }} onClick={post}>Send</button>
                     <button className="btn btn-secondary">Send random!</button>
                 </div>
