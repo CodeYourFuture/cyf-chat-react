@@ -9,8 +9,9 @@ const AppProvider = ({ children }) => {
     const [selectValue, setSelectValue] = useState([])
     const [messages, setMessages] = useState([]);
     const [data, setData] = useState([]);
-
-    
+    const [postName, setpostName ] = useState("")
+    const [postMessage, setPostMessage ] = useState("")
+    const [id, setId ] = useState("") 
     useEffect(() => {
         const second = `${selectValue[0]}/messages`
         console.log(second)
@@ -25,6 +26,8 @@ const AppProvider = ({ children }) => {
         .then(response => response.json())
         .then(data => setData(data))
     },[])
+
+
     const fetchurl = (e) => {
         setSelectValue(selectValue.concat(e.target.value).reverse())
     }
@@ -43,8 +46,27 @@ const AppProvider = ({ children }) => {
         }
     }
    
+
+    const yourname = (e) => {
+        setpostName(e.target.value)
+    }
+
+    const yourmessage = (e) => {
+        setPostMessage(e.target.value)
+    }
     return (
-        <AppContext.Provider value={{ popup, clicked, setUrl, url, fetchurl, submit, value, setValue, messages, setMessages, data, selectValue }}>
+        <AppContext.Provider value={{ popup, clicked,
+         setUrl, url, fetchurl,
+        submit, value,
+        setValue, messages,
+        setMessages, data, selectValue,
+        yourmessage, yourname,
+        postMessage,
+        postName,
+        setPostMessage,
+        setpostName,
+        id,
+        setId }}>
             {children}
         </AppContext.Provider>
     );

@@ -1,51 +1,75 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGlobalContext } from "./Context";
 import faker from  "faker";
 
 
 const ChatFormContainer = () => {
-    const [postName, setpostName ] = useState("")
-    const [postMessage, setPostMessage ] = useState("")
-    const { url } = useGlobalContext();
-
-    const yourname = (e) => {
-        setpostName(e.target.value)
-    }
-
-    const yourmessage = (e) => {
-        setPostMessage(e.target.value)
-    }
-
+    const { yourname, yourmessage, postName, postMessage, url, id, setId, setPostMessage, setpostName, setData, selectValue } =useGlobalContext()
+    
+    console.log(faker.datatype.number());
     const post = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-                {
-                     from: `${postName}`,
-                     text : `${postMessage}`
-                 }
-             )
-        };
-        fetch(`${url[0]}/messages`, requestOptions)
-        .then(response => response.json())
-        .then(data =>   this.setState({ postId: data.id }))
-       
+
+        if(id){
+            setId("")
+            setPostMessage("")
+            setpostName("")
+            const update = {
+                method: 'PUT',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'accept' : 'application/json'
+            
+            },
+                body: JSON.stringify(
+                    {    id: id,
+                         from: `${postName}`,
+                         text : `${postMessage}`
+                     }
+                 )
+            };
+            fetch(`${url[0]}/messages/${id}`, update)
+            .then(response => response.json())
+            .then(data =>   console.warn(data))
+        }else {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(
+                    {    id: faker.datatype.number(),
+                         from: `${postName}`,
+                         text : `${postMessage}`
+                     }
+                 )
+            };
+            fetch(`${url[0]}/messages`, requestOptions)
+            .then(response => response.json())
+            .then(data =>   console.warn(data))
+        }
     }
     const sendrandom = () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
-                {
+                {    id:faker.datatype.number(),
                      from: faker.name.findName(),
                      text : faker.lorem.sentences()
                  }
              )
         };
         fetch(`${url[0]}/messages`, requestOptions)
-        .then(response => response.json())
-        .then(data =>   this.setState({ postId: data.id }))
+        .then((response) =>
+        {
+            response.json().then((data) => {
+            console.warn(data) 
+            const second = `${selectValue[0]}/messages`
+              console.log("hello")
+            fetch(second)
+            .then(response => response.json())
+            .then(data => setData(data));
+
+        })
+    } )
     }
     return (
         <div className="chat-form-container">

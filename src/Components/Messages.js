@@ -3,19 +3,29 @@ import { useGlobalContext } from "./Context";
 
 
 const Messages = () => {
-    const { data, url } = useGlobalContext();
+    const { data, url ,setPostMessage, setpostName, setId } = useGlobalContext();
 
-    const edit = () => {
-        console.log("dsasd")
+    const edit = (e) => {
+       data.map((element) => {
+           return (
+               parseInt(element.id) ===  parseInt(e.target.value) ? 
+               setpostName(element.from) ||
+               setPostMessage(element.text) || 
+               setId(element.id) : null
+           )
+       })
     }
 
     const remove = (e) => {
         fetch(`${url[0]}/messages/${e.target.value}`, {
         method: 'DELETE',
         })
-        .then(res => res.text()) // or res.json()
-        .then(res => console.log(res))
-        console.log(`${url[0]}/${e.target.value}`)
+        .then(res => res.json()) // or res.json()
+        .then(data => console.warn(data))
+    }
+
+    const refresh = () => {
+        window.location.reload(false);
     }
     return (
         <div>
@@ -35,7 +45,7 @@ const Messages = () => {
                                         <div className="message-row">
                                             <span className="message-text">{text}</span>
                                             <div className="controls">
-                                                <button onClick={edit}>Edit</button>
+                                                <button onClick={edit} value={id}>Edit</button>
                                                 <div className="delete">
                                                     <button onClick={remove} value={id} className="btn btn-warning">X</button>
                                                 </div>
@@ -48,7 +58,7 @@ const Messages = () => {
                             </>
                         );
                     })}
-                    <button className="refresh">Refresh Messages</button>
+                    <button className="refresh" onClick={refresh}>Refresh Messages</button>
                 </ul>
             </section>
         </div>
