@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App-logo {
@@ -30,4 +33,42 @@
   to {
     transform: rotate(360deg);
   }
+}
+.message {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: aquamarine;
+  border-radius: 5px;
+  justify-content:space-between;
+  align-content: space-between ;
+}
+.from {
+  font-weight: bold;
+}
+.from,.text {
+  align-self: start;
+  margin-top: 0;
+
+  text-align: left;
+  padding-left: 5px;
+}
+.text-container {
+  display: flex;
+  justify-content:space-between;
+  align-content: space-between ;
+ 
+
+}
+
+
+.btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnDel,.btnUpd {
+  height: 20px;
+ margin-right: 10px;
 }
