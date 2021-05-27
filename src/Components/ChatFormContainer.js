@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useGlobalContext } from "./Context";
+import faker from  "faker";
 
 
 const ChatFormContainer = () => {
@@ -26,13 +27,26 @@ const ChatFormContainer = () => {
                  }
              )
         };
-        console.log(url[0]);
         fetch(`${url[0]}/messages`, requestOptions)
         .then(response => response.json())
         .then(data =>   this.setState({ postId: data.id }))
        
     }
-
+    const sendrandom = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(
+                {
+                     from: faker.name.findName(),
+                     text : faker.lorem.sentences()
+                 }
+             )
+        };
+        fetch(`${url[0]}/messages`, requestOptions)
+        .then(response => response.json())
+        .then(data =>   this.setState({ postId: data.id }))
+    }
     return (
         <div className="chat-form-container">
             <div className="chat-form">
@@ -43,7 +57,7 @@ const ChatFormContainer = () => {
                 <div className="form-buttons">
                     <span></span>
                     <button className="btn btn-primary" style={{ marginRight:"5px" }} onClick={post}>Send</button>
-                    <button className="btn btn-secondary">Send random!</button>
+                    <button className="btn btn-secondary" onClick={sendrandom}>Send random!</button>
                 </div>
             </div>
         </div>
