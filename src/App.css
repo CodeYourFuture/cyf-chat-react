@@ -2,6 +2,9 @@
   box-sizing: border-box;
 }
 
+body {
+  margin:0;
+}
 
 .App {
   text-align: center;
@@ -75,4 +78,58 @@ select {
   box-shadow: 2px 2px rgb(0 0 0 / 50%);
   box-sizing: border-box;
   margin: auto;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-li {
+  padding: 6px;
+  margin: 5px 0;
+  flex-grow: 1;
+  width: 100%;
+  text-align: left;
+  border-radius: 10px;
+  background: #c7f464;
+  box-shadow: 2px 2px rgb(0 0 0 / 20%);
+}
+.from {
+  font-size: larger;
+  font-weight: 700;
+  margin-left:5px;
+}
+.timestamp {
+  text-align: right;
+}
+
+.message-row {
+  width: 100%;
+  display: flex;
+}
+
+.controls{
+  text-align: right;
+  width: 20%;
+  margin-left: 28rem;
+}
+
+.delete {
+  margin-top: 9px;
+}
+
+.message-text {
+  padding: 10px;
+  width: 100%;
+}
+.index {
+  margin-top: 4px;
+}
+.refresh{
+  margin-left: 41rem;
+}
+
+ul{
+  list-style-type: none;
 }

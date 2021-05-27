@@ -8,6 +8,7 @@ const AppProvider = ({ children }) => {
     const [value, setValue] = useState("");
     const [selectValue, setSelectValue] = useState([])
     const [messages, setMessages] = useState([]);
+    const [data, setData] = useState([]);
 
     
     useEffect(() => {
@@ -15,14 +16,14 @@ const AppProvider = ({ children }) => {
         console.log(second)
         fetch(second)
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => setData(data));
     },[selectValue])
 
     useEffect(() => {
         const first = "https://yunus-chat-server.herokuapp.com/messages"
         fetch(first)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => setData(data))
     },[])
 
     const fetchurl = (e) => {
@@ -44,7 +45,7 @@ const AppProvider = ({ children }) => {
     }
    
     return (
-        <AppContext.Provider value={{ popup, clicked, setUrl, url, fetchurl, submit, value, setValue, messages, setMessages }}>
+        <AppContext.Provider value={{ popup, clicked, setUrl, url, fetchurl, submit, value, setValue, messages, setMessages, data }}>
             {children}
         </AppContext.Provider>
     );
