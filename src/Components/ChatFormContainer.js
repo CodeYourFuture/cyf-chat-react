@@ -5,9 +5,8 @@ import faker from  "faker";
 
 const ChatFormContainer = () => {
     const { yourname, yourmessage, postName, postMessage,id, setId, setPostMessage, setpostName, setData, selectValue, url} =useGlobalContext();
-    console.log(selectValue);
-    const post = () => {
 
+    const post = () => {
         if(id){
             setId("")
             setPostMessage("")
@@ -50,7 +49,7 @@ const ChatFormContainer = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(
-                {    id:faker.datatype.number(),
+                {    id: faker.datatype.number(),
                      from: faker.name.findName(),
                      text : faker.lorem.sentences()
                  }
