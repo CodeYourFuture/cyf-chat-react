@@ -4,27 +4,27 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
     const [clicked, setClicked] = useState(false);
-    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com","https://ahmed-chat-server.glitch.me"]);
+    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com", "https://ahmed-chat-server.glitch.me"]);
     const [value, setValue] = useState("");
     const [selectValue, setSelectValue] = useState([])
     const [messages, setMessages] = useState([]);
     const [data, setData] = useState([]);
-    const [postName, setpostName ] = useState("")
-    const [postMessage, setPostMessage ] = useState("")
-    const [id, setId ] = useState("") 
+    const [postName, setpostName] = useState("")
+    const [postMessage, setPostMessage] = useState("")
+    const [id, setId] = useState("")
     useEffect(() => {
         const second = `${selectValue[0]}/messages`
         fetch(second)
-        .then(response => response.json())
-        .then(data => setData(data));
-    },[selectValue,url])
+            .then(response => response.json())
+            .then(data => setData(data));
+    }, [selectValue, url])
 
     useEffect(() => {
         const first = "https://yunus-chat-server.herokuapp.com/messages"
         fetch(first)
-        .then(response => response.json())
-        .then(data => setData(data))
-    },[])
+            .then(response => response.json())
+            .then(data => setData(data))
+    }, [])
 
 
     const fetchurl = (e) => {
@@ -44,7 +44,7 @@ const AppProvider = ({ children }) => {
             setClicked(true)
         }
     }
-   
+
 
     const yourname = (e) => {
         setpostName(e.target.value)
@@ -54,19 +54,21 @@ const AppProvider = ({ children }) => {
         setPostMessage(e.target.value)
     }
     return (
-        <AppContext.Provider value={{ popup, clicked,
-         setUrl, url, fetchurl,
-        submit, value,
-        setValue, messages,
-        setMessages, data,
-        selectValue,
-        yourmessage, yourname,
-        postMessage,
-        postName,
-        setPostMessage,
-        setpostName,
-        id,
-        setId }}>
+        <AppContext.Provider value={{
+            popup, clicked,
+            setUrl, url, fetchurl,
+            submit, value,
+            setValue, messages,
+            setMessages, data,
+            selectValue,
+            yourmessage, yourname,
+            postMessage,
+            postName,
+            setPostMessage,
+            setpostName,
+            id,
+            setId
+        }}>
             {children}
         </AppContext.Provider>
     );
