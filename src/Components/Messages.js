@@ -34,9 +34,8 @@ const Messages = () => {
                     {data.map((element, index) => {
                         const { from, text, timeSent,id } = element
                         return (
-                            <>
                                 <li key={index} className="message-li">{
-                                    <>
+                                    <div>
                                         <div style={{ display: "flex" }}>
                                             <div className="index">{index}  --{">"} </div>
                                             <div className="from">{from}:</div>
@@ -52,10 +51,9 @@ const Messages = () => {
                                             </div>
                                         </div>
                                         <div className="timestamp">{timeSent}</div>
-                                    </>
+                                    </div>
                                 }
                                 </li>
-                            </>
                         );
                     })}
                     <button className="refresh" onClick={refresh}>Refresh Messages</button>
