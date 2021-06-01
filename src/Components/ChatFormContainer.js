@@ -4,8 +4,8 @@ import faker from "faker";
 
 
 const ChatFormContainer = () => {
-    const { yourname, yourmessage, postName, postMessage, id, setId, setPostMessage, setpostName, setData, selectValue, url } = useGlobalContext();
 
+    const { yourname, yourmessage, postName, postMessage, id, setId, setPostMessage, setpostName, setData, selectValue, url } = useGlobalContext();
     const post = () => {
         if (id) {
             setId("")
@@ -16,7 +16,6 @@ const ChatFormContainer = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'accept': 'application/json'
-
                 },
                 body: JSON.stringify(
                     {
@@ -25,10 +24,10 @@ const ChatFormContainer = () => {
                         text: `${postMessage}`
                     }
                 )
-            };
+            };  
             fetch(`${selectValue.length > 0 ? selectValue[0] : url[0]}/messages/${id}`, update)
                 .then(response => response.json())
-                .then(data => console.warn(data))
+                .then(data => setData(data))
         } else {
             setPostMessage("")
             setpostName("")
@@ -42,9 +41,9 @@ const ChatFormContainer = () => {
                     }
                 )
             };
-            fetch(`${selectValue.length > 0 ? selectValue[0] : url[0]}/messages/${id}`, requestOptions)
+            fetch(selectValue.length > 0 ? `${selectValue[0]}/messages/${id}` : `${url[0]}/messages/${id}`, requestOptions)
                 .then(response => response.json())
-                .then(data => console.warn(data))
+                .then(data => {setData(data)})
         }
     }
     const sendrandom = () => {
@@ -62,13 +61,10 @@ const ChatFormContainer = () => {
         fetch(`${selectValue[0]}/messages`, requestOptions)
             .then((response) => {
                 response.json().then((data) => {
-                    console.warn(data)
                     const second = `${selectValue[0]}/messages`
-                    console.log("hello")
                     fetch(second)
                         .then(response => response.json())
-                        .then(data => setData(data));
-
+                        .then(data =>  setData(data));
                 })
             })
     }
@@ -86,7 +82,6 @@ const ChatFormContainer = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 

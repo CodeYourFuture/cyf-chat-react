@@ -3,8 +3,7 @@ import { useGlobalContext } from "./Context";
 
 
 const Messages = () => {
-    const { data, selectValue, setPostMessage, setpostName, setId, url } = useGlobalContext();
-
+    const { data, selectValue, setPostMessage, setpostName, setId, url, setData } = useGlobalContext();
     const edit = (e) => {
         data.map((element) => {
             return (
@@ -17,11 +16,12 @@ const Messages = () => {
     }
 
     const remove = (e) => {
-        fetch(`${selectValue.length > 0 ? selectValue[0] : url[0]}/messages/${parseInt(e.target.value)}`, {
+        const targetValue = e.target.value
+        fetch( selectValue.length > 0 ? `${selectValue[0]}/messages/${targetValue}` : `${url[0]}/messages/${targetValue}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
-            .then(data => console.warn(data))
+            .then(data => setData(data))
     }
 
     const refresh = () => {
