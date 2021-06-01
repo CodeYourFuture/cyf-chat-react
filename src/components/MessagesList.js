@@ -12,10 +12,15 @@ function MessagesList() {
     //   .then((res) => res.json())
     //   .then((data) => setMessages(data))
     //   .catch((err) => alert(err));
+    console.log("start getMessages");
     axios
       .get("http://localhost:5000/messages")
-      .then((res) => setMessages(res.data))
+      .then((res) => {
+        setMessages(res.data);
+        console.log(res.data);
+      })
       .catch((err) => alert(err));
+    console.log("end getMessages");
   }
 
   useEffect(() => {
@@ -23,7 +28,13 @@ function MessagesList() {
   }, []);
 
   function handleDelete(id) {
-    console.log(id);
+    console.log("Deleted:", id);
+    axios({
+      method: "delete",
+      url: `http://localhost:5000/messages/${id}`,
+    })
+      .then(() => getMessages())
+      .catch((err) => alert(err));
   }
 
   return (
@@ -35,7 +46,7 @@ function MessagesList() {
           id={message.id}
           from={message.from}
           text={message.text}
-          time={messages.timeSent}
+          time={message.timeSent}
           clickFunc={handleDelete}
         />
       ))}

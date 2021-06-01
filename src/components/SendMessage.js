@@ -14,8 +14,9 @@ function SendMessage({ updateList }) {
         from: from,
         text: text,
       },
-    }).catch((err) => alert(err));
-    updateList();
+    })
+      .then(() => updateList())
+      .catch((err) => alert(err));
   }
 
   return (

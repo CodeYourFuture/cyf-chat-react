@@ -1,6 +1,7 @@
 import React from "react";
+import { DeleteForever } from "@material-ui/icons";
 
-function MessageCard({ id, from, text, time = "12:12", clickFunc }) {
+function MessageCard({ id, from, text, time, clickFunc }) {
   return (
     <div className="card m-2">
       <div className="card-header align-self-start p-0">{from}</div>
@@ -14,9 +15,12 @@ function MessageCard({ id, from, text, time = "12:12", clickFunc }) {
             clickFunc(id);
           }}
         >
-          Delete
+          <DeleteForever />
         </button>
-        {time}
+        <span>
+          {new Date(Date.parse(time)).getHours().toString().padStart(2,"0")}:
+          {new Date(Date.parse(time)).getMinutes().toString().padStart(2,"0")}
+        </span>
       </div>
     </div>
   );
