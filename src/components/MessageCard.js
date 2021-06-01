@@ -1,16 +1,22 @@
 import React from "react";
 
-function MessageCard({ from, text, time = "12:12" }) {
+function MessageCard({ id, from, text, time = "12:12", clickFunc }) {
   return (
-    <div className="card">
-      <div className="card-body">
-        <h6 class="card-title">{text}</h6>
-        <p class="card-text">
-          From: {from} / sendTime: {time}
-        </p>
-        <a href="#" class="btn btn-outline-danger">
+    <div className="card m-2">
+      <div className="card-header align-self-start p-0">{from}</div>
+      <div className="card-body align-self-start m-0 p-0">
+        <h6 className="card-text p-1 ">{text}</h6>
+      </div>
+      <div className="card-footer text-muted align-self-end p-0">
+        <button
+          className="btn btn-outline-danger m-0 p-0"
+          onClick={() => {
+            clickFunc(id);
+          }}
+        >
           Delete
-        </a>
+        </button>
+        {time}
       </div>
     </div>
   );

@@ -1,38 +1,50 @@
+import axios from "axios";
 import React, { useState } from "react";
 
-function SendMessage() {
+function SendMessage({ updateList }) {
   const [from, setFrom] = useState("");
   const [text, setText] = useState("");
 
-  function handleSend(){
-      
+  function handleSend() {
+    console.log("click Send");
+    axios({
+      method: "post",
+      url: "http://localhost:5000/messages",
+      data: {
+        from: from,
+        text: text,
+      },
+    }).catch((err) => alert(err));
+    updateList();
   }
 
   return (
-    <div className="col-6">
-      <div class="">
+    <div className="row">
+      <div className="col-4">
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="from"
           placeholder="name"
           value={from}
-          onChange={(val) => setFrom(val)}
+          onChange={(e) => setFrom(e.target.value)}
         />
       </div>
-      <div class="mb-3">
+      <div className="col-12">
         <textarea
-          class="form-control"
+          className="form-control"
           placeholder="text message"
           id="text"
           rows="2"
           value={text}
-          onChange={(val) => setText(val)}
+          onChange={(e) => setText(e.target.value)}
         ></textarea>
       </div>
-      <button type="button" class="btn btn-outline-success" onClick={handleSend}>
-        Send
-      </button>
+      <div className="col-2 offset-8">
+        <button className=" btn btn-outline-success" onClick={handleSend}>
+          Send
+        </button>
+      </div>
     </div>
   );
 }
