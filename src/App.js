@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import Messages from "./Components/Messages"
 import './App.css';
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
        <h1>just started react app after cloning to my pc</h1>
+       <Messages/>
       </header>
     </div>
   );
