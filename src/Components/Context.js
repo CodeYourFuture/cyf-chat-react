@@ -4,9 +4,9 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
     const [clicked, setClicked] = useState(false);
-    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com/messages", "https://ahmed-chat-server.glitch.me"]);
+    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com", "https://ahmed-chat-server.glitch.me"]);
     const [value, setValue] = useState("");
-    const [selectValue, setSelectValue] = useState(["https://yunus-chat-server.herokuapp.com/messages"])
+    const [selectValue, setSelectValue] = useState(["https://yunus-chat-server.herokuapp.com"])
     const [messages, setMessages] = useState([]);
     const [data, setData] = useState([]);
     const [postName, setpostName] = useState("")
@@ -18,6 +18,7 @@ const AppProvider = ({ children }) => {
             .then(response => response.json())
             .then(data => setData(data));
     }, [selectValue, url])
+    // "https://yunus-chat-server.herokuapp.com/messages"
     useEffect(() => {
         const first = "https://yunus-chat-server.herokuapp.com/messages"
         fetch(first)
