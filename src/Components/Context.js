@@ -4,7 +4,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
     const [clicked, setClicked] = useState(false);
-    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com", "https://ahmed-chat-server.glitch.me"]);
+    const [url, setUrl] = useState(["https://yunus-chat-server.herokuapp.com"]);
     const [value, setValue] = useState("");
     const [selectValue, setSelectValue] = useState(["https://yunus-chat-server.herokuapp.com"])
     const [messages, setMessages] = useState([]);
