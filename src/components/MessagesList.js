@@ -14,7 +14,7 @@ function MessagesList() {
     //   .catch((err) => alert(err));
     console.log("start getMessages");
     axios
-      .get("http://localhost:5000/messages")
+      .get("https://mustafa-chat-server.glitch.me/messages") //http://localhost:5000/messages")
       .then((res) => {
         setMessages(res.data);
         console.log(res.data);
@@ -31,7 +31,7 @@ function MessagesList() {
     console.log("Deleted:", id);
     axios({
       method: "delete",
-      url: `http://localhost:5000/messages/${id}`,
+      url: `https://mustafa-chat-server.glitch.me/messages/${id}`, //http://localhost:5000/messages/${id}`,
     })
       .then(() => getMessages())
       .catch((err) => alert(err));

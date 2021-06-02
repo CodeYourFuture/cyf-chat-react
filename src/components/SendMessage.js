@@ -9,7 +9,7 @@ function SendMessage({ updateList }) {
     console.log("click Send");
     axios({
       method: "post",
-      url: "http://localhost:5000/messages",
+      url: "https://mustafa-chat-server.glitch.me/messages", // "http://localhost:5000/messages",
       data: {
         from: from,
         text: text,
