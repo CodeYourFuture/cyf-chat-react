@@ -1,5 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin:0;
+}
+
 .App {
   text-align: center;
+  margin-top:20px
+}
+
+.positioner{
+  max-width: 850px;
+  margin: auto;
 }
 
 .App-logo {
@@ -30,4 +44,129 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.client {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  padding: 10px;
+  margin: 2px;
+  background: #dcdcdc;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 2px 2px rgb(0 0 0 / 50%);
+}
+
+.display {
+  display: none;
+}
+
+.api-selector {
+  border: 1px solid #000;
+  background: #c44d58;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+}
+
+select {
+  width: 80%;
+  padding: 10px 22px;
+  box-shadow: 2px 2px rgb(0 0 0 / 50%);
+  box-sizing: border-box;
+  margin: auto;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-li {
+  padding: 6px;
+  margin: 5px 0;
+  flex-grow: 1;
+  width: 100%;
+  text-align: left;
+  border-radius: 10px;
+  background: #c7f464;
+  box-shadow: 2px 2px rgb(0 0 0 / 20%);
+}
+.from {
+  font-size: larger;
+  font-weight: 700;
+  margin-left:5px;
+}
+.timestamp {
+  text-align: right;
+}
+
+.message-row {
+  width: 100%;
+  display: flex;
+}
+
+.controls{
+  text-align: right;
+  width: 20%;
+  margin-left: 28rem;
+}
+
+.delete {
+  margin-top: 9px;
+}
+
+.message-text {
+  padding: 10px;
+  width: 100%;
+}
+.index {
+  margin-top: 4px;
+}
+.refresh{
+  margin-left: 43rem;
+  margin-top:6px;
+}
+
+ul{
+  list-style-type: none;
+  align-items: center;
+  flex-direction: column;
+  padding:0;
+  margin:0;
+}
+
+
+/* /chat-form-container */
+
+.chat-form {
+  padding: 20px 0;
+  background: #4ecdc4;
+  border-radius: 5px;
+  border-top: 10px solid #556270;
+}
+
+.message-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+
+.form-buttons {
+  align-self: flex-end;
+  margin-left: 31rem;
+  margin-top:7px
+}
+
+input {
+  width: 80%;
+  padding: 10px 22px;
+  box-shadow: 2px 2px rgb(0 0 0 / 50%);
+  box-sizing: border-box;
+  margin: auto;
 }
