@@ -8,16 +8,14 @@ export default function ShowMessages({ messages, fetchData }) {
         
       }).then((response) => fetchData());
   }
-  const messagesArr = messages.map((message) => {
-    return (
+  const messagesArr = messages.map((message) => (
       <div key={message.id}>
-        <h2>{message.from}</h2>
-        <p>{message.text}</p>
-        <button onClick={()=>handleDelete(message.id)}> Delete </button> 
-      {/* callback function prevents evoking onClick */}
+          <h2>{message.from}</h2>
+          <p>{message.text}</p>
+          <button onClick={() => handleDelete(message.id)}> Delete </button>
+          {/* callback function prevents evoking onClick */}
       </div>
-    );
-  });
+  ));
 
   return <div>{messagesArr}</div>;
 }
