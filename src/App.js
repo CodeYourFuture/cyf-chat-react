@@ -12,7 +12,15 @@ function App() {
     },
   ]);
 
- 
+  const [endpoint, setEndpoint] = useState("messages")
+
+  useEffect(() => {
+    fetch(`https://gulnihal-node-challange-chat-server.glitch.me/${endpoint}`)
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data)
+        setMessages(data)
+    })
   return (
     <div className="App">
       <h1>Hello world</h1>
