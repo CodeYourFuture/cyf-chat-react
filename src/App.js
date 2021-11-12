@@ -16,16 +16,23 @@ function App() {
 
   useEffect(() => {
     fetch(`https://gulnihal-node-challange-chat-server.glitch.me/${endpoint}`)
-    .then((res) => res.json())
-    .then((data) => {
-        console.log(data)
-        setMessages(data)
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setMessages(data);
+      });
+  }, [endpoint]);
+
+  const getAllMessages = () => {
+    setEndpoint("/messages");
+  };
+
   return (
     <div className="App">
       <h1>Hello world</h1>
-      a
-      <button onClick={getAllMessages}>Show all messages</button>
+      
+      <button 
+      onClick={getAllMessages}>Show all messages</button>
       <ShowMessages messages={messages} />
     </div>
   );
