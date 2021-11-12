@@ -14,7 +14,6 @@ function App() {
   ]);
 
   const [endpoint, setEndpoint] = useState("messages")
-//xxx
   const fetchData = () => {
      fetch(`https://gulnihal-node-challange-chat-server.glitch.me/${endpoint}`)
        .then((res) => res.json())
@@ -41,7 +40,7 @@ function App() {
       <h1>Hello world</h1>
       <button onClick={latest10Messages}>Last messages</button>
       <button onClick={getAllMessages}>Show all messages</button>
-      <ShowMessages messages={messages} />
+      <ShowMessages messages={messages} fetchData={fetchData} />
       <SendMessage fetchData={fetchData}/>
     </div>
   );
