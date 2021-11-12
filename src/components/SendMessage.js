@@ -21,6 +21,21 @@ export default function SendMessage ({fetchData}) {
       setText(event.target.value);
     }
     
+    function handleSubmitButton(event) {
+      event.preventDefault();
+      fetch(`https://gulnihal-node-challange-chat-server.glitch.me/messages`, {
+        method: "POST",
+        body: JSON.stringify(
+          {
+            from: from, //from comes from useState
+            text: text,
+          } //text comes from useState
+        ),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => fetchData());
+    }
     return (
       <form onSubmit={handleSubmitButton}>
         <input
@@ -37,8 +52,7 @@ export default function SendMessage ({fetchData}) {
           placeholder="message"
           onChange={handleTextInput}
         ></input>
-        
-       
+        <button type="submit"> Submit </button>;
       </form>
     );
 }
