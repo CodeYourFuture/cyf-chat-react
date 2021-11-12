@@ -27,12 +27,15 @@ function App() {
     setEndpoint("/messages");
   };
 
+  const bringLast10 = () => {
+    setEndpoint("/messages/latest");
+  }; 
+
   return (
     <div className="App">
       <h1>Hello world</h1>
-      
-      <button 
-      onClick={getAllMessages}>Show all messages</button>
+      <button onClick={bringLast10}>Last 10 messages</button>
+      <button onClick={getAllMessages}>Show all messages</button>
       <ShowMessages messages={messages} />
     </div>
   );
