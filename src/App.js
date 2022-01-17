@@ -1,12 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import Message from './Message';
+import LastTenMessages from './LastTenMessages';
 
 function App() {
   const [message, setMessage] = useState("");
   const [messagesArray, setMessagesArray] = useState([]);
   const [sender, setSender] = useState("");
   const [submittedObject, setSubmittedObject] = useState({});
+   const [isActive, setActive] = useState("false");
+
+  const handleToggle = () => {
+    setActive(!isActive);
+  };
 
 useEffect(() => {
   console.log(submittedObject)
@@ -23,6 +29,10 @@ useEffect(() => {
       console.log(data)});
       
 }, [submittedObject]);
+
+  function ToggleClass(){
+    document.getElementById("")
+  }
 
   function toSetName(event){
     setSender(event.target.value);
@@ -41,6 +51,8 @@ useEffect(() => {
     });
 
     setMessagesArray(messagesArray.concat(submittedObject));
+    setMessage("");
+    setSender("");
   }
 
   return (
@@ -51,8 +63,11 @@ useEffect(() => {
               <input type="text" placeholder="please type in your name" onChange={toSetName} value={sender}/>
             <input type="text" placeholder='type a message to send' onChange={toSetMessage} value={message}/>
             <button type="submit" onClick={sendMessage}>Send</button>
-            <button type="submit" onClick={sendMessage}>See Latest</button>
+            <button type="submit" onClick={handleToggle}>See Latest</button>
           </div>
+      </div>
+      <div className="messageContainer" className={isActive ? "hide" : null}>
+         <LastTenMessages />
       </div>
     </div>
   )

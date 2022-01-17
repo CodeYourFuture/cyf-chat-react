@@ -2,7 +2,9 @@
 .App{
   width:98vw;
   height:auto;
+  min-height: 100vh;
   background:#5f4332;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   position:absolute;
   top:0;
   left:0;
@@ -42,6 +44,7 @@ button:hover{
   color:#ffffff;
   transition:all .2s linear;
 }
+
 p{
   color:#9c9c9a;
 }
@@ -50,3 +53,6 @@ p{
   justify-content: center;
 }
 
+.hide{
+  display:none;
+}
