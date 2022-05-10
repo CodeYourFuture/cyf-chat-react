@@ -1,19 +1,53 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
+import { useToast } from '@chakra-ui/react';
 import { default as TMessage } from '../types/message';
+import { API_URL } from '../config';
 
 interface IUseMessageFetcher {
   loading: boolean;
-  error: string;
   messages: TMessage[];
   triggerFetch: () => void;
 }
 
 const useMessageFetcher = (): IUseMessageFetcher => {
-  const API_URL = process.env.REACT_APP_API_URL;
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
   const [messages, setMessages] = useState<TMessage[]>([]);
   const [triggerState, setTriggerState] = useState<boolean>(false);
+  const toast = useToast();
+
+  const notifier = (type:string): void => {
+    switch (type) {
+      case 'no-new-messages':
+        toast({
+          title: 'Info',
+          description: 'There are no new messages',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+        break;
+      case 'success':
+        toast({
+          title: 'Success',
+          description: 'Messages fetched successfully',
+          status: 'success',
+          duration: 3000,
+        });
+        break;
+      case 'error':
+        toast({
+          title: 'Error',
+          description: 'Failed to fetch messages',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+        break;
+      default:
+        break;
+    }
+  }
 
   const triggerFetch = ():void => {
     setTriggerState(!triggerState);
@@ -25,24 +59,27 @@ const useMessageFetcher = (): IUseMessageFetcher => {
         if (res.ok) {
           return res.json();
         } else {
-          setError(res.statusText);
-          setLoading(false);     
+          setLoading(false);
+          notifier('error');
         }
       })
       .then((data) => {
+        if (data.length === messages.length && data.length > 0 && messages.length > 0) {
+          notifier('no-new-messages');
+        } else {
+          notifier('success');
+        }
         setMessages(data);
-        setError(''); 
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
-        setError(err.message);
+        notifier('error');
       });
-  }, [API_URL, triggerState]);
+  }, [triggerState]);
 
   return {
     loading,
-    error,
     messages,   
     triggerFetch,
   };

@@ -9,7 +9,7 @@ interface Props {
 const MessagingApp = ({ user }: Props): JSX.Element => {
   return (
     <Center>
-        <DisplayMessages />
+        <DisplayMessages user={user}/>
     </Center>
   )
 }
