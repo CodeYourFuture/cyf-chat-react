@@ -17,7 +17,7 @@ const ProvideName = ({ setUser }:Props):JSX.Element => {
   }
   return (
       <>
-        <Input ref={inputRef} w='60%' size='lg' variant='flushed' min='3' placeholder='Please provide your name to start using the chat app'/>
+        <Input role='enter-username' ref={inputRef} w='60%' size='lg' variant='flushed' min='3' placeholder='Please provide your name to start using the chat app'/>
         <Button onClick={setUserHandler}>Start Chatting</Button>
       </>
   )

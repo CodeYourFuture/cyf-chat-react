@@ -16,11 +16,15 @@ const App = () => {
       setUser(username);
     }
   }, [])
+  const logout = () => {
+    localStorage.removeItem('user');
+    setUser('');
+  }
   return (
   <ChakraProvider theme={theme}>
     <VStack w='100%' p='4' minH='100vh'>
       <Header />
-      {user ? <MessagingApp user={user} /> : <ProvideName setUser={setUser}/>}
+      {user ? <MessagingApp user={user} logout={logout} /> : <ProvideName setUser={setUser}/>}
     </VStack>
   </ChakraProvider>
   );

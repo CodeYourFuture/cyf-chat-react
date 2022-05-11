@@ -4,12 +4,13 @@ import DisplayMessages from './components/DisplayMessages'
 
 interface Props {
   user: string
+  logout:() => void
 }
 
-const MessagingApp = ({ user }: Props): JSX.Element => {
+const MessagingApp = ({ user, logout }: Props): JSX.Element => {
   return (
     <Center>
-        <DisplayMessages user={user}/>
+        <DisplayMessages user={user} logout={logout}/>
     </Center>
   )
 }

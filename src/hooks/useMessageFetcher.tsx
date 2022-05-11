@@ -66,10 +66,8 @@ const useMessageFetcher = (): IUseMessageFetcher => {
       .then((data) => {
         if (data.length === messages.length && data.length > 0 && messages.length > 0) {
           notifier('no-new-messages');
-        } else {
-          notifier('success');
         }
-        setMessages(data);
+        setMessages(data.reverse());
         setLoading(false);
       })
       .catch((err) => {
