@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 const AllMessages = (props) => {
   console.log(props.allMessages);
   useEffect(() => {
-    fetch("http://localhost:9000/messages")
+    fetch("https://timeareich-chat-server.glitch.me/messages")
       .then((res) => res.json())
       .then((data) => props.setAllMessages(data));
   }, []);

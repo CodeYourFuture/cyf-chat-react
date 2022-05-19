@@ -20,12 +20,15 @@ const UserInput = (props) => {
 
   const postInput = async () => {
     const message = { from: name, text: text };
-    const response = await fetch("http://localhost:9000/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      mode: "cors",
-      body: JSON.stringify(message),
-    });
+    const response = await fetch(
+      "https://timeareich-chat-server.glitch.me/messages",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify(message),
+      }
+    );
     const data = await response.json();
   };
 
@@ -43,8 +46,8 @@ const UserInput = (props) => {
   //   .then((data) => console.log(data));
   // console.log(response);
 
-  async function handleClick(e) {
-    e.preventDefault();
+  async function handleClick() {
+    //e.preventDefault();
     await postInput();
   }
 
