@@ -2,20 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const AllMessagesButton = (props) => {
-  const handleClick = () => {
-    fetch("https://timeareich-chat-server.glitch.me/messages")
-      .then((response) => response.json())
-      .then((data) => props.setAllMessages(data));
+  // const handleClick = () => {
+  //   fetch("https://timeareich-chat-server.glitch.me/messages")
+  //     .then((response) => response.json())
+  //     .then((data) => props.setAllMessages(data));
+  // };
+
+  const handleClick = async () => {
+    const response = await fetch(
+      "https://timeareich-chat-server.glitch.me/messages"
+    );
+    const data = await response.json();
+    props.setAllMessages(data);
   };
 
-  // function handleClick() {
-  //   fetch("https://timeareich-chat-server.glitch.me/messages")
-  //     .then((res) => res.json())
-  //     .then((data) => props.setAllMessages(data));
-  // }
-  // async function handleClick() {
-  //   await getAllMessages();
-  // }
   return (
     <Link to={"/messages"}>
       <button onClick={handleClick} className="all-messages-button">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 const AllMessages = (props) => {
   // console.log(props.allMessages);
   // const getData = async () => {
@@ -12,12 +12,17 @@ const AllMessages = (props) => {
   const data = props.allMessages;
   // console.log(data);
   return (
-    <div className="messages-div">
+    <div>
       {data
         ? data.map((item) => (
-            <p className="messages" key={item.id}>
-              {item.text}
-            </p>
+            <div className="messages-div">
+              <p className="messages" key={item.id}>
+                {item.text}
+              </p>
+              <p className="from" key={item.from}>
+                {item.from}
+              </p>
+            </div>
           ))
         : "waiting..."}
     </div>

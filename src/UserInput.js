@@ -4,6 +4,7 @@ const UserInput = (props) => {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
+  console.log(responseMessage);
 
   // async function postInput() {
   //   const message = { from: name, text: text };
@@ -31,6 +32,7 @@ const UserInput = (props) => {
       }
     );
     const data = await response.json();
+    setResponseMessage(data);
   };
 
   //.then((response) => response.json())
@@ -54,7 +56,6 @@ const UserInput = (props) => {
 
   return (
     <div>
-      <p></p>
       <form>
         <label htmlFor="from">Name:</label>
         <input
@@ -71,6 +72,12 @@ const UserInput = (props) => {
           name="text"
           placeholder="your message"
         ></input>
+        {responseMessage.warning ? (
+          <p className="warning-message">{responseMessage.warning}</p>
+        ) : (
+          ""
+        )}
+
         <br />
         <button onClick={handleClick}>Submit</button>
       </form>
