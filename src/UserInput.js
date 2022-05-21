@@ -20,6 +20,7 @@ const UserInput = (props) => {
 
   const postInput = async () => {
     const message = { from: name, text: text };
+    //console.log(message);
     const response = await fetch(
       "https://timeareich-chat-server.glitch.me/messages",
       {
@@ -46,8 +47,8 @@ const UserInput = (props) => {
   //   .then((data) => console.log(data));
   // console.log(response);
 
-  async function handleClick() {
-    //e.preventDefault();
+  async function handleClick(e) {
+    e.preventDefault();
     await postInput();
   }
 

@@ -1,17 +1,24 @@
 import React, { useEffect } from "react";
 const AllMessages = (props) => {
-  console.log(props.allMessages);
-  useEffect(() => {
-    fetch("https://timeareich-chat-server.glitch.me/messages")
-      .then((res) => res.json())
-      .then((data) => props.setAllMessages(data));
-  }, []);
+  // console.log(props.allMessages);
+  // const getData = async () => {
+  //   const response = await fetch(
+  //     "https://timeareich-chat-server.glitch.me/messages"
+  //   );
+  //   const data = await response;
+  //   console.log(data);
+  // };
+
   const data = props.allMessages;
-  console.log(data);
+  // console.log(data);
   return (
-    <div>
+    <div className="messages-div">
       {data
-        ? data.map((item) => <p key={item.id}>{item.text}</p>)
+        ? data.map((item) => (
+            <p className="messages" key={item.id}>
+              {item.text}
+            </p>
+          ))
         : "waiting..."}
     </div>
   );

@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const AllMessagesButton = (props) => {
-  // const getAllMessages = async () => {
-  //   const response = await fetch("http://localhost:9000/messages");
-  //   const data = response.json();
-  //   props.setAllMessages(data);
-  // };
+  const handleClick = () => {
+    fetch("https://timeareich-chat-server.glitch.me/messages")
+      .then((response) => response.json())
+      .then((data) => props.setAllMessages(data));
+  };
 
   // function handleClick() {
-  //   fetch("http://localhost:9000/messages")
+  //   fetch("https://timeareich-chat-server.glitch.me/messages")
   //     .then((res) => res.json())
   //     .then((data) => props.setAllMessages(data));
   // }
@@ -18,7 +18,9 @@ const AllMessagesButton = (props) => {
   // }
   return (
     <Link to={"/messages"}>
-      <button className="all-messages-button">View All Messages</button>
+      <button onClick={handleClick} className="all-messages-button">
+        View All Messages
+      </button>
     </Link>
   );
 };
