@@ -4,7 +4,6 @@ const UserInput = (props) => {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
-  console.log(responseMessage);
 
   // async function postInput() {
   //   const message = { from: name, text: text };

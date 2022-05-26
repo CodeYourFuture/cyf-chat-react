@@ -72,3 +72,15 @@ button {
   position: relative;
   left: 5rem;
 }
+.all-messages-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.erase-button {
+  position: relative;
+  left: 300px;
+  bottom: 90px;
+  border-radius: 2px;
+}
