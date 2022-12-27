@@ -5,13 +5,14 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Heading,
   Stack,
-  Button,
   Avatar,
-  HStack,
+  Flex,
+  Spacer,
+  IconButton,
 } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
@@ -31,17 +32,23 @@ function Messages() {
         {messages.map((msg, i) => (
           <Card key={i} size="sm" minW="2xl" backgroundColor="gray.50">
             <CardHeader>
-              <HStack spacing={3}>
-                <Avatar name={msg.from}></Avatar>
-                <Heading size="lg"> {msg.from}</Heading>
-              </HStack>
+              <Flex>
+                <Avatar name={msg.from} mr="5"></Avatar>
+                <Heading size="lg" lineHeight="-10px">
+                  {" "}
+                  {msg.from}
+                </Heading>
+                <Spacer />
+                <IconButton
+                  alignSelf="end"
+                  variant="outline"
+                  colorScheme="red"
+                  aria-label="delete message"
+                  icon={<DeleteIcon />}
+                />
+              </Flex>
             </CardHeader>
             <CardBody>{msg.text}</CardBody>
-            <CardFooter justifyContent="end">
-              <Button size="sm" colorScheme="red">
-                Delete
-              </Button>
-            </CardFooter>
           </Card>
         ))}
       </Stack>
