@@ -50,7 +50,7 @@ function Messages() {
                   colorScheme="red"
                   aria-label="delete message"
                   icon={<DeleteIcon />}
-                  onClick={() => deleteMessage}
+                  onClick={(e) => deleteMessage(e)}
                 />
               </Flex>
             </CardHeader>
