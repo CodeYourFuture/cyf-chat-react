@@ -80,11 +80,7 @@ function ChatMessages(props) {
             console.error('There was an error!', error);
     });
   };
-
-  const onSave = () => {
-    setLoadMessages(!loadMessages);
-  };
- 
+  
   useEffect(() => {
     fetch(`https://kavita-repeated-chestnut-jobaria.glitch.me/messages`)
       .then((res) => res.json())
