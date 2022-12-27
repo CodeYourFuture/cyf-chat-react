@@ -1,10 +1,11 @@
 import React from "react";
+import { Link as ReachLink } from "react-router-dom";
 import {
   ChakraProvider,
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
+  Link,
   Heading,
   Image,
   Center,
@@ -15,8 +16,8 @@ import {
   Textarea,
   Button,
 } from "@chakra-ui/react";
-
 import { AtSignIcon } from "@chakra-ui/icons";
+
 function Home() {
   return (
     <ChakraProvider>
@@ -49,6 +50,9 @@ function Home() {
               </InputGroup>
               <Textarea name="text" placeholder="Add message" size="sm" />
               <Button colorScheme="blue">Post Message</Button>
+              <Link color='red.600' as={ReachLink} to="/messages">
+                View latest messages
+              </Link>
             </Stack>
           </CardBody>
         </Card>
