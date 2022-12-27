@@ -8,7 +8,14 @@ import {
   Heading,
   Image,
   Center,
+  Stack,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
 } from "@chakra-ui/react";
+
+import { AtSignIcon } from "@chakra-ui/icons";
 import "./App.css";
 
 function App() {
@@ -16,15 +23,16 @@ function App() {
     <ChakraProvider>
       <Center>
         <Card
+          size="lg"
+          width="4xl"
           m="4"
-          width="lg"
           direction={{ base: "column", sm: "row" }}
           overflow="hidden"
           variant="outline"
         >
           <Image
             objectFit="cover"
-            maxW={{ base: "100%", sm: "200px" }}
+            maxW={{ base: "100%", sm: "400px" }}
             src="https://images.pexels.com/photos/1111369/pexels-photo-1111369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="Pink Background With Speech Bubble"
           />
@@ -32,6 +40,16 @@ function App() {
             <CardHeader>
               <Heading size="md">CYF Chat</Heading>
             </CardHeader>
+            <Stack spacing={4}>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<AtSignIcon color="gray.300" />}
+                />
+                <Input type="text" placeholder="Username" />
+              </InputGroup>
+              <Textarea placeholder="Add message" size="sm" />
+            </Stack>
           </CardBody>
         </Card>
       </Center>
