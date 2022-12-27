@@ -14,6 +14,8 @@ import {
   InputLeftElement,
   Textarea,
   Button,
+  Avatar,
+  HStack,
 } from "@chakra-ui/react";
 
 import { AtSignIcon } from "@chakra-ui/icons";
@@ -68,12 +70,15 @@ function App() {
       </Heading>
       <Stack spacing={5} alignItems="center">
         {messages.map((msg, i) => (
-          <Card key={i} size="md" minW="2xl" backgroundColor="gray.50">
+          <Card key={i} size="sm" minW="2xl" backgroundColor="gray.50">
             <CardHeader>
-              <Heading size="lg"> {msg.from}</Heading>
+              <HStack spacing={3}>
+                <Avatar name={msg.from}></Avatar>
+                <Heading size="lg"> {msg.from}</Heading>
+              </HStack>
             </CardHeader>
             <CardBody>{msg.text}</CardBody>
-            <CardFooter>
+            <CardFooter justifyContent="end">
               <Button size="sm" colorScheme="red">
                 Delete
               </Button>
