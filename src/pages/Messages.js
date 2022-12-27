@@ -20,9 +20,14 @@ function Messages() {
     fetch("https://saadiaelf-chat-server.glitch.me/messages/latest").then(
       (res) => res.json().then((data) => setMessages(data))
     );
-  }, []);
+  }, [messages]);
 
-  console.log(messages);
+  function deleteMessage(e) {
+    let msgId = e.target.value;
+    fetch(`https://saadiaelf-chat-server.glitch.me/messages/${msgId}`, {
+      method: "DELETE",
+    }).then(console.log("Message successfully deleted"));
+  }
   return (
     <ChakraProvider>
       <Heading size="xl" textAlign="center">
@@ -35,16 +40,17 @@ function Messages() {
               <Flex>
                 <Avatar name={msg.from} mr="5"></Avatar>
                 <Heading size="lg" lineHeight="-10px">
-                  {" "}
                   {msg.from}
                 </Heading>
                 <Spacer />
                 <IconButton
+                  value={msg.id}
                   alignSelf="end"
                   variant="outline"
                   colorScheme="red"
                   aria-label="delete message"
                   icon={<DeleteIcon />}
+                  onClick={() => deleteMessage}
                 />
               </Flex>
             </CardHeader>
