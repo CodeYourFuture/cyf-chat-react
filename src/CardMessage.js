@@ -3,20 +3,22 @@ import React from 'react';
 function CardMessage ({ id, from, text, handleEdit, handleDelete}) {
  return (
 
-<div className="card text-right bg-light shadow-sm ">
-  <div className="card-body">
-    <p className="card-text">Name:{from}</p>
-    <h5 className="card-title">Message:{text}</h5>
+<div className="card m-3 text-right bg-light shadow-sm rounded-4 shadow">
+  <div className="card-body text-left">
+    <h5 className="card-text">Name : {from}</h5>
+    <h5 className="card-title">Message : {text}</h5>
+     <br/>
     <button
         onClick={handleEdit}
-        className="btn btn-info btn-md"
+        className="btn btn-sm btn-primary w-25 mx-0 mb-2 shadow text-nowrap"
       >
         Edit
       </button>
       &nbsp;
+      &nbsp;
       <button
         onClick={handleDelete}
-        className="btn btn-info btn-md"
+        className="btn btn-sm btn-light w-25 mx-0 mb-2 shadow text-nowrap"
       >
         Delete
       </button>

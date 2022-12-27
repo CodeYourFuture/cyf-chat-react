@@ -114,7 +114,7 @@ function ChatMessages(props) {
             
       )}
 
-      <div className="d-flex flex-column align-items-center">
+      <div className="modal modal-sheet position-static d-block bg-secondary py-5 w-50 p-4 text-center container rounded-4 shadow">
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                 <input
@@ -136,7 +136,7 @@ function ChatMessages(props) {
                     onChange={(e) => setText(e.target.value)}
                 />
                 </div>
-                <button type="submit" className="btn btn-primary">Send</button>
+                <button type="submit" className="btn btn-primary shadow">Send</button>
             </form>
             </div>
     </div>
