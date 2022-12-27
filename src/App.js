@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import {
   ChakraProvider,
   Card,
@@ -20,6 +20,14 @@ import { AtSignIcon } from "@chakra-ui/icons";
 import "./App.css";
 
 function App() {
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    fetch("https://saadiaelf-chat-server.glitch.me/messages/latest").then(
+      (res) => res.json().then((data) => setMessages(data))
+    );
+  }, []);
+
+  console.log(messages);
   return (
     <ChakraProvider>
       <Center>
@@ -39,7 +47,7 @@ function App() {
           />
           <CardBody>
             <CardHeader>
-              <Heading size="md">CYF Chat</Heading>
+              <Heading size="xl">CYF Chat</Heading>
             </CardHeader>
             <Stack pl="5" spacing={3}>
               <InputGroup>
@@ -47,14 +55,32 @@ function App() {
                   pointerEvents="none"
                   children={<AtSignIcon color="gray.300" />}
                 />
-                <Input type="text" placeholder="Username" />
+                <Input name="from" type="text" placeholder="Username" />
               </InputGroup>
-              <Textarea placeholder="Add message" size="sm" />
+              <Textarea name="text" placeholder="Add message" size="sm" />
               <Button colorScheme="blue">Post Message</Button>
             </Stack>
           </CardBody>
         </Card>
       </Center>
+      <Heading size="xl" textAlign="center">
+        Messages
+      </Heading>
+      <Stack spacing={5} alignItems="center">
+        {messages.map((msg, i) => (
+          <Card key={i} size="md" minW="2xl" backgroundColor="gray.50">
+            <CardHeader>
+              <Heading size="lg"> {msg.from}</Heading>
+            </CardHeader>
+            <CardBody>{msg.text}</CardBody>
+            <CardFooter>
+              <Button size="sm" colorScheme="red">
+                Delete
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </Stack>
     </ChakraProvider>
   );
 }
