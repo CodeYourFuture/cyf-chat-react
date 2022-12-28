@@ -28,7 +28,7 @@ function Messages() {
       fetch("https://saadiaelf-chat-server.glitch.me/messages/latest")
         .then((res) => res.json())
         .then((data) => setMessages(data), setNotFoundMsg(""));
-    }, 30000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [messages]);
 
@@ -85,10 +85,15 @@ function Messages() {
         />
       </InputGroup>
 
-      <Stack spacing={5} alignItems="center" mt="4">
+      <Stack spacing={5} alignItems="center" m="4">
         <Text>{notFoundMsg}</Text>
         {messages.map((msg, i) => (
-          <Card key={i} size="sm" minW="2xl" backgroundColor="gray.50">
+          <Card
+            key={i}
+            size="sm"
+            width={["sm", "md", "lg", "xl", "2xl"]}
+            backgroundColor="gray.50"
+          >
             <CardHeader>
               <Flex>
                 <Avatar name={msg.from} mr="5"></Avatar>
