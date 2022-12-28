@@ -15,6 +15,8 @@ import {
   InputLeftElement,
   Textarea,
   Button,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import { AtSignIcon } from "@chakra-ui/icons";
 
@@ -24,30 +26,35 @@ function Home() {
     text: "",
   });
 
+  // Handle inputs change
   function handleInputChange(event) {
     const updatedUserData = {
       ...userData,
       [event.target.name]: event.target.value,
     };
-
     setUserData(updatedUserData);
   }
 
-  function createMessage() {
-    fetch(`https://saadiaelf-chat-server.glitch.me/messages`, {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
+  // Create new message to API
+  function createMessage(e) {
+    if (userData.from && userData.text) {
+      fetch(`https://saadiaelf-chat-server.glitch.me/messages`, {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      e.preventDefault();
+    }
   }
   return (
     <ChakraProvider>
@@ -70,36 +77,45 @@ function Home() {
             <CardHeader>
               <Heading size="xl">CYF Chat</Heading>
             </CardHeader>
-            <Stack pl="5" spacing={3}>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<AtSignIcon color="gray.300" />}
-                />
-                <Input
-                  name="from"
-                  type="text"
-                  placeholder="Username"
+            <FormControl isRequired>
+              <Stack pl="5" spacing={2}>
+                <FormLabel>Username</FormLabel>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<AtSignIcon color="gray.300" />}
+                  />
+                  <Input
+                    name="from"
+                    type="text"
+                    placeholder="Username"
+                    onChange={handleInputChange}
+                  />
+                </InputGroup>
+                <FormLabel>Message</FormLabel>
+                <Textarea
+                  name="text"
+                  placeholder="Add message"
+                  size="sm"
                   onChange={handleInputChange}
                 />
-              </InputGroup>
-              <Textarea
-                name="text"
-                placeholder="Add message"
-                size="sm"
-                onChange={handleInputChange}
-              />
-              <Center>
-                <Link as={ReachLink} to="/messages">
-                  <Button colorScheme="pink" onClick={createMessage}>
-                    Post Message
-                  </Button>
-                </Link>
-              </Center>
-              <Link color="red.600" as={ReachLink} to="/messages">
-                View latest messages
-              </Link>
-            </Stack>
+                <Center>
+                  <Link as={ReachLink} to="/messages">
+                    <Button
+                      colorScheme="pink"
+                      type="submit"
+                      onClick={createMessage}
+                    >
+                      Post Message
+                    </Button>
+                  </Link>
+                </Center>
+              </Stack>
+            </FormControl>
+
+            <Link color="red.600" as={ReachLink} to="/messages">
+              View latest messages
+            </Link>
           </CardBody>
         </Card>
       </Center>

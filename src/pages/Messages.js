@@ -24,6 +24,7 @@ function Messages() {
   const [searchValue, setSearchValue] = useState("");
   const [notFoundMsg, setNotFoundMsg] = useState("");
 
+  // Fetch data from the API
   useEffect(() => {
     const interval = setInterval(() => {
       fetch("https://saadiaelf-chat-server.glitch.me/messages/latest")
@@ -33,6 +34,7 @@ function Messages() {
     return () => clearInterval(interval);
   }, [messages]);
 
+  // Delete message by id
   function deleteMessage(e) {
     let msgId = e.target.value;
     fetch(`https://saadiaelf-chat-server.glitch.me/messages/${msgId}`, {
@@ -40,6 +42,7 @@ function Messages() {
     }).then(console.log("Message successfully deleted"));
   }
 
+  // Search messages whose text contains a given string
   function search() {
     if (searchValue) {
       fetch(
