@@ -1,5 +1,5 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link as ReachLink } from "react-router-dom";
 import {
   ChakraProvider,
   Card,
@@ -15,6 +15,7 @@ import {
   InputRightAddon,
   Input,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import { SearchIcon, DeleteIcon } from "@chakra-ui/icons";
 
@@ -84,8 +85,10 @@ function Messages() {
           }
         />
       </InputGroup>
-
       <Stack spacing={5} alignItems="center" m="4">
+        <Link color="red.600" as={ReachLink} to="/">
+          Home
+        </Link>
         <Text>{notFoundMsg}</Text>
         {messages.map((msg, i) => (
           <Card
