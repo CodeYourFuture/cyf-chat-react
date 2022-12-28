@@ -11,15 +11,22 @@ import {
   Flex,
   Spacer,
   IconButton,
+  InputGroup,
+  InputRightAddon,
+  Input,
+  Center,
 } from "@chakra-ui/react";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { SearchIcon, DeleteIcon } from "@chakra-ui/icons";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
   useEffect(() => {
-    fetch("https://saadiaelf-chat-server.glitch.me/messages/latest").then(
-      (res) => res.json().then((data) => setMessages(data))
-    );
+    const interval = setInterval(() => {
+      fetch("https://saadiaelf-chat-server.glitch.me/messages/latest").then(
+        (res) => res.json().then((data) => setMessages(data))
+      );
+    }, 30000);
+    return () => clearInterval(interval);
   }, [messages]);
 
   function deleteMessage(e) {
@@ -30,10 +37,16 @@ function Messages() {
   }
   return (
     <ChakraProvider>
-      <Heading size="xl" textAlign="center">
+      <Heading size="xl" textAlign="center" m="4">
         Messages
       </Heading>
-      <Stack spacing={5} alignItems="center">
+      <InputGroup justifyContent="center">
+        <Input placeholder="search" width="auto" />
+        <InputRightAddon
+          children={<IconButton aria-label="Search" icon={<SearchIcon />} />}
+        />
+      </InputGroup>
+      <Stack spacing={5} alignItems="center" mt="4">
         {messages.map((msg, i) => (
           <Card key={i} size="sm" minW="2xl" backgroundColor="gray.50">
             <CardHeader>
