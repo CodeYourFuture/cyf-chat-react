@@ -14,17 +14,20 @@ import {
   InputGroup,
   InputRightAddon,
   Input,
-  Center,
+  Text,
 } from "@chakra-ui/react";
 import { SearchIcon, DeleteIcon } from "@chakra-ui/icons";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [notFoundMsg, setNotFoundMsg] = useState("");
+
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch("https://saadiaelf-chat-server.glitch.me/messages/latest").then(
-        (res) => res.json().then((data) => setMessages(data))
-      );
+      fetch("https://saadiaelf-chat-server.glitch.me/messages/latest")
+        .then((res) => res.json())
+        .then((data) => setMessages(data), setNotFoundMsg(""));
     }, 30000);
     return () => clearInterval(interval);
   }, [messages]);
@@ -35,18 +38,55 @@ function Messages() {
       method: "DELETE",
     }).then(console.log("Message successfully deleted"));
   }
+
+  function search() {
+    if (searchValue) {
+      fetch(
+        `https://saadiaelf-chat-server.glitch.me/messages/search?text=${searchValue}`
+      )
+        .then((res) => {
+          if (res.status >= 200 && res.status <= 299) {
+            return res.json();
+          } else {
+            throw Error(res.statusText);
+          }
+        })
+        .then((data) => {
+          setMessages(data);
+          setNotFoundMsg("");
+        })
+        .catch((error) => {
+          setMessages([]);
+          setNotFoundMsg("No Matching results");
+          console.log(error);
+        });
+    }
+  }
+
   return (
     <ChakraProvider>
       <Heading size="xl" textAlign="center" m="4">
         Messages
       </Heading>
       <InputGroup justifyContent="center">
-        <Input placeholder="search" width="auto" />
+        <Input
+          placeholder="search"
+          width="auto"
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
         <InputRightAddon
-          children={<IconButton aria-label="Search" icon={<SearchIcon />} />}
+          children={
+            <IconButton
+              aria-label="Search"
+              icon={<SearchIcon />}
+              onClick={search}
+            />
+          }
         />
       </InputGroup>
+
       <Stack spacing={5} alignItems="center" mt="4">
+        <Text>{notFoundMsg}</Text>
         {messages.map((msg, i) => (
           <Card key={i} size="sm" minW="2xl" backgroundColor="gray.50">
             <CardHeader>
