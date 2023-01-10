@@ -25,12 +25,13 @@ function ChatMessages(props) {
 
     alert(`Entered by : ${from} Message: ${text}`);
     //post to api.
-
+    //methord create/post
     let method = "POST";
 
     if (id !== null)
     {
-         method = "PUT";
+      //methord undate/put
+      method = "PUT";
     }
 
     fetch("https://kavita-repeated-chestnut-jobaria.glitch.me/messages", {

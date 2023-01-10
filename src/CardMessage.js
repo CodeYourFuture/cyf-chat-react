@@ -10,7 +10,7 @@ function CardMessage ({ id, from, text, handleEdit, handleDelete}) {
      <br/>
     <button
         onClick={handleEdit}
-        className="btn btn-sm btn-primary w-25 mx-0 mb-2 shadow text-nowrap"
+        className="btn btn-sm btn-primary w-50 mx-0 mb-2 shadow text-nowrap"
       >
         Edit
       </button>
@@ -18,7 +18,7 @@ function CardMessage ({ id, from, text, handleEdit, handleDelete}) {
       &nbsp;
       <button
         onClick={handleDelete}
-        className="btn btn-sm btn-light w-25 mx-0 mb-2 shadow text-nowrap"
+        className="btn btn-sm btn-light w-50 mx-0 mb-2 shadow text-nowrap"
       >
         Delete
       </button>
