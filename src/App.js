@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Home from "./Home";
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
-  const [newMessage, setNewMessage] = useState("");
+  //const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
     fetch("https://lorena-chat-server.glitch.me/messages")
@@ -23,8 +22,8 @@ function App() {
   }, []);
   console.log(error);
 
-  const [inputName, setInputName] = useState("");
-  const [inputText, setInputText] = useState("");
+  let [inputName, setInputName] = useState("");
+  let [inputText, setInputText] = useState("");
 
   function handleNameInput(e) {
     e.preventDefault();
@@ -43,33 +42,41 @@ function App() {
 
     const newMessage = { from: inputName, text: inputText };
     messages.push(newMessage);
+    setInputName("");
+    setInputText("");
   }
-  console.log(inputName);
-  console.log(inputText);
+
+  console.log(messages);
 
   return (
     <div className="App">
       <h1>LORENA'S CHAT SERVER</h1>
       <form className="inputContainer" onSubmit={handleFormSubmit}>
-        <input
-          id="inputName"
-          type="text"
-          value={inputName}
-          onChange={handleNameInput}
-        />
-        <input
-          id="inputMessage"
-          type="text"
-          value={inputText}
-          onChange={handleNameText}
-        />
+        <label>
+          Name:
+          <input
+            id="inputName"
+            type="text"
+            value={inputName}
+            onChange={handleNameInput}
+          />
+        </label>
+        <label>
+          Your message:
+          <input
+            id="inputMessage"
+            type="text"
+            value={inputText}
+            onChange={handleNameText}
+          />
+        </label>
         <input id="submitBtn" type="submit" />
       </form>
       <div className="messagesContainer">
         {messages.map((el) => (
           <div className="message">
             <p>
-              <strong>{messages.map((el) => el.from)}</strong>
+              <strong>{el.from}</strong>
             </p>
             <div className="messageFunctionality">
               <p className="textMessage">{el.text}</p>
