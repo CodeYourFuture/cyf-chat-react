@@ -53,7 +53,7 @@ function App() {
       <h1>LORENA'S CHAT SERVER</h1>
       <form className="inputContainer" onSubmit={handleFormSubmit}>
         <label>
-          Name:
+          <strong>Name:</strong>
           <input
             id="inputName"
             type="text"
@@ -62,7 +62,7 @@ function App() {
           />
         </label>
         <label>
-          Your message:
+          <strong>Your message:</strong>
           <input
             id="inputMessage"
             type="text"
