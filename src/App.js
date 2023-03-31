@@ -80,7 +80,7 @@ function App() {
             </p>
             <div className="messageFunctionality">
               <p className="textMessage">{el.text}</p>
-              <i class="far fa-edit"></i>
+              <i class="fa fa-edit"></i>
               <i class="fa fa-trash"></i>
             </div>
           </div>
