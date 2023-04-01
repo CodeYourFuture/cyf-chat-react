@@ -4,9 +4,6 @@ import "./App.css";
 function App() {
   let [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
-  let idCount = 0;
-
-  //const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
     fetch("https://lorena-chat-server.glitch.me/messages")
