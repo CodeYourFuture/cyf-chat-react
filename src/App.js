@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [messages, setMessages] = useState([]);
+  let [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
+  let idCount = 0;
+
   //const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
@@ -20,7 +22,6 @@ function App() {
         setError("Error");
       });
   }, []);
-  console.log(error);
 
   let [inputName, setInputName] = useState("");
   let [inputText, setInputText] = useState("");
@@ -35,19 +36,46 @@ function App() {
     setInputText(e.target.value);
   }
 
+  // function handleFormSubmit(e) {
+  //   e.preventDefault();
+  //   const newMessage = {
+  //     id: idCount + 1,
+  //     from: inputName,
+  //     text: inputText,
+  //   };
+  //   messages.push(newMessage);
+  //   setInputName("");
+  //   setInputText("");
+  //   idCount = idCount + 1;
+  // }
   function handleFormSubmit(e) {
-    console.log("Name:" + inputName);
-    console.log("Text" + inputText);
     e.preventDefault();
-
-    const newMessage = { from: inputName, text: inputText };
-    messages.push(newMessage);
+    const newMessage = {
+      from: inputName,
+      text: inputText,
+    };
+    fetch("https://lorena-chat-server.glitch.me/messages", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newMessage),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setMessages(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
     setInputName("");
     setInputText("");
   }
 
-  console.log(messages);
-
+  function deleteMessage(id) {
+    console.log("id", id);
+  }
   return (
     <div className="App">
       <h1>LORENA'S CHAT SERVER</h1>
@@ -74,16 +102,16 @@ function App() {
       </form>
       <div className="messagesContainer">
         {messages.map((el) => (
-          <div className="message">
+          <li key={el.id} className="message">
             <p>
               <strong>{el.from}</strong>
             </p>
             <div className="messageFunctionality">
               <p className="textMessage">{el.text}</p>
               <i class="fa fa-edit"></i>
-              <i class="fa fa-trash"></i>
+              <i class="fa fa-trash" onClick={(el) => deleteMessage(el.id)}></i>
             </div>
-          </div>
+          </li>
         ))}
       </div>
     </div>
