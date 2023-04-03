@@ -20,6 +20,7 @@ function App() {
       })
       .then((data) => {
         setMessages(data);
+        console.log("all data", data);
       })
       .catch((error) => {
         setError("Error", error);
@@ -52,6 +53,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
+        console.log("created element", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -70,6 +72,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
+        console.log("delete message", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -97,6 +100,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
+        console.log("edit data", data);
       })
       .catch((error) => {
         console.error("Error:", error);
