@@ -16,7 +16,7 @@ function App() {
         setMessages(data);
       })
       .catch((error) => {
-        setError("Error");
+        setError("Error", error);
       });
   }, []);
 
@@ -33,18 +33,6 @@ function App() {
     setInputText(e.target.value);
   }
 
-  // function handleFormSubmit(e) {
-  //   e.preventDefault();
-  //   const newMessage = {
-  //     id: idCount + 1,
-  //     from: inputName,
-  //     text: inputText,
-  //   };
-  //   messages.push(newMessage);
-  //   setInputName("");
-  //   setInputText("");
-  //   idCount = idCount + 1;
-  // }
   function handleFormSubmit(e) {
     e.preventDefault();
     const newMessage = {
@@ -70,9 +58,57 @@ function App() {
     setInputText("");
   }
 
-  function deleteMessage(id) {
-    console.log("id", id);
+  function deleteMessage(el) {
+    fetch(`https://lorena-chat-server.glitch.me/messages/:${el.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMessages(data);
+        console.log("Success deleted:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputEdit, setInputEdit] = useState("");
+
+  function handleEdit(e) {
+    e.preventDefault();
+    setInputEdit(e.target.value);
+  }
+
+  function editMessage(el) {
+    console.log("success from edit", el.id);
+    let updateMessage = {
+      id: el.id,
+      from: el.from,
+      text: inputEdit,
+    };
+    fetch(`https://lorena-chat-server.glitch.me/messages/:${el.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateMessage),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success: edit", data);
+        setMessages(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    console.log("EDIT id", el.id);
+    setIsEditing(false);
+  }
+
   return (
     <div className="App">
       <h1>LORENA'S CHAT SERVER</h1>
@@ -105,8 +141,19 @@ function App() {
             </p>
             <div className="messageFunctionality">
               <p className="textMessage">{el.text}</p>
-              <i class="fa fa-edit"></i>
-              <i class="fa fa-trash" onClick={(el) => deleteMessage(el.id)}></i>
+              <i
+                class="fa fa-edit"
+                onClick={() => {
+                  setIsEditing(true);
+                }}
+              ></i>
+              {!isEditing ? null : (
+                <>
+                  <input type="text" value={inputEdit} onChange={handleEdit} />
+                  <button onClick={() => editMessage(el)}>Save</button>
+                </>
+              )}
+              <i class="fa fa-trash" onClick={() => deleteMessage(el)}></i>
             </div>
           </li>
         ))}
