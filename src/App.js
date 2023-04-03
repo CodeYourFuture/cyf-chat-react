@@ -5,6 +5,12 @@ function App() {
   let [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
 
+  let [inputName, setInputName] = useState("");
+  let [inputText, setInputText] = useState("");
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputEdit, setInputEdit] = useState("");
+
   useEffect(() => {
     fetch("https://lorena-chat-server.glitch.me/messages")
       .then((res) => {
@@ -19,9 +25,6 @@ function App() {
         setError("Error", error);
       });
   }, []);
-
-  let [inputName, setInputName] = useState("");
-  let [inputText, setInputText] = useState("");
 
   function handleNameInput(e) {
     e.preventDefault();
@@ -48,7 +51,6 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
         setMessages(data);
       })
       .catch((error) => {
@@ -68,15 +70,11 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
-        console.log("Success deleted:", data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   }
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [inputEdit, setInputEdit] = useState("");
 
   function handleEdit(e) {
     e.preventDefault();
@@ -98,13 +96,11 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success: edit", data);
         setMessages(data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-    console.log("EDIT id", el.id);
     setIsEditing(false);
   }
 
