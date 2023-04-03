@@ -84,7 +84,6 @@ function App() {
   }
 
   function editMessage(el) {
-    console.log("success from edit", el.id);
     let updateMessage = {
       id: el.id,
       from: el.from,
