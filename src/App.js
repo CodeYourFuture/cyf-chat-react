@@ -12,7 +12,7 @@ function App() {
   const [inputEdit, setInputEdit] = useState("");
 
   useEffect(() => {
-    fetch("https://lorena-chat-server.glitch.me/messages")
+    fetch("https://lorena-chat-react.onrender.com/messages")
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! status code ${res.status}`);
 
