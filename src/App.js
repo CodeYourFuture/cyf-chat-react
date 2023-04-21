@@ -35,15 +35,18 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>The ChatterBox Corner App</h1>
+    <div id="message-board">
+      <h1>The ChatterBox Corner!</h1>
+      <p>
+        Where talkatives can express themselves without reserve...!
+      </p>
       <OnloadMessages
         setDisplayAllMessages={setDisplayAllMessages}
         displayAllMessages={displayAllMessages}
         messages={messages}
         pageRefreshButton={pageRefreshButton}
       />
-      <MessageForm pageRefreshButton={pageRefreshButton}/>
+      <MessageForm pageRefreshButton={pageRefreshButton} />
     </div>
   );
 }

@@ -48,7 +48,7 @@ function MessageForm(props) {
       {displayAllMessages && (
         <form action="/messages" method="post" onSubmit={handleSubmit}>
 
-          <label htmlFor="name">FROM:</label>
+          <label htmlFor="name">From:</label>
           <input type="text" name="name" value={formData.name}placeholder="Your Name" onChange={handleInputChange} /> <br />
 
           <label htmlFor="message">Message:</label>
