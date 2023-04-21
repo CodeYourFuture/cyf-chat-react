@@ -7,10 +7,17 @@ import OnloadMessages from "./OnloadMessages";
 function App() {
   const [messages, setMessages] = useState([]);
   const [displayAllMessages, setDisplayAllMessages] = useState(false);
+  const [pageRefresh, setPageRefresh] = useState(true);
 
+  function pageRefreshButton(state){
+    setPageRefresh(state);
+  }
   useEffect(() => {
-    fetchMessages();
-  },[]);
+    // fetchMessages();
+    if (pageRefresh){
+      return fetchMessages();
+    }
+  },[pageRefresh, setPageRefresh]);
 
   const fetchMessages = () => {
     fetch("http://localhost:3001/messages/latest")
@@ -20,6 +27,7 @@ function App() {
       .then((data) => {
         console.log(data);
         setMessages(data);
+        setPageRefresh(false);
       })
       .catch((error) => {
         console.log("Your requested infomation is not currently available!");
@@ -33,8 +41,9 @@ function App() {
         setDisplayAllMessages={setDisplayAllMessages}
         displayAllMessages={displayAllMessages}
         messages={messages}
+        pageRefreshButton={pageRefreshButton}
       />
-      <MessageForm/>
+      <MessageForm pageRefreshButton={pageRefreshButton}/>
     </div>
   );
 }

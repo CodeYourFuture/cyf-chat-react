@@ -68,7 +68,7 @@ import React, {useState} from "react";
 
 
 
-function MessageForm() {
+function MessageForm(props) {
   const [displayAllMessages, setDisplayAllMessages] = useState(false);
   const toggleShow = () => setDisplayAllMessages((s) => !s);
   const initialState = {
@@ -76,7 +76,9 @@ function MessageForm() {
       message: "",
       time: "",
     };
+
     const [formData, setFormData] = useState(initialState);
+
 
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -94,6 +96,7 @@ function MessageForm() {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
+           props.pageRefreshButton(true);
           setFormData(initialState);
         })
         .catch((error) => {
@@ -137,7 +140,7 @@ function MessageForm() {
               <h5>See All Messages</h5>
             </a>
           </button>
-          
+
         </form>
       )}
     </div>
