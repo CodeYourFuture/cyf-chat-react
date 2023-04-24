@@ -26,6 +26,8 @@ function App() {
         setError("Error", error);
       });
   }, []);
+  console.log(error);
+  console.log(messages);
 
   function handleNameInput(e) {
     e.preventDefault();
