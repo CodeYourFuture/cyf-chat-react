@@ -45,7 +45,7 @@ function App() {
       from: inputName,
       text: inputText,
     };
-    fetch("https://lorena-chat-server.glitch.me/messages", {
+    fetch("https://lorena-chat-react.onrender.com/messages", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ function App() {
   }
 
   function deleteMessage(el) {
-    fetch(`https://lorena-chat-server.glitch.me/messages/:${el.id}`, {
+    fetch(`https://lorena-chat-react.onrender.com/messages:${el.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function App() {
       from: el.from,
       text: inputEdit,
     };
-    fetch(`https://lorena-chat-server.glitch.me/messages/:${el.id}`, {
+    fetch(`https://lorena-chat-react.onrender.com/messages:${el.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
