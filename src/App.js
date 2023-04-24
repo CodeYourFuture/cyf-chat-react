@@ -39,6 +39,23 @@ function App() {
     setInputText(e.target.value);
   }
 
+  function deleteMessage(id) {
+    fetch(`https://lorena-chat-react.onrender.com/messages/:${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMessages(data);
+        console.log("delete message", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
   function handleFormSubmit(e) {
     e.preventDefault();
     const newMessage = {
@@ -62,23 +79,6 @@ function App() {
       });
     setInputName("");
     setInputText("");
-  }
-
-  function deleteMessage(el) {
-    fetch(`https://lorena-chat-react.onrender.com/messages:${el.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setMessages(data);
-        console.log("delete message", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
   }
 
   function handleEdit(e) {
@@ -154,7 +154,11 @@ function App() {
                   <button onClick={() => editMessage(el)}>Save</button>
                 </>
               )}
-              <i class="fa fa-trash" onClick={() => deleteMessage(el)}></i>
+              <i class="fa fa-trash" onClick={() => deleteMessage(el.id)}></i>
+              {/* <i
+                class="fa fa-trash"
+                onClick={() => console.log("Message deleted", el.id)}
+              ></i> */}
             </div>
           </li>
         ))}
