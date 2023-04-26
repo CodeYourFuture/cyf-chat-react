@@ -40,7 +40,7 @@ function App() {
   }
 
   function deleteMessage(id) {
-    fetch(`https://lorena-chat-react.onrender.com/messages/:${id}`, {
+    fetch(`https://lorena-chat-react.onrender.com/messages/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function App() {
       from: el.from,
       text: inputEdit,
     };
-    fetch(`https://lorena-chat-react.onrender.com/messages:${el.id}`, {
+    fetch(`https://lorena-chat-react.onrender.com/messages/${el.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -148,7 +148,7 @@ function App() {
                   setIsEditing(true);
                 }}
               ></i>
-              {isEditing === true ? (
+              {isEditing && el.id ? (
                 <>
                   <input type="text" value={inputEdit} onChange={handleEdit} />
                   <button onClick={() => editMessage(el)}>Save</button>
