@@ -21,14 +21,11 @@ function App() {
       })
       .then((data) => {
         setMessages(data);
-        console.log("READ-->", data);
       })
       .catch((error) => {
         setError("Error", error);
       });
   }, []);
-  // console.log(error);
-  // console.log(messages);
 
   function handleNameInput(e) {
     e.preventDefault();
@@ -50,7 +47,6 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
-        console.log("DELETE-->", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -73,7 +69,6 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
-        console.log("CREATE-->", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -108,7 +103,6 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
-        console.log("UPDATE-->", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -157,8 +151,6 @@ function App() {
                 <>
                   <input type="text" value={inputEdit} onChange={handleEdit} />
                   <button onClick={() => editMessage(el)}>Save</button>
-                  {console.log(`editingId is ${isEditingId} `)}
-                  {console.log(`messageId is ${el.id} `)}
                 </>
               ) : null}
               <i class="fa fa-trash" onClick={() => deleteMessage(el.id)}></i>
