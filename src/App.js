@@ -13,7 +13,7 @@ function App() {
 
   const [isEditingId, setIsEditingId] = useState(null);
   useEffect(() => {
-    fetch("https://lorena-chat-react.onrender.com/messages")
+    fetch("https://chatserver-5o9o.onrender.com/messages")
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP error! status code ${res.status}`);
 
@@ -38,7 +38,7 @@ function App() {
   }
 
   function deleteMessage(id) {
-    fetch(`https://lorena-chat-react.onrender.com/messages/${id}`, {
+    fetch(`https://chatserver-5o9o.onrender.com/messages/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function App() {
       from: inputName,
       text: inputText,
     };
-    fetch("https://lorena-chat-react.onrender.com/messages", {
+    fetch("https://chatserver-5o9o.onrender.com/messages", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +93,7 @@ function App() {
       from: el.from,
       text: inputEdit,
     };
-    fetch(`https://lorena-chat-react.onrender.com/messages/${el.id}`, {
+    fetch(`https://chatserver-5o9o.onrender.com/messages/${el.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
