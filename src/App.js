@@ -20,14 +20,14 @@ function App() {
       })
       .then((data) => {
         setMessages(data);
-        console.log("all data", data);
+        console.log("READ-->", data);
       })
       .catch((error) => {
         setError("Error", error);
       });
   }, []);
-  console.log(error);
-  console.log(messages);
+  // console.log(error);
+  // console.log(messages);
 
   function handleNameInput(e) {
     e.preventDefault();
@@ -49,7 +49,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
-        console.log("delete message", data);
+        console.log("DELETE-->", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -72,7 +72,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
-        console.log("created element", data);
+        console.log("CREATE-->", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -102,7 +102,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setMessages(data);
-        console.log("edit data", data);
+        console.log("UPDATE-->", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -148,17 +148,13 @@ function App() {
                   setIsEditing(true);
                 }}
               ></i>
-              {!isEditing ? null : (
+              {isEditing === true ? (
                 <>
                   <input type="text" value={inputEdit} onChange={handleEdit} />
                   <button onClick={() => editMessage(el)}>Save</button>
                 </>
-              )}
+              ) : null}
               <i class="fa fa-trash" onClick={() => deleteMessage(el.id)}></i>
-              {/* <i
-                class="fa fa-trash"
-                onClick={() => console.log("Message deleted", el.id)}
-              ></i> */}
             </div>
           </li>
         ))}
