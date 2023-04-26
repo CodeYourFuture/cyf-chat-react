@@ -11,6 +11,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [inputEdit, setInputEdit] = useState("");
 
+  const [isEditingId, setIsEditingId] = useState(null);
   useEffect(() => {
     fetch("https://lorena-chat-react.onrender.com/messages")
       .then((res) => {
@@ -86,6 +87,11 @@ function App() {
     setInputEdit(e.target.value);
   }
 
+  function handleEditIconClick(el) {
+    setIsEditing(true);
+    setIsEditingId(el);
+  }
+
   function editMessage(el) {
     let updateMessage = {
       id: el.id,
@@ -108,6 +114,7 @@ function App() {
         console.error("Error:", error);
       });
     setIsEditing(false);
+    // setIsEditingId(updateMessage.id);
   }
 
   return (
@@ -144,14 +151,14 @@ function App() {
               <p className="textMessage">{el.text}</p>
               <i
                 class="fa fa-edit"
-                onClick={() => {
-                  setIsEditing(true);
-                }}
+                onClick={() => handleEditIconClick(el.id)}
               ></i>
-              {isEditing && el.id ? (
+              {isEditing && isEditingId === el.id ? (
                 <>
                   <input type="text" value={inputEdit} onChange={handleEdit} />
                   <button onClick={() => editMessage(el)}>Save</button>
+                  {console.log(`editingId is ${isEditingId} `)}
+                  {console.log(`messageId is ${el.id} `)}
                 </>
               ) : null}
               <i class="fa fa-trash" onClick={() => deleteMessage(el.id)}></i>
