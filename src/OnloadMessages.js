@@ -5,7 +5,7 @@ function OnloadMessages(props) {
     //  const toggleShow = () => props.setDisplayAllMessages((s) => !s);
 
     function deleteMessage(id) {
-      fetch(`http://localhost:3001/messages/${id}`, {
+      fetch(`https://the-chatterboxers-app.onrender.com/messages/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

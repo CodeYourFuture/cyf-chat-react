@@ -10,7 +10,7 @@ function App() {
   const [showLatest, setShowLatest] = useState(false);
 
   const fetchMessages = () => {
-    fetch("http://localhost:3001/messages")
+    fetch("https://the-chatterboxers-app.onrender.com/messages")
       .then((response) => {
         return response.json();
       })

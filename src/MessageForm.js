@@ -14,7 +14,7 @@ function MessageForm(props) {
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      fetch("http://localhost:3001/messages", {
+      fetch("https://the-chatterboxers-app.onrender.com/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ function MessageForm(props) {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-           props.fetchMessages();
+          props.fetchMessages();
           setFormData(initialState);
         })
         .catch((error) => {
