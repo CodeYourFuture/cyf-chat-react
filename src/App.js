@@ -34,17 +34,18 @@ function App() {
     <div id="message-board">
       <h1>The ChatterBox Corner!</h1>
       <p>
-        Where talkatives and listeners can express themselves without
-        reserve...!
+        Welcome to the ChatterBox Corner..!<br></br> A place where talkatives and
+        chatterheads can express themselves without reserve...!
       </p>
+
+      <MessageForm fetchMessages={fetchMessages} />
+
       <OnloadMessages
         setDisplayAllMessages={setDisplayAllMessages}
         displayAllMessages={displayAllMessages}
         messages={messagesDisplayed}
-  
       />
       <div className="latest-see-all-btns">
-        <MessageForm fetchMessages={fetchMessages} />
         <button
           id="see-latest"
           onClick={() => {
@@ -54,6 +55,7 @@ function App() {
         >
           See Newest Messages
         </button>
+
         <button
           id="all-message-btn"
           onClick={() => {
