@@ -28,7 +28,7 @@ function MessageForm(props) {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-           props.pageRefreshButton(true);
+           props.fetchMessages();
           setFormData(initialState);
         })
         .catch((error) => {
@@ -42,15 +42,20 @@ function MessageForm(props) {
     }
   return (
     <div>
-      <button id="show-form-button" onClick={() => toggleShow()}>
-        <h3>Click To Send A Message!</h3>
+      <button id="start-chat-btn" onClick={() => toggleShow()}>
+        <h3>CLICK TO START CHATTERING..!</h3>
       </button>
       {displayAllMessages && (
         <form action="/messages" method="post" onSubmit={handleSubmit}>
-
           <label htmlFor="name">From:</label>
-          <input type="text" name="name" value={formData.name}placeholder="Your Name" onChange={handleInputChange} /> <br />
-
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            placeholder="Your Name"
+            onChange={handleInputChange}
+          />{" "}
+          <br />
           <label htmlFor="message">Message:</label>
           <input
             className="message-styles"
@@ -58,23 +63,18 @@ function MessageForm(props) {
             name="message"
             placeholder="Enter your message..."
             value={formData.message}
-          onChange={handleInputChange}/>
+            onChange={handleInputChange}
+          />
           <br />
-
           <div id="message-buttons">
             <button id="send-btn" type="submit">
               <h5>Send Your Msg</h5>
             </button>
           </div>
-
-          <button id="all-message-btn">
-            <a href="/message.json">
-              <h5>See All Messages</h5>
-            </a>
-          </button>
-
         </form>
       )}
+
+     
     </div>
   );
 }

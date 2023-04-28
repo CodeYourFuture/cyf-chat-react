@@ -2,7 +2,7 @@ import React from "react";
 
 
 function OnloadMessages(props) {
-     const toggleShow = () => props.setDisplayAllMessages((s) => !s);
+    //  const toggleShow = () => props.setDisplayAllMessages((s) => !s);
 
     function deleteMessage(id) {
       fetch(`http://localhost:3001/messages/${id}`, {
@@ -16,7 +16,6 @@ function OnloadMessages(props) {
             throw new Error("Something went wrong");
           }
           console.log("Message Deleted " + id);
-          props.pageRefreshButton(true);
           alert("Message deleted");
         })
         .catch((error) => console.log(error));
@@ -24,16 +23,16 @@ function OnloadMessages(props) {
 
   return (
     <div>
-      <button onClick={() => toggleShow()}>
+      {/* <button id="see-latest" onClick={() => toggleShow()}>
         See Latest
-      </button>
+      </button> */}
       {props.displayAllMessages &&
         props.messages.map((message) => (
           <div key={message.id}>
             <p>
               {message.from} - {message.timeSent}
             </p>
-            <p>{message.text}</p>
+            <p>{message.text} {message.id}</p>
 
             <button onClick={() => deleteMessage(message.id)}>Delete</button>
           </div>
