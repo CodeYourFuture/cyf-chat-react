@@ -28,13 +28,17 @@ function OnloadMessages(props) {
       </button> */}
       {props.displayAllMessages &&
         props.messages.map((message) => (
-          <div key={message.id}>
+          <div id="msg-greet" key={message.id}>
+            <div id="msg-card">
             <p>
-              {message.from} - {message.timeSent}
+              id: {message.id}. <br></br>
+              From: {message.from}
             </p>
-            <p>{message.text} {message.id}</p>
+            <p>{message.text} </p>
+            <p>Sent on: {message.timeSent}</p> </div>
 
-            <button onClick={() => deleteMessage(message.id)}>Delete</button>
+            <div id="delbtn"> <button onClick={() => deleteMessage(message.id)}>Delete</button>
+          </div>
           </div>
         ))}
     </div>

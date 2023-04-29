@@ -35,7 +35,7 @@ function App() {
       <h1>The ChatterBox Corner!</h1>
       <p>
         Welcome to the ChatterBox Corner..!<br></br> A place where talkatives and
-        chatterheads can express themselves without reserve...!
+        chatterheads can express themselves without reserve...! Please be kind and be positive. 
       </p>
 
       <MessageForm fetchMessages={fetchMessages} />
