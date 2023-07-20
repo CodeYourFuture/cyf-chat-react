@@ -1,70 +1,58 @@
-# React front-end for chat server exercise
+# CodeYourFuture Chat Service 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application provide Chat Service to users to exchange messages on a single purpose build platform.
 
-## Available Scripts
+## Deployed Website
 
-In the project directory, you can run:
+Access the deployed version of the application: <a href="lorena-chat-react.netlify.app/">lorena-chat-react.netlify.app</a>
 
-### `npm start`
+## Inside The App
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img width="1440" alt="Screenshot 2023-07-19 at 10 14 18" src="https://github.com/LorenaCapraru/cyf-chat-react/assets/108892538/c3e13aca-6f7a-4f8e-a52d-1148b3b2036e">
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Features
 
-### `npm test`
+- [x] The app facilitates the user to write a meesage after inserting his/her name.
+- [x] The app enables user to exchange messages in real-time with other users.
+- [x] The app ensures user to delete a message.
+- [x] The app provides the option to edit a message.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Technologies Used:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [x] JavaScript Frameworks: React
+- [x] Node.js
+- [x] CSS, HTML
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Pie Chart Of Languages Used
 
-### `npm run eject`
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'pie1': '#ff6978', 'pie2': '#b1ede8', 'pie3': '#fffcf9'}}}%%
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+pie
+    title Languages Used
+    "JavaScript" : 64.5
+    "CSS" : 21.9
+    "HTML" : 13.6
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Clone the repository:**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+git clone github.com/LorenaCapraru/cyf-chat-react
+```
 
-## Learn More
+**Install dependencies:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Start the development server:**
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```bash
+npm start
+```
