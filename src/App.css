@@ -28,7 +28,9 @@ h2 {
   color: #b4573e;
   margin-left: 1rem;
 }
-
+p {
+  color: #b4573e;
+}
 button {
   background-color: #f27b7b;
   color: #fff;
