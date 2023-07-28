@@ -1,0 +1,28 @@
+.message-row {
+  font-size: larger;
+  background-color: rgb(195, 216, 209);
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 6fr 2fr 1fr;
+}
+
+.message-text-container{
+  background-color: #e8e6e4;
+  border-radius: 10px;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+.delete-btn-container{
+  text-align: center;
+  padding: 0.5rem;
+}
+.delete-btn {
+  background-color: #D9C3CA;
+  font-size: large;
+  width: 6rem;
+  border-radius: 10px;
+  padding: 0.5rem;
+
+}
