@@ -15,6 +15,7 @@ textarea[type="text"]
 
 .chat-from-input{
   border-radius: 10px;
+  width: 95%;
 
 }
 
