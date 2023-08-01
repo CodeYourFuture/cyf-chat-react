@@ -1,0 +1,10 @@
+.loading-container{
+  text-align: center;
+}
+
+.loading-text{
+  font-size: larger;
+  color: brown;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
