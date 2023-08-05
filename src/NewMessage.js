@@ -1,8 +1,9 @@
-import { useState } from "react";
+
+
 import React from "react";
 
 const NewMessage = (props) => {
- const { loadData, setLoadData } = props;
+ const { setLoadData } = props;
  function deletBtnHandler(e) {
   console.log("deleting.....");
   console.log(props.item.id);
