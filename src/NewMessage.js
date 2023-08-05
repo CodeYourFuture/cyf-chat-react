@@ -3,7 +3,7 @@
 import React from "react";
 
 const NewMessage = (props) => {
- const { setLoadData } = props;
+ const {setLoadData } = props;
  function deletBtnHandler(e) {
   console.log("deleting.....");
   console.log(props.item.id);
