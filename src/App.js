@@ -14,7 +14,9 @@ function App() {
         const response = await fetch(
           `https://chat-server-nke3.onrender.com/messages`
         );
-        
+        if(!statuse.ok){
+          throw new Error("something went wrong")
+        }
         const data = await response.json();
         return setLoadData(data);
       } catch (e) {
