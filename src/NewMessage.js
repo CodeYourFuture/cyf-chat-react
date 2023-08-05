@@ -1,40 +1,54 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import React from "react";
 
-const NewMessage = () => {
-  const [load, setLoaded] = useState([]);
+const NewMessage = (props) => {
+ const { loadData, setLoadData } = props;
+ function deletBtnHandler(e) {
+  console.log("deleting.....");
+  console.log(props.item.id);
+   e.preventDefault();
+   const deleteMessage = {
+     from: props.item.from,
+     text: props.item.text,
+     id: props.item.id,
+   };
+   fetch(`http://localhost:9090/messages/${props.item.id}`, {
+     method: "DELETE",
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify(deleteMessage),
+   }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+   setLoadData(data);
+ })
+ }
 
-  useEffect(() => {
-    fetch(`http://localhost:9090/messages`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLoaded(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-console.log(load);
   return (
     <div>
-      {load.map((item, index) => (
-        <ul key={index}>
-          <li>
-            <div className="liDiv">
-              <div>
-                <p>{item.text}</p>
-              </div>
-              <div>
-                <p>{item.form}</p>
-              </div>
-              <div>
-                <button className="deleteBtn">Delete</button>
-              </div>
-            </div>
-          </li>
-        </ul>
-      ))}
+      <div className="mainMessageDiv">
+        <div className="textDiv">
+          <p>{props.item.text}</p>
+        </div>
+        <div className="fromDiv">
+          <p>{props.item.from}</p>
+        </div>
+        <div className="deleteDiv">
+          <button className="deleteBtn" onClick={deletBtnHandler}>Delete</button>
+        </div>
+      </div>
     </div>
   );
+  
 };
 
 export default NewMessage;
+
+
+ 

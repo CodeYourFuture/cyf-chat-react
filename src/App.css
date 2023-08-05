@@ -4,12 +4,14 @@
   align-items: center;
   justify-content: center;
 }
-
+.headerDiv{
+color:rgb(245, 181, 193)
+}
 
 
 
 .mainForm{
-  background-color: red;
+  background-color:rgb(167, 165, 165);
   border-radius: 5px;
   height: 500px;
   width: 500px;
@@ -49,7 +51,51 @@
 .newNameDiv{
   float: left;
 }
-.liDiv{
+.mainMessageDiv{
   display: flex;
-  background-color: aqua;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(248, 221, 226);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.textArea{
+color:rgb(245, 181, 193);
+font-weight: bold;
+} 
+.inputId{
+color:rgb(245, 181, 193);
+font-weight: bold;
+}
+.addBtn{
+  color: rgb(245, 181, 193);
+  margin-top: 10px;
+  font-weight: bold;
+}
+.textDiv{
+  width:380 ;
+  height: 50;
+  color: rgb(139, 137, 137);
+  font-weight: bold;
+  padding-left: 0PX;
+}
+.fromDiv{
+  width:100 ;
+  height: 50;
+  padding-left: 0PX;
+  color: rgb(139, 137, 137);
+  font-weight: bold;
+}
+.deleteDiv{
+  width: 20px;
+  height: 10px;
+  margin: 5px;
+}
+.deleteBtn{
+  color: rgb(139, 137, 137);
+  font-weight: bold;
+  
+  
 }
