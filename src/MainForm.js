@@ -11,13 +11,13 @@ function clickHandler(e) {
   e.preventDefault();
   const newMessage = { from: nameData, text: textData, id:loadData.length };
   //fetch for post method
-  fetch(`http://localhost:9090/messages`, {
+  fetch(`https://chat-server-nke3.onrender.com/messages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newMessage),
-  })
+  });
   
   //with updating the state we can call get api again from backend and have 
   //an array with all the previous obj with the new one that we posted 

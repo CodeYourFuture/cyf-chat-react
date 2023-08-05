@@ -12,7 +12,7 @@ function App() {
 console.log(loadData);
    useEffect(() => {
     //we get all data from backend with get api
-     fetch(`http://localhost:9090/messages`)
+     fetch(`https://chat-server-nke3.onrender.com/messages`)
        .then((res) => res.json())
        .then((data) => {
          setLoadData(data);

@@ -13,22 +13,23 @@ const NewMessage = (props) => {
      text: props.item.text,
      id: props.item.id,
    };
-   fetch(`http://localhost:9090/messages/${props.item.id}`, {
+   fetch(`https://chat-server-nke3.onrender.com/messages/${props.item.id}`, {
      method: "DELETE",
      headers: {
        "Content-Type": "application/json",
      },
      body: JSON.stringify(deleteMessage),
-   }).then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-   setLoadData(data);
- })
+   })
+     .then((response) => {
+       if (!response.ok) {
+         throw new Error("Network response was not ok");
+       }
+       return response.json();
+     })
+     .then((data) => {
+       console.log(data);
+       setLoadData(data);
+     });
  }
 
   return (
