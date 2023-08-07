@@ -14,14 +14,15 @@ function App() {
         const response = await fetch(
           `https://chat-server-nke3.onrender.com/messages`
         );
-        if(!statuse.ok){
+        if(!response.ok){
           throw new Error("something went wrong")
         }
         const data = await response.json();
         return setLoadData(data);
-      } catch (e) {
-        console.log(e); 
-      }
+      } catch (error){
+        console.error("Error fetching data:", error)
+      } 
+      
       
 
       //we get all data from backend with get api
@@ -34,7 +35,7 @@ function App() {
       //     console.error("Error fetching data:", error);
       //   });
     };
-    getData();
+    getData()
   }, [setLoadData]);
 
 
