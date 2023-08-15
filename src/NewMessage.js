@@ -5,8 +5,7 @@ import React from "react";
 const NewMessage = (props) => {
  const {setLoadData } = props;
  function deletBtnHandler(e) {
-  console.log("deleting.....");
-  console.log(props.item.id);
+  
    e.preventDefault();
    const deleteMessage = {
      from: props.item.from,
@@ -27,7 +26,6 @@ const NewMessage = (props) => {
        return response.json();
      })
      .then((data) => {
-       console.log(data);
        setLoadData(data);
      });
  }
