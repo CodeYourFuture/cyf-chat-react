@@ -1,33 +1,101 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.headerDiv{
+color:rgb(245, 181, 193)
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.mainForm{
+  background-color:rgb(167, 165, 165);
+  border-radius: 5px;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.messageDiv{
+  background-color: pink;
+  border-radius: 5px;
+  height: 250px;
+  width: 300px;
+}
+.nameDiv{
+  background-color: pink;
+  border-radius: 5px;
+  height: 70px;
+  width: 300px;
+  
+}
+.AddButtonDiv{
+  background-color: blueviolet;
+  margin-top: 10px;
+}
+.newMessageDiv{
+  margin-top: 15px;
+  width: 500px;
+  background-color: yellow;
+}
+.deleteBtn{
+ float: right;
+}
+.newMessageDiv{
+  float: left;
+}
+.newNameDiv{
+  float: left;
+}
+.mainMessageDiv{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(248, 221, 226);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.textArea{
+color:rgb(245, 181, 193);
+font-weight: bold;
+} 
+.inputId{
+color:rgb(245, 181, 193);
+font-weight: bold;
+}
+.addBtn{
+  color: rgb(245, 181, 193);
+  margin-top: 10px;
+  font-weight: bold;
+}
+.textDiv{
+  width:380 ;
+  height: 50;
+  color: rgb(139, 137, 137);
+  font-weight: bold;
+  padding-left: 0PX;
+}
+.fromDiv{
+  width:100 ;
+  height: 50;
+  padding-left: 0PX;
+  color: rgb(139, 137, 137);
+  font-weight: bold;
+}
+.deleteDiv{
+  width: 20px;
+  height: 10px;
+  margin: 5px;
+}
+.deleteBtn{
+  color: rgb(139, 137, 137);
+  font-weight: bold;
+  
+  
 }

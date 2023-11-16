@@ -1,24 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import MainForm from "./MainForm.js";
+import Header from "./Header.js";
+import "./App.css";
 
 function App() {
+  const [loadData, setLoadData] = useState([]);
+
+  useEffect(() => {
+    
+
+    const getData = async () => {
+      try {
+        const response = await fetch(
+          `https://chat-server-nke3.onrender.com/messages`
+        );
+        if(!response.ok){
+          throw new Error("something went wrong")
+        }
+        const data = await response.json();
+        return setLoadData(data);
+      } catch (error){
+        console.error("Error fetching data:", error)
+      } 
+      
+      
+
+      //we get all data from backend with get api
+      // fetch(`https://chat-server-nke3.onrender.com/messages`)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setLoadData(data);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error fetching data:", error);
+      //   });
+    };
+    getData()
+  }, [setLoadData]);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <MainForm loadData={loadData} setLoadData={setLoadData} />
     </div>
   );
 }
