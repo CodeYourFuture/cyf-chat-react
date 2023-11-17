@@ -1,45 +1,44 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 function MessageForm(props) {
   const [displayAllMessages, setDisplayAllMessages] = useState(false);
   const toggleShow = () => setDisplayAllMessages((s) => !s);
   const initialState = {
-      name: "",
-      message: "",
-      time: "",
-    };
+    name: "",
+    message: "",
+    time: "",
+  };
 
-    const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(initialState);
 
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      fetch("https://the-chatterboxers-app.onrender.com/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: formData.name,
-          text: formData.message,
-          timeSent: formData.time,
-        }),
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("https://the-chatterboxers-app.onrender.com/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: formData.name,
+        text: formData.message,
+        timeSent: formData.time,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        props.fetchMessages();
+        setFormData(initialState);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          props.fetchMessages();
-          setFormData(initialState);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    };
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-    function handleInputChange(event) {
-      event.preventDefault();
-      setFormData({ ...formData, [event.target.name]: event.target.value });
-    }
+  function handleInputChange(event) {
+    event.preventDefault();
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  }
   return (
     <div>
       <button id="start-chat-btn" onClick={() => toggleShow()}>
@@ -73,8 +72,6 @@ function MessageForm(props) {
           </div>
         </form>
       )}
-
-     
     </div>
   );
 }

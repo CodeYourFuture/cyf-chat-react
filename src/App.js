@@ -20,6 +20,7 @@ function App() {
       })
       .catch((error) => {
         console.log("Your requested infomation is not currently available!");
+        console.log(error);
       });
   };
 
